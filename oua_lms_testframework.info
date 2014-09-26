@@ -1,3 +1,4 @@
 name = OUA LMS TestFramework
 description = Testframework for OUA LMS
 version = 7.0.1
+core = 7.x
