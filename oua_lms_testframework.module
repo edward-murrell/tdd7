@@ -3,3 +3,4 @@
  * @file Main module file for OUA LMS Framework
  */
 
+include_once 'mocks/MockCurlService.php';
