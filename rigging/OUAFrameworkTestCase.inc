@@ -15,6 +15,7 @@ namespace oua\lms\testframework {
      * @param $menu A filled menu array.
      */
     public function checkMenuValidity($menu) {
+      $this->assertTrue(is_array($menu), 'Menu variable is not an array.');
       $this->assertNotEmpty($menu);
     }
   }
