@@ -29,7 +29,8 @@ namespace oua\lms\testframework {
      *  - 'page callback' exists and points to a real function
      * @param $item A drupal menu item
      */
-    public function checkMenuItemValidity($menu) {
+    public function checkMenuItemValidity($item) {
+      $this->assertArrayHasKey('page callback', $item);
     }
   }
 }
