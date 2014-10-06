@@ -37,6 +37,21 @@ namespace oua\lms\testframework {
       $this->assertNotEmpty($function,              "Menu item {$path} 'page callback' is empty.");
       $this->assertTrue(function_exists($function), "Menu item {$path} 'page callback' function does not exist.");
     }
+
+    /**
+     * Checks if a supplied form function is valid. Resulting form array is
+     *  passed to checkFormArrayValidity()
+     * @param type $function
+     */
+    public function checkFormFunctionValidity($function) {
+    }
+
+    /**
+     * Checks if a supplied form array is valid
+     * @param type $form
+     */
+    public function checkFormArrayValidity($form) {
+    }
   }
 }
 
