@@ -12,6 +12,7 @@ namespace oua\lms\testframework {
      *  Asserts the following:
      *  - Menu is not empty
      *  - Passes each item to checkMenuItemValidity
+     * @TODO : add check for valid menu keys (ie; url path)
      * @param $menu A filled menu array.
      */
     public function checkMenuValidity($menu) {
