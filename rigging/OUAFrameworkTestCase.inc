@@ -36,6 +36,10 @@ namespace oua\lms\testframework {
       $this->assertTrue(is_string($function),       "Menu item {$path} 'page callback' is not a string.");
       $this->assertNotEmpty($function,              "Menu item {$path} 'page callback' is empty.");
       $this->assertTrue(function_exists($function), "Menu item {$path} 'page callback' function does not exist.");
+
+      if (array_key_exists('page arguments', $item)) {
+        $this->assertTrue(is_array($item['page arguments']),  "Menu item {$path} 'page arguments' is not an array.");
+      }
     }
 
     /**
