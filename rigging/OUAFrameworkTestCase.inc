@@ -18,8 +18,8 @@ namespace oua\lms\testframework {
     public function checkMenuValidity($menu) {
       $this->assertTrue(is_array($menu), 'Menu variable is not an array.');
       $this->assertNotEmpty($menu);
-      foreach($menu as $item) {
-        $this->checkMenuItemValidity($item);
+      foreach($menu as $path => $item) {
+        $this->checkMenuItemValidity($item, $path);
       }
     }
 
@@ -28,9 +28,14 @@ namespace oua\lms\testframework {
      *  Asserts the following:
      *  - 'page callback' exists and points to a real function
      * @param $item A drupal menu item
+     * @param $key Identifiying key (path) of the menu item
      */
-    public function checkMenuItemValidity($item) {
-      $this->assertArrayHasKey('page callback', $item);
+    public function checkMenuItemValidity($item, $key = '') {
+      $this->assertArrayHasKey('page callback', $item, "Menu item {$path} missing 'page callback'.");
+      $function = $item['page callback'];
+      $this->assertTrue(is_string($function),       "Menu item {$path} 'page callback' is not a string.");
+      $this->assertNotEmpty($function,              "Menu item {$path} 'page callback' is empty.");
+      $this->assertTrue(function_exists($function), "Menu item {$path} 'page callback' function does not exist.");
     }
   }
 }
