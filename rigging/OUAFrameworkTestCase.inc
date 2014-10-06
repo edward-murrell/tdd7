@@ -31,14 +31,14 @@ namespace oua\lms\testframework {
      * @param $key Identifiying key (path) of the menu item
      */
     public function checkMenuItemValidity($item, $key = '') {
-      $this->assertArrayHasKey('page callback', $item, "Menu item {$path} missing 'page callback'.");
+      $this->assertArrayHasKey('page callback', $item, "Menu item {$key} missing 'page callback'.");
       $function = $item['page callback'];
-      $this->assertTrue(is_string($function),       "Menu item {$path} 'page callback' is not a string.");
-      $this->assertNotEmpty($function,              "Menu item {$path} 'page callback' is empty.");
-      $this->assertTrue(function_exists($function), "Menu item {$path} 'page callback' function does not exist.");
+      $this->assertTrue(is_string($function),       "Menu item {$key} 'page callback' is not a string.");
+      $this->assertNotEmpty($function,              "Menu item {$key} 'page callback' is empty.");
+      $this->assertTrue(function_exists($function), "Menu item {$key} 'page callback' function does not exist.");
 
       if (array_key_exists('page arguments', $item)) {
-        $this->assertTrue(is_array($item['page arguments']),  "Menu item {$path} 'page arguments' is not an array.");
+        $this->assertTrue(is_array($item['page arguments']),  "Menu item {$key} 'page arguments' is not an array.");
       }
     }
 
