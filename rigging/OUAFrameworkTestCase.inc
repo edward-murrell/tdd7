@@ -46,20 +46,8 @@ namespace oua\lms\testframework {
     public function checkFormFunctionValidity($function) {
       $this->assertTrue(function_exists($function), "Function '{$function}' does not exist.");
       $form_state = array();
-      $form = $function();
-      $this->checkFormArrayValidity($form);
-
       $form = \drupal_get_form($function);
       $this->assertArrayHasKey('#build_id', $form);
-    }
-
-    /**
-     * Checks if a supplied form array is valid
-     * @param type $form
-     */
-    public function checkFormArrayValidity($form) {
-      $this->assertTrue(is_array($form), 'Supplied \$form is not array.');
-      $this->assertNotEmpty($form);
     }
   }
 }
