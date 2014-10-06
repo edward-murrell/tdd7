@@ -55,6 +55,8 @@ namespace oua\lms\testframework {
      * @param type $form
      */
     public function checkFormArrayValidity($form) {
+      $this->assertTrue(is_array($form), 'Supplied \$form is not array.');
+      $this->assertNotEmpty($form);
     }
   }
 }
