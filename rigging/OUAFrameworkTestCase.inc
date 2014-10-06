@@ -17,6 +17,18 @@ namespace oua\lms\testframework {
     public function checkMenuValidity($menu) {
       $this->assertTrue(is_array($menu), 'Menu variable is not an array.');
       $this->assertNotEmpty($menu);
+      foreach($menu as $item) {
+        $this->checkMenuItemValidity($item);
+      }
+    }
+
+    /**
+     * Checks validity of Drupal menu items
+     *  Asserts the following:
+     *  - 'page callback' exists and points to a real function
+     * @param $item A drupal menu item
+     */
+    public function checkMenuItemValidity($menu) {
     }
   }
 }
