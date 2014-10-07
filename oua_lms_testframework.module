@@ -4,4 +4,5 @@
  */
 
 module_load_include('inc', 'oua_lms_testframework', 'rigging/OUAFrameworkTestCase');
+module_load_include('inc', 'oua_lms_testframework', 'mocks/Database');
 module_load_include('inc', 'oua_lms_testframework', 'mocks/MockCurlService');
