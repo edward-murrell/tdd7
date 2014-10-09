@@ -3,8 +3,11 @@
  * @file Drupal Database layer mock functions and classes
  */
 
+namespace oua\lms\testframework;
+
 /**
- * Returns a new SelectQuery object for the active database.
+ * Returns a new mocked up SelectQuery object for the active database.
+ *
  *
  * @param $table
  *   The base table for this query. May be a string or another SelectQuery
@@ -18,8 +21,27 @@
  *   A new SelectQuery object for this connection.
  */
 function db_select($table, $alias = NULL, array $options = array()) {
-  if (empty($options['target'])) {
-    $options['target'] = 'default';
+  $connection = new DatabaseConnection_unittest();
+  return $connection;
+}
+
+class DatabaseConnection_unittest extends \DatabaseConnection {
+  public function databaseType() {
   }
-  return Database::getConnection($options['target'])->select($table, $alias, $options);
+
+  public function driver() {
+  }
+
+  public function mapConditionOperator($operator) {
+  }
+
+  public function nextId($existing_id = 0) {
+  }
+
+  public function queryRange($query, $from, $count, array $args = array(), array  $options = array()) {
+  }
+
+  public function queryTemporary($query,  array $args = array(), array $options = array()) {
+  }
+
 }
