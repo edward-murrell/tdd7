@@ -21,11 +21,12 @@ namespace oua\lms\testframework;
  *   A new SelectQuery object for this connection.
  */
 function db_select($table, $alias = NULL, array $options = array()) {
-  $connection = new DatabaseConnection_unittest();
-  return $connection;
+  return DatabaseConnection_unittest::getInstance();
 }
 
 class DatabaseConnection_unittest extends \DatabaseConnection {
+  static $instance = null;
+
   public function databaseType() {
     return "mock_sql";
   }
@@ -46,4 +47,10 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   public function queryTemporary($query,  array $args = array(), array $options = array()) {
   }
 
+  public static function getInstance() {
+    if ($this->instance == null) {
+      $this->instance = new DatabaseConnection_unittest();
+    }
+    return $this->instance;
+  }
 }
