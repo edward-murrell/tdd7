@@ -27,9 +27,11 @@ function db_select($table, $alias = NULL, array $options = array()) {
 
 class DatabaseConnection_unittest extends \DatabaseConnection {
   public function databaseType() {
+    return "mock_sql";
   }
 
   public function driver() {
+    return "mock_sql";
   }
 
   public function mapConditionOperator($operator) {
