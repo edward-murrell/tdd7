@@ -55,10 +55,10 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
    * @return DatabaseConnection_unittest
    */
   public static function getInstance() {
-    if ($this->instance == null) {
-      $this->instance = new DatabaseConnection_unittest();
+    if (DatabaseConnection_unittest::$instance == null) {
+      DatabaseConnection_unittest::$instance = new DatabaseConnection_unittest();
     }
-    return $this->instance;
+    return DatabaseConnection_unittest::$instance;
   }
 
   /**
