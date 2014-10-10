@@ -27,6 +27,8 @@ function db_select($table, $alias = NULL, array $options = array()) {
 class DatabaseConnection_unittest extends \DatabaseConnection {
   static $instance = null;
 
+  private $data = array();
+
   public function databaseType() {
     return "mock_sql";
   }
@@ -47,10 +49,24 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   public function queryTemporary($query,  array $args = array(), array $options = array()) {
   }
 
+  /**
+   * Returns a staticly stored instance of this class. Creates a new instance
+   *  if required.
+   * @return DatabaseConnection_unittest
+   */
   public static function getInstance() {
     if ($this->instance == null) {
       $this->instance = new DatabaseConnection_unittest();
     }
     return $this->instance;
+  }
+
+  /**
+   * Add test data to a table
+   * @param type $table
+   * @param array $data
+   */
+  public function addTestData($table, array $data) {
+    $this->data[$table][] = $data;
   }
 }
