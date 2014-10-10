@@ -3,7 +3,7 @@
  * @file Drupal Database layer mock functions and classes
  */
 
-namespace oua\lms\testframework;
+namespace oua\lms\testframework\mocks;
 
 /**
  * Returns a new mocked up SelectQuery object for the active database.
