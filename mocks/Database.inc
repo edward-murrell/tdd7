@@ -21,7 +21,7 @@ namespace oua\lms\testframework\mocks;
  *   A new SelectQuery object for this connection.
  */
 function db_select($table, $alias = NULL, array $options = array()) {
-  return DatabaseConnection_unittest::getInstance();
+  return \oua\lms\testframework\mocks\DatabaseConnection_unittest::getInstance();
 }
 
 class DatabaseConnection_unittest extends \DatabaseConnection {
@@ -56,7 +56,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
    */
   public static function getInstance() {
     if (DatabaseConnection_unittest::$instance == null) {
-      DatabaseConnection_unittest::$instance = new DatabaseConnection_unittest();
+      DatabaseConnection_unittest::$instance = new DatabaseConnection_unittest('test_db','username','password');
     }
     return DatabaseConnection_unittest::$instance;
   }
