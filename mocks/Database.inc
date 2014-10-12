@@ -52,6 +52,11 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   public function queryTemporary($query,  array $args = array(), array $options = array()) {
   }
 
+  public function select($table, $alias = NULL, array $options = array()) {
+    $class = $this->getDriverClass('SelectQuery', array('query.inc', 'select.inc'));
+    return new $class($table, $alias, $this, $options);
+  }
+
   /**
    * Returns a staticly stored instance of this class. Creates a new instance
    *  if required.
