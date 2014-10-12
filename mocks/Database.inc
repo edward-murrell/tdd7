@@ -30,10 +30,6 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   private $data = array();
 
   function __construct($dsn, $username, $password, $driver_options = array()) {
-    $this->connectionOptions = array();
-    $this->connectionOptions['prefix'] = 'mock_sql';
-    // This is how we should call it, but it causes a PDO error
-    // parent::__construct($dsn, $username, $password, $driver_options);
   }
 
   public function databaseType() {
