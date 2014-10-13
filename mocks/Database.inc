@@ -259,11 +259,23 @@ class MockSelectQuery implements \SelectQueryInterface {
             return FALSE;
           }
           break;
+        case 'LIKE':
+          return $this->confirmLikeRow($value, $row);
         default:
           break;
       }
     }
     // Not sure if this is right, need more caffiene to think about it.
+    return TRUE;
+  }
+
+  /**
+   * Tests if $row matches SQL LIKE $key
+   * @param $row Value to test against
+   * @param $key Search string: eg; '%test%';
+   * @return boolean TRUE if $row matches $key
+   */
+  private function confirmLikeRow($row, $key) {
     return TRUE;
   }
 
