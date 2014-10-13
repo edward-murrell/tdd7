@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 namespace oua\lms\testframework {
-  class Test_Case extends \PHPUnit_Framework_TestCase {
+  class OuaFrameworkTestCase extends \PHPUnit_Framework_TestCase {
     /**
      * Checks validity of Drupal menu arrays
      *  Asserts the following:
