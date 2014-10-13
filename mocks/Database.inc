@@ -110,7 +110,7 @@ class MockSelectQuery implements \SelectQueryInterface {
   public function condition($field, $value = NULL, $operator = NULL) {
   }
 
-  public function conditions() {
+  public function &conditions() {
   }
 
   public function countQuery() {
@@ -125,7 +125,7 @@ class MockSelectQuery implements \SelectQueryInterface {
   public function extend($extender_name) {
   }
 
-  public function fields($table_alias, $fields = array()) {
+  public function fields($table_alias, array $fields = array()) {
   }
 
   public function forUpdate($set = TRUE) {
@@ -134,25 +134,25 @@ class MockSelectQuery implements \SelectQueryInterface {
   public function getArguments(\QueryPlaceholderInterface $queryPlaceholder = NULL) {
   }
 
-  public function getExpressions() {
+  public function &getExpressions() {
   }
 
-  public function getFields() {
+  public function &getFields() {
   }
 
-  public function getGroupBy() {
+  public function &getGroupBy() {
   }
 
   public function getMetaData($key) {
   }
 
-  public function getOrderBy() {
+  public function &getOrderBy() {
   }
 
-  public function getTables() {
+  public function &getTables() {
   }
 
-  public function getUnion() {
+  public function &getUnion() {
   }
 
   public function groupBy($field) {
