@@ -53,7 +53,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   }
 
   public function select($table, $alias = NULL, array $options = array()) {
-    return new MockSelectQuery($this);
+    return new MockSelectQuery($this, $table);
   }
 
   /**
@@ -90,11 +90,13 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
 class MockSelectQuery implements \SelectQueryInterface {
   private $database;
+  private $table;
   private $fields;
   private $conditions;
 
- function __construct(DatabaseConnection_unittest $db) {
+ function __construct(DatabaseConnection_unittest $db, $table) {
     $this->database = $db;
+    $this->table    = $table;
   }
 
   public function __clone() {
@@ -248,7 +250,7 @@ class MockSelectQuery implements \SelectQueryInterface {
 
   public function execute() {
     $results = array();
-    foreach ($this->database->getTestData() as $row) {
+    foreach ($this->database->getTestData($this->table) as $row) {
       if ($this->confirmMatch($row)) {
         $results[] = $row;
       }
