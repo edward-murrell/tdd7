@@ -76,6 +76,16 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   public function addTestData($table, array $data) {
     $this->data[$table][] = $data;
   }
+
+  public function getTestData($table) {
+    if (array_key_exists($table, $this->data)) {
+      return $this->data['table'];
+    }
+    else {
+      // Maybe this should be an exception.
+      return FALSE;
+    }
+  }
 }
 
 class MockSelectQuery implements \SelectQueryInterface {
@@ -232,8 +242,19 @@ class MockSelectQuery implements \SelectQueryInterface {
   public function where($snippet, $args = array()) {
   }
 
+  private function confirmMatch($row) {
+    return TRUE;
+  }
+
   public function execute() {
-    return new MockQueryResult($this->database, $this);
+    $results = array();
+    foreach ($this->database->getTestData() as $row) {
+      if ($this->confirmMatch($row)) {
+        $results[] = $row;
+      }
+    }
+
+    return new MockQueryResult($this->database, $this, $results);
   }
 }
 
@@ -245,7 +266,7 @@ class MockQueryResult {
   private $database;
   private $query;
 
-  function __construct(DatabaseConnection_unittest $db, MockSelectQuery $qy) {
+  function __construct(DatabaseConnection_unittest $db, MockSelectQuery $qy, $results) {
     $this->database = $db;
     $this->query    = $qy;
   }
