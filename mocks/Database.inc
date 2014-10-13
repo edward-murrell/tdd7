@@ -79,6 +79,12 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 }
 
 class MockSelectQuery implements \SelectQueryInterface {
+  private $database;
+
+  function __constructor(DatabaseConnection_unittest $db) {
+    $this->database = $db;
+  }
+
   public function __clone() {
   }
 
