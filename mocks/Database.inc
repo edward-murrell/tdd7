@@ -78,3 +78,144 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
     $this->data[$table][] = $data;
   }
 }
+
+class MockSelectQuery implements \SelectQueryInterface {
+  public function __clone() {
+  }
+
+  public function addExpression($expression, $alias = NULL, $arguments = array()) {
+  }
+
+  public function addField($table_alias, $field, $alias = NULL) {
+  }
+
+  public function addJoin($type, $table, $alias = NULL, $condition = NULL, $arguments = array()) {
+  }
+
+  public function addMetaData($key, $object) {
+  }
+
+  public function addTag($tag) {
+  }
+
+  public function arguments() {
+  }
+
+  public function compile(\DatabaseConnection $connection, \QueryPlaceholderInterface $queryPlaceholder) {
+  }
+
+  public function compiled() {
+  }
+
+  public function condition($field, $value = NULL, $operator = NULL) {
+  }
+
+  public function conditions() {
+  }
+
+  public function countQuery() {
+  }
+
+  public function distinct($distinct = TRUE) {
+  }
+
+  public function exists(\SelectQueryInterface $select) {
+  }
+
+  public function extend($extender_name) {
+  }
+
+  public function fields($table_alias, $fields = array()) {
+  }
+
+  public function forUpdate($set = TRUE) {
+  }
+
+  public function getArguments(\QueryPlaceholderInterface $queryPlaceholder = NULL) {
+  }
+
+  public function getExpressions() {
+  }
+
+  public function getFields() {
+  }
+
+  public function getGroupBy() {
+  }
+
+  public function getMetaData($key) {
+  }
+
+  public function getOrderBy() {
+  }
+
+  public function getTables() {
+  }
+
+  public function getUnion() {
+  }
+
+  public function groupBy($field) {
+  }
+
+  public function hasAllTags() {
+  }
+
+  public function hasAnyTag() {
+  }
+
+  public function hasTag($tag) {
+  }
+
+  public function havingCondition($field, $value = NULL, $operator = NULL) {
+  }
+
+  public function innerJoin($table, $alias = NULL, $condition = NULL, $arguments = array()) {
+  }
+
+  public function isNotNull($field) {
+  }
+
+  public function isNull($field) {
+  }
+
+  public function isPrepared() {
+  }
+
+  public function join($table, $alias = NULL, $condition = NULL, $arguments = array()) {
+  }
+
+  public function leftJoin($table, $alias = NULL, $condition = NULL, $arguments = array()) {
+  }
+
+  public function nextPlaceholder() {
+  }
+
+  public function notExists(\SelectQueryInterface $select) {
+  }
+
+  public function orderBy($field, $direction = 'ASC') {
+  }
+
+  public function orderRandom() {
+  }
+
+  public function preExecute(\SelectQueryInterface $query = NULL) {
+  }
+
+  public function range($start = NULL, $length = NULL) {
+  }
+
+  public function rightJoin($table, $alias = NULL, $condition = NULL, $arguments = array()) {
+  }
+
+  public function union(\SelectQueryInterface $query, $type = '') {
+  }
+
+  public function uniqueIdentifier() {
+  }
+
+  public function where($snippet, $args = array()) {
+  }
+
+}
