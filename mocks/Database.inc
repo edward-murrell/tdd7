@@ -80,6 +80,8 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
 class MockSelectQuery implements \SelectQueryInterface {
   private $database;
+  private $fields;
+  private $conditions;
 
   function __constructor(DatabaseConnection_unittest $db) {
     $this->database = $db;
@@ -113,6 +115,11 @@ class MockSelectQuery implements \SelectQueryInterface {
   }
 
   public function condition($field, $value = NULL, $operator = NULL) {
+    if (empty($operator)) {
+      $operator = '=';
+    }
+    $this->conditions[$field] = array('value' => $value, 'operator' => $operator);
+    return $this;
   }
 
   public function &conditions() {
@@ -131,6 +138,8 @@ class MockSelectQuery implements \SelectQueryInterface {
   }
 
   public function fields($table_alias, array $fields = array()) {
+    $this->fields[$table] = $fields;
+    return $this;
   }
 
   public function forUpdate($set = TRUE) {
