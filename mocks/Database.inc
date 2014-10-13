@@ -232,4 +232,23 @@ class MockSelectQuery implements \SelectQueryInterface {
   public function where($snippet, $args = array()) {
   }
 
+  public function execute() {
+    return new MockQueryResult();
+  }
+}
+
+
+/**
+ * Mock database return result
+ */
+class MockQueryResult {
+  function __construct() {
+  }
+
+  /**
+   * Returns a stdObject() pointing to the row of the next result;
+   */
+  public function fetchObject() {
+    return FALSE;
+  }
 }
