@@ -244,7 +244,25 @@ class MockSelectQuery implements \SelectQueryInterface {
   public function where($snippet, $args = array()) {
   }
 
+  /**
+   * Ugly function decide if fields match conditons or not
+   */
   private function confirmMatch($row) {
+    foreach ($this->conditions as $field => $cond) {
+      switch ($cond['operator']) {
+        case null :
+        case '='  :
+        case '==' :
+          if ($row[$field] == $cond['value']) {
+            return TRUE;
+          } else {
+            return FALSE;
+          }
+          break;
+        default:
+          break;
+      }
+    }
     return TRUE;
   }
 
