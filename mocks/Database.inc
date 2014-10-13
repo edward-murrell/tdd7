@@ -90,13 +90,13 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
 class MockSelectQuery implements \SelectQueryInterface {
   private $database;
-  private $table;
+  private $tablename;
   private $fields;
   private $conditions;
 
- function __construct(DatabaseConnection_unittest $db, $table) {
+ function __construct(DatabaseConnection_unittest $db, $tablename) {
     $this->database = $db;
-    $this->table    = $table;
+    $this->tablename    = $tablename;
   }
 
   public function __clone() {
@@ -287,7 +287,7 @@ class MockSelectQuery implements \SelectQueryInterface {
 
   public function execute() {
     $results = array();
-    foreach ($this->database->getTestData($this->table) as $row) {
+    foreach ($this->database->getTestData($this->tablename) as $row) {
       if ($this->confirmMatch($row)) {
         $results[] = $row;
       }
