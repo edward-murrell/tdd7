@@ -265,16 +265,30 @@ class MockSelectQuery implements \SelectQueryInterface {
 class MockQueryResult {
   private $database;
   private $query;
+  private $results;
 
+  /**
+   * Create a result set from the a mock database and query
+   * @param \oua\lms\testframework\mocks\DatabaseConnection_unittest $db
+   * @param \oua\lms\testframework\mocks\MockSelectQuery $qy
+   * @param type $results Array of results MockSelectQuery execute()
+   */
   function __construct(DatabaseConnection_unittest $db, MockSelectQuery $qy, $results) {
     $this->database = $db;
     $this->query    = $qy;
+    $this->results  = $results;
   }
 
   /**
-   * Returns a stdObject() pointing to the row of the next result;
+   * Returns a stdObject() pointing to the row of the next result
+   * @return stdClass or NULL
    */
   public function fetchObject() {
-    return FALSE;
+    if (!empty($this->results)) {
+      $res = array_pop($this->results);
+      return (object) $res;
+    } else {
+      return FALSE;
+    }
   }
 }
