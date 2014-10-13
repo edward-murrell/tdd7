@@ -256,10 +256,12 @@ class MockSelectQuery implements \SelectQueryInterface {
           if ($row[$field] != $cond['value']) {
             return FALSE;
           }
+          break;
         case 'LIKE':
-          if ($this->confirmLikeRow($value, $row) == FALSE) {
+          if ($this->confirmLikeRow($row[$field], $cond['value']) == FALSE) {
             return FALSE;
           }
+          break;
         default:
           break;
       }
