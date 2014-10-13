@@ -83,7 +83,7 @@ class MockSelectQuery implements \SelectQueryInterface {
   private $fields;
   private $conditions;
 
-  function __constructor(DatabaseConnection_unittest $db) {
+ function __construct(DatabaseConnection_unittest $db) {
     $this->database = $db;
   }
 
@@ -233,7 +233,7 @@ class MockSelectQuery implements \SelectQueryInterface {
   }
 
   public function execute() {
-    return new MockQueryResult();
+    return new MockQueryResult($this->database, $this);
   }
 }
 
@@ -242,7 +242,12 @@ class MockSelectQuery implements \SelectQueryInterface {
  * Mock database return result
  */
 class MockQueryResult {
-  function __construct() {
+  private $database;
+  private $query;
+
+  function __construct(DatabaseConnection_unittest $db, MockSelectQuery $qy) {
+    $this->database = $db;
+    $this->query    = $qy;
   }
 
   /**
