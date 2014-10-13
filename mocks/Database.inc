@@ -53,8 +53,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   }
 
   public function select($table, $alias = NULL, array $options = array()) {
-    $class = $this->getDriverClass('SelectQuery', array('query.inc', 'select.inc'));
-    return new $class($table, $alias, $this, $options);
+    return new MockSelectQuery();
   }
 
   /**
