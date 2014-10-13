@@ -276,7 +276,13 @@ class MockSelectQuery implements \SelectQueryInterface {
    * @return boolean TRUE if $row matches $key
    */
   private function confirmLikeRow($row, $key) {
-    return TRUE;
+    $test_str = str_replace(
+        array('%%', '%', '?'),
+        array('%', '.*', '.'),
+        $key);
+    $test_str = "/^{$test_str}$/";
+    $result = preg_match($test_str, $row);
+    return (bool)$result;
   }
 
   public function execute() {
