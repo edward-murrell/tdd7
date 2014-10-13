@@ -253,19 +253,17 @@ class MockSelectQuery implements \SelectQueryInterface {
         case null :
         case '='  :
         case '==' :
-          if ($row[$field] == $cond['value']) {
-            return TRUE;
-          } else {
+          if ($row[$field] != $cond['value']) {
             return FALSE;
           }
-          break;
         case 'LIKE':
-          return $this->confirmLikeRow($value, $row);
+          if ($this->confirmLikeRow($value, $row) == FALSE) {
+            return FALSE;
+          }
         default:
           break;
       }
     }
-    // Not sure if this is right, need more caffiene to think about it.
     return TRUE;
   }
 
