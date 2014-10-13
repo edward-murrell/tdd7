@@ -263,6 +263,7 @@ class MockSelectQuery implements \SelectQueryInterface {
           break;
       }
     }
+    // Not sure if this is right, need more caffiene to think about it.
     return TRUE;
   }
 
