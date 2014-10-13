@@ -53,7 +53,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   }
 
   public function select($table, $alias = NULL, array $options = array()) {
-    return new MockSelectQuery();
+    return new MockSelectQuery($this);
   }
 
   /**
