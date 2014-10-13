@@ -79,7 +79,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
   public function getTestData($table) {
     if (array_key_exists($table, $this->data)) {
-      return $this->data['table'];
+      return $this->data[$table];
     }
     else {
       // Maybe this should be an exception.
@@ -150,7 +150,7 @@ class MockSelectQuery implements \SelectQueryInterface {
   }
 
   public function fields($table_alias, array $fields = array()) {
-    $this->fields[$table] = $fields;
+    $this->fields[$table_alias] = $fields;
     return $this;
   }
 
