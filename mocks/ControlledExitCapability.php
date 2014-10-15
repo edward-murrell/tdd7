@@ -1,7 +1,7 @@
 <?php
 
 namespace oua\lms\testframework\mocks;
-include_once dirname(__FILE__) . "/../../oua_lms_services/ExitCapability/ExitCapable.php";
+include_once dirname(__FILE__) . "/../../oua_lms_services/HangUpService/ExitCapable.php";
 
 use Exception;
 use oua\lms\services\ExitCapable;
