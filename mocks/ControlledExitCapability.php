@@ -3,35 +3,24 @@
 namespace oua\lms\testframework\mocks;
 include_once dirname(__FILE__) . "/../../oua_lms_services/ExitCapability/ExitCapable.php";
 
+use Exception;
 use oua\lms\services\ExitCapable;
 
-class ControlledExitCapability implements ExitCapable {
+class ControlledExitCapability extends ExitCapable {
   /**
    * @var bool
    */
   public $dropped = FALSE;
 
+  public $throwException = FALSE;
+
   /**
-   * Spy for the Drop() function.
+   * Agree to do that in whatever way.
    */
-  public function Drop() {
+  public function hangUp() {
     $this->dropped = TRUE;
-  }
-
-  /**
-   * Stub for ExitCapability::Consume.
-   */
-  public static function Consume() {
-    // TODO: Implement Consume() method.
-  }
-
-  /**
-   * Stub for ExitCapability::Provide.
-   *
-   * @param ExitCapable $exit_controller
-   *   The new ExitCapable to use
-   */
-  public static function Provide($exit_controller) {
-    // TODO: Implement Provide() method.
+    if ($this->throwException) {
+      throw new Exception("HANG UP EXCEPTION");
+    }
   }
 }
