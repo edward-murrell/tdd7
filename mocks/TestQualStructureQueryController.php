@@ -2,11 +2,17 @@
 
 namespace oua_lms_testframework\mocks;
 
+use VetWebservices\AbstractQualStructureQueryController;
+
 require_once dirname(__FILE__) . '/../../vet_webservices/classes/QualStructureQueryController.php';
 
-class TestQualStructureQueryController extends \VetWebservices\AbstractQualStructureQueryController {
+class TestQualStructureQueryController extends AbstractQualStructureQueryController {
 
-  public $entityFieldQuery = null;
+  public $entityFieldQuery = NULL;
+  public $now_date = NULL;
+  public $start_date = NULL;
+  public $end_date = NULL;
+  public $pepi_id = 71747;
 
   public function setEntityFieldQuery($theQuery) {
     $this->entityFieldQuery = $theQuery;
@@ -27,11 +33,6 @@ class TestQualStructureQueryController extends \VetWebservices\AbstractQualStruc
   public function getNewEntityFieldQuery() {
     return $this->entityFieldQuery;
   }
-
-  public $now_date = null;
-  public $start_date = null;
-  public $end_date = null;
-  public $pepi_id = 71747;
 
   public function entityLoad($entity_type, $ids = FALSE, $conditions = array(), $reset = FALSE) {
     $loadedentities = array();
