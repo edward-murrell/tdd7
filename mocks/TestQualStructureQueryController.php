@@ -2,7 +2,7 @@
 
 namespace oua_lms_testframework\mocks;
 
-require_once dirname(__FILE__) . '/../../vet-webservices/classes/QualStructureQueryController.php';
+require_once dirname(__FILE__) . '/../../vet_webservices/classes/QualStructureQueryController.php';
 
 class TestQualStructureQueryController extends \VetWebservices\AbstractQualStructureQueryController {
 
