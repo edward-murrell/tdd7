@@ -20,6 +20,30 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
 
   public function setUp() {
     $this->db = DatabaseConnection_unittest::getInstance();
+
+    $this->db->addTestData(TABLE1, array(
+      'id'        => 7854,
+      'firstName' => 'Alex',
+      'lastName'  => 'Honnold',
+      'year'      => 1985,
+      'email'     => 'alex@example.com',
+    ));
+
+    $this->db->addTestData(TABLE1, array(
+      'id'        => 48091,
+      'firstName' => 'Hans',
+      'lastName'  => 'Florine',
+      'year'      => 1964,
+      'email'     => 'hans@example.com',
+    ));
+
+    $this->db->addTestData(TABLE1, array(
+      'id'        => 2391,
+      'firstName' => 'Yuji',
+      'lastName'  => 'Hirayama',
+      'year'      => 1969,
+      'email'     => 'yuji@example.jp',
+    ));
   }
 
   public function testAddEmptyData() {
