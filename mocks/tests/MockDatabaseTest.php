@@ -200,13 +200,14 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
   public function testCombinedConditonMatches() {
     $res = db_select(TABLE1)
       ->fields(TABLE1, array('id', 'lastName'))
-      ->condition('email', '%@example.com', 'LIKE')
-      ->condition('year',  1989, '==')
+      ->condition('email',    '%@example.com', 'LIKE')
+      ->condition('lastname', '?????',         'LIKE')
+      ->condition('year',     1989,            '==')
       ->execute();
 
     $record = $res->fetchObject();
-    $this->assertEquals(2391,       $record->id);
-    $this->assertEquals('Hirayama', $record->lastName);
+    $this->assertEquals(7981,       $record->id);
+    $this->assertEquals('Woods',    $record->lastName);
     $this->assertObjectNotHasAttribute('firstName', $record);
     $this->assertObjectNotHasAttribute('year', $record);
     $this->assertFalse($res->fetchObject());
