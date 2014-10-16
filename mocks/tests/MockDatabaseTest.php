@@ -57,4 +57,15 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     // Assert that data is stored in the correct 'table'
     $this->assertFalse($db->getTestData(TABLE2));
   }
+
+  // Test that a simple record request by unique ID works
+  public function testGetSingleRecord() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year'))
+      ->condition('id', 2391)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Yuji', $record->firstName);
+    $this->assertEquals(1969,   $record->year);
+  }
 }
