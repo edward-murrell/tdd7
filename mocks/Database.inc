@@ -283,8 +283,8 @@ class MockSelectQuery implements \SelectQueryInterface {
    * @param array $row
    * @return array The same row, with only the fields expected
    */
-  private function filterFields(array $row) {
-    if (empty($this->fields)) {
+  private function filterFields($tablename, array $row) {
+    if (empty($this->fields[$tablename])) {
       return $row;
     }
   }
@@ -309,7 +309,7 @@ class MockSelectQuery implements \SelectQueryInterface {
     $results = array();
     foreach ($this->database->getTestData($this->tablename) as $row) {
       if ($this->confirmMatch($row)) {
-        $results[] = $this->filterFields($row);
+        $results[] = $this->filterFields($this->tablename, $row);
       }
     }
 
