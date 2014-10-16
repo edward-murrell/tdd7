@@ -86,6 +86,13 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
       return FALSE;
     }
   }
+
+  /**
+   * Replace all test data.
+   */
+  public function resetTestData() {
+    $this->data = array();
+  }
 }
 
 class MockSelectQuery implements \SelectQueryInterface {
