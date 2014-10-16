@@ -22,12 +22,15 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->db = DatabaseConnection_unittest::getInstance();
   }
 
-  public function testAddData() {
-    $this->assertFalse($this->db->getTestData(TABLE1));
-    $this->db->addTestData(TABLE1, array());
-    $this->assertCount(1, $this->db->getTestData(TABLE1));
+  public function testAddEmptyData() {
+    // Use local copy for this test becase we are corrupting it with empty data
+    $db = new DatabaseConnection_unittest();
+
+    $this->assertFalse($db->getTestData(TABLE1));
+    $db->addTestData(TABLE1, array());
+    $this->assertCount(1, $db->getTestData(TABLE1));
 
     // Assert that data is stored in the correct 'table'
-    $this->assertFalse($this->db->getTestData(TABLE2));
+    $this->assertFalse($db->getTestData(TABLE2));
   }
 }
