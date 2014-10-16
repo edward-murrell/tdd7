@@ -201,7 +201,7 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $res = db_select(TABLE1)
       ->fields(TABLE1, array('id', 'lastName'))
       ->condition('email',    '%@example.com', 'LIKE')
-      ->condition('lastname', '?????',         'LIKE')
+      ->condition('lastName', '?????',         'LIKE')
       ->condition('year',     1989,            '==')
       ->execute();
 
