@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 namespace oua\lms\testframework {
-  class OuaFrameworkTestCase extends \PHPUnit_Framework_TestCase {
+  abstract class OuaFrameworkTestCase extends \PHPUnit_Framework_TestCase {
     /**
      * Checks validity of Drupal menu arrays
      *  Asserts the following:
@@ -52,6 +52,16 @@ namespace oua\lms\testframework {
       $form_state = array();
       $form = \drupal_get_form($function);
       $this->assertArrayHasKey('#build_id', $form);
+    }
+
+    /**
+     * A test so that child classes of \PHPUnit_Framework_TestCase don't fail
+     *  due to a lack of tests. Also should catch changes to the class name.
+     *
+     * Test that this class is being inheritted properly.
+     */
+    public function testSelfClassName() {
+      $this->assertEquals('oua\lms\testframework\OuaFrameworkTestCase', __CLASS__);
     }
   }
 }
