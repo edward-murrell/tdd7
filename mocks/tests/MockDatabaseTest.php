@@ -87,6 +87,9 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $record = $res->fetchObject();
     $this->assertEquals('Yuji', $record->firstName);
     $this->assertEquals(1969,   $record->year);
+
+    // Check that only one record was returned.
+    $this->assertFalse($res->fetchObject());
   }
 
   // Test that a simple record unique two overlapping id
