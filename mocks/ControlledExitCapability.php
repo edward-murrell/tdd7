@@ -10,7 +10,11 @@ class ControlledExitCapability extends ExitCapable {
   /**
    * @var bool
    */
-  public $dropped = FALSE;
+  public $hardDropped = NULL;
+  /**
+   * @var bool
+   */
+  public $softDropped = NULL;
 
   public $throwException = FALSE;
 
@@ -18,9 +22,21 @@ class ControlledExitCapability extends ExitCapable {
    * Agree to do that in whatever way.
    */
   public function hangUp() {
-    $this->dropped = TRUE;
+    $this->hardDropped = TRUE;
+    $this->softDropped = FALSE;
     if ($this->throwException) {
       throw new Exception("HANG UP EXCEPTION");
+    }
+  }
+
+  /**
+   * Agree to hang up in the 'soft way'.
+   */
+  public function soft() {
+    $this->softDropped = TRUE;
+    $this->hardDropped = FALSE;
+    if ($this->throwException) {
+      throw new Exception("SOFT HANG UP EXCEPTION");
     }
   }
 }
