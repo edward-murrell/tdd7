@@ -134,7 +134,10 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       ->condition('year', 1964)
       ->execute();
     $record = $res->fetchObject();
-    $this->assertEquals('Hans',   $record->firstName);
+    $this->assertObjectHasAttribute('firstName', $record);
+    $this->assertEquals('Hans',      $record->firstName);
+    $this->assertObjectHasAttribute('lastName', $record);
+    $this->assertEquals('Florine',   $record->lastName);
 
     $this->assertFalse($res->fetchObject());
   }
