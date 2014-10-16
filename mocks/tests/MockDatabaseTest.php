@@ -160,4 +160,16 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
 
     $this->assertFalse($res->fetchObject());
   }
+
+  // Test that the LIKE keyword works
+  public function testLikeMatches() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'lastName'))
+      ->condition('email', '%example.com', 'LIKE')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals('7981',    $record->id);
+    $this->assertEquals('Woods',   $record->lastName);
+  }
 }
