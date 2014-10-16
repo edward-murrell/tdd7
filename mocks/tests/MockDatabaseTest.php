@@ -169,7 +169,17 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       ->execute();
 
     $record = $res->fetchObject();
-    $this->assertEquals('7981',    $record->id);
+    $this->assertEquals(7981,      $record->id);
     $this->assertEquals('Woods',   $record->lastName);
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,      $record->id);
+    $this->assertEquals('Puccio',  $record->lastName);
+    $record = $res->fetchObject();
+    $this->assertEquals(48091,     $record->id);
+    $this->assertEquals('Florine', $record->lastName);
+    $record = $res->fetchObject();
+    $this->assertEquals(7854,      $record->id);
+    $this->assertEquals('Honnold',  $record->lastName);
+    $this->assertFalse($res->fetchObject());
   }
 }
