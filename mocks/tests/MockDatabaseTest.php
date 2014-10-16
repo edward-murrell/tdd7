@@ -44,6 +44,22 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       'year'      => 1969,
       'email'     => 'yuji@example.jp',
     ));
+
+    $this->db->addTestData(TABLE1, array(
+      'id'        => 7593,
+      'firstName' => 'Alex',
+      'lastName'  => 'Puccio',
+      'year'      => 1989,
+      'email'     => 'alex.puccio@example.com',
+    ));
+
+    $this->db->addTestData(TABLE1, array(
+      'id'        => 7981,
+      'firstName' => 'Daniel',
+      'lastName'  => 'Woods',
+      'year'      => 1989,
+      'email'     => 'daniel.woods@example.com',
+    ));
   }
 
   public function testAddEmptyData() {
