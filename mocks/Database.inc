@@ -320,7 +320,7 @@ class MockQueryResult {
 
   /**
    * Returns a stdObject() pointing to the row of the next result
-   * @return stdClass or NULL
+   * @return stdClass or FALSE
    */
   public function fetchObject() {
     if (!empty($this->results)) {
