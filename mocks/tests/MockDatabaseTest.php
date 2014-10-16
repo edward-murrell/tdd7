@@ -195,4 +195,20 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('Hirayama', $record->lastName);
     $this->assertFalse($res->fetchObject());
   }
+
+  // Test that the Like and == conditions work properly together
+  public function testCombinedConditonMatches() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'lastName'))
+      ->condition('email', '%@example.com', 'LIKE')
+      ->condition('year',  1989, '==')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals(2391,       $record->id);
+    $this->assertEquals('Hirayama', $record->lastName);
+    $this->assertObjectNotHasAttribute('firstName', $record);
+    $this->assertObjectNotHasAttribute('year', $record);
+    $this->assertFalse($res->fetchObject());
+  }
 }
