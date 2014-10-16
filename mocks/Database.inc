@@ -287,6 +287,11 @@ class MockSelectQuery implements \SelectQueryInterface {
     if (empty($this->fields[$tablename])) {
       return $row;
     }
+    $new = array();
+    foreach ($this->fields[$tablename] as $field) {
+      $new[$field] = $row[$field];
+    }
+    return $new;
   }
 
   /**
