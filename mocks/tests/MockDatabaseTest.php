@@ -139,6 +139,8 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertObjectHasAttribute('lastName', $record);
     $this->assertEquals('Florine',   $record->lastName);
 
+    $this->assertObjectNotHasAttribute('year', $record);
+
     $this->assertFalse($res->fetchObject());
   }
 }
