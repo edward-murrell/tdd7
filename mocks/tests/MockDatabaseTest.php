@@ -62,6 +62,10 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     ));
   }
 
+  public function tearDown() {
+    $this->db->resetTestData();
+  }
+
   public function testAddEmptyData() {
     // Use local copy for this test becase we are corrupting it with empty data
     $db = new DatabaseConnection_unittest();
