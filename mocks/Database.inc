@@ -284,7 +284,9 @@ class MockSelectQuery implements \SelectQueryInterface {
    * @return array The same row, with only the fields expected
    */
   private function filterFields(array $row) {
-    return $row;
+    if (empty($this->fields)) {
+      return $row;
+    }
   }
 
   /**
