@@ -84,4 +84,17 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('Yuji', $record->firstName);
     $this->assertEquals(1969,   $record->year);
   }
+
+  // Test that a simple record unique two overlapping id
+  public function testSingleMultiMatchRecord() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'firstName', 'lastName'))
+      ->condition('firstName', 'Alex')
+      ->condition('year', 1989)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,     $record->id);
+    $this->assertEquals('Alex',   $record->firstName);
+    $this->assertEquals('Puccio', $record->lastName);
+  }
 }
