@@ -182,4 +182,17 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('Honnold',  $record->lastName);
     $this->assertFalse($res->fetchObject());
   }
+
+  // Test that the LIKE keyword works with single chars
+  public function testLikeSingleMatches() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'lastName'))
+      ->condition('email', '%example.??', 'LIKE')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals(2391,       $record->id);
+    $this->assertEquals('Hirayama', $record->lastName);
+    $this->assertFalse($res->fetchObject());
+  }
 }
