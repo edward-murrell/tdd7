@@ -107,4 +107,20 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     // Check that only one record was returned.
     $this->assertFalse($res->fetchObject());
   }
+
+  // Test that we get all instances of records that match
+  public function testMulipleReturnRecord() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'firstName', 'lastName'))
+      ->condition('firstName', 'Alex')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,     $record->id);
+    $record = $res->fetchObject();
+    $this->assertEquals(7854,     $record->id);
+
+    // Check that only one record was returned.
+    $this->assertFalse($res->fetchObject());
+  }
 }
