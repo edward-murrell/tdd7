@@ -92,6 +92,23 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($res->fetchObject());
   }
 
+  // Test that a simple .* record request by unique ID works
+  public function testGetSingleRecordWithAllFields() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1)
+      ->condition('id', 7981)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals(7981,                       $record->id);
+    $this->assertEquals('Daniel',                   $record->firstName);
+    $this->assertEquals('Woods',                    $record->lastName);
+    $this->assertEquals(1989,                       $record->year);
+    $this->assertEquals('daniel.woods@example.com', $record->email);
+
+    // Check that only one record was returned.
+    $this->assertFalse($res->fetchObject());
+  }
+
   // Test that a simple record unique two overlapping id
   public function testSingleMultiMatchRecord() {
     $res = db_select(TABLE1)
