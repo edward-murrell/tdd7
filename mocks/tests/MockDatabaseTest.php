@@ -23,7 +23,11 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
   }
 
   public function testAddData() {
+    $this->assertFalse($this->db->getTestData(TABLE1));
     $this->db->addTestData(TABLE1, array());
     $this->assertCount(1, $this->db->getTestData(TABLE1));
+
+    // Assert that data is stored in the correct 'table'
+    $this->assertFalse($this->db->getTestData(TABLE2));
   }
 }
