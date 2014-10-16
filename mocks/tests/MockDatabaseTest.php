@@ -123,4 +123,19 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     // Check that only one record was returned.
     $this->assertFalse($res->fetchObject());
   }
+
+  /**
+   * Test that we can retrieve only the fields we want, using a different field
+   * to retreieve.
+   */
+  public function testCorrectFieldsReturned() {
+        $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'lastName'))
+      ->condition('year', 1964)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Hans',   $record->firstName);
+
+    $this->assertFalse($res->fetchObject());
+  }
 }
