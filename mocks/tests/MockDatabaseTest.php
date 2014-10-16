@@ -96,5 +96,8 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(7593,     $record->id);
     $this->assertEquals('Alex',   $record->firstName);
     $this->assertEquals('Puccio', $record->lastName);
+
+    // Check that only one record was returned.
+    $this->assertFalse($res->fetchObject());
   }
 }
