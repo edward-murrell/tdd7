@@ -277,6 +277,17 @@ class MockSelectQuery implements \SelectQueryInterface {
   }
 
   /**
+   * Filters the given row down to only the fields expected. If the fields are
+   * not supplied, they a null value will be created. If an empty array has been
+   * supplied for fields, then all fields will be returned.
+   * @param array $row
+   * @return array The same row, with only the fields expected
+   */
+  private function filterFields(array $row) {
+    return $row;
+  }
+
+  /**
    * Tests if $row matches SQL LIKE $key
    * @param $row Value to test against
    * @param $key Search string: eg; '%test%';
@@ -296,7 +307,7 @@ class MockSelectQuery implements \SelectQueryInterface {
     $results = array();
     foreach ($this->database->getTestData($this->tablename) as $row) {
       if ($this->confirmMatch($row)) {
-        $results[] = $row;
+        $results[] = $this->filterFields($row);
       }
     }
 
