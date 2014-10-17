@@ -71,6 +71,7 @@ namespace oua\lms\testframework {
       foreach ($info as $delta => $data) {
         $this->assertTrue(is_string($delta));
         $this->assertTrue(is_array($data));
+        $this->checkModuleBlockView($module, $delta);
       }
     }
 
