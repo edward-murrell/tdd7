@@ -83,6 +83,9 @@ namespace oua\lms\testframework {
     public function checkModuleBlockView($module = '', $delta = '') {
       $view_callback = "{$module}_block_view";
       $this->assertTrue(function_exists($view_callback), "Expected function '{$view_callback}' does not exist");
+      $result = call_user_func($view_callback, $delta);
+      $this->assertArrayHasKey('subject', $result);
+      $this->assertArrayHasKey('content', $result);
     }
 
     /**
