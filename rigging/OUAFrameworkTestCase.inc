@@ -55,7 +55,9 @@ namespace oua\lms\testframework {
     }
 
     /**
-     * Checks if the block_info and modules for a given module are valid.
+     * Checks if the block_info and modules for a given module are valid
+     *  according to the specifications at:
+     *  https://api.drupal.org/api/drupal/modules!block!block.api.php/function/hook_block_info/7
      * @param string $module module name to check.
      */
     public function checkModuleBlocks($module = '') {
@@ -66,7 +68,8 @@ namespace oua\lms\testframework {
       if (!function_exists($info_callback)) {
         throw new \Exception("Expected function '{$info_callback}' does not exist");
       }
-      $this->assertTrue(true);
+      $info = call_user_func($info_callback);
+      $this->assertTrue(is_array($info));
     }
 
     /**
