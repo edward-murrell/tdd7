@@ -59,6 +59,13 @@ namespace oua\lms\testframework {
      * @param string $module module name to check.
      */
     public function checkModuleBlocks($module = '') {
+      if (empty($module)) {
+        throw new \Exception('Supplied argument for checkModuleBlocks cannot be null');
+      }
+      $info_callback = "{$module}_block_info";
+      if (!function_exists($info_callback)) {
+        throw new \Exception("Expected function '{$info_callback}' does not exist");
+      }
       $this->assertTrue(true);
     }
 
