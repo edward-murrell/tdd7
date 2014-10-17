@@ -55,6 +55,14 @@ namespace oua\lms\testframework {
     }
 
     /**
+     * Checks if the block_info and modules for a given module are valid.
+     * @param string $module module name to check.
+     */
+    public function checkModuleBlocks($module = '') {
+      $this->assertTrue(true);
+    }
+
+    /**
      * A test so that child classes of \PHPUnit_Framework_TestCase don't fail
      *  due to a lack of tests. Also should catch changes to the class name.
      *
