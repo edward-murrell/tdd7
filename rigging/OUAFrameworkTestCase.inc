@@ -81,7 +81,8 @@ namespace oua\lms\testframework {
      * @param type $delta delta string to pass to hook_block_view
      */
     public function checkModuleBlockView($module = '', $delta = '') {
-      $this->assertTrue(true);
+      $view_callback = "{$module}_block_view";
+      $this->assertTrue(function_exists($view_callback), "Expected function '{$view_callback}' does not exist");
     }
 
     /**
