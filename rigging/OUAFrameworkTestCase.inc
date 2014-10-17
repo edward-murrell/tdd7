@@ -65,9 +65,7 @@ namespace oua\lms\testframework {
         throw new \Exception('Supplied argument for checkModuleBlocks cannot be null');
       }
       $info_callback = "{$module}_block_info";
-      if (!function_exists($info_callback)) {
-        throw new \Exception("Expected function '{$info_callback}' does not exist");
-      }
+      $this->assertTrue(function_exists($info_callback), "Expected function '{$info_callback}' does not exist");
       $info = call_user_func($info_callback);
       $this->assertTrue(is_array($info));
       foreach ($info as $delta => $data) {
