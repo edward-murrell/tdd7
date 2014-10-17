@@ -77,6 +77,16 @@ namespace oua\lms\testframework {
     }
 
     /**
+     * Checks the validity of data returned from hook_block_view. This is
+     *  automatically called from checkModuleBlockInfo
+     * @param type $module module name to check
+     * @param type $delta delta string to pass to hook_block_view
+     */
+    public function checkModuleBlockView($module = '', $delta = '') {
+      $this->assertTrue(true);
+    }
+
+    /**
      * A test so that child classes of \PHPUnit_Framework_TestCase don't fail
      *  due to a lack of tests. Also should catch changes to the class name.
      *
