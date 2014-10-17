@@ -70,6 +70,10 @@ namespace oua\lms\testframework {
       }
       $info = call_user_func($info_callback);
       $this->assertTrue(is_array($info));
+      foreach ($info as $delta => $data) {
+        $this->assertTrue(is_string($delta));
+        $this->assertTrue(is_array($data));
+      }
     }
 
     /**
