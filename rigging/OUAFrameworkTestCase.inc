@@ -60,7 +60,7 @@ namespace oua\lms\testframework {
      *  https://api.drupal.org/api/drupal/modules!block!block.api.php/function/hook_block_info/7
      * @param string $module module name to check.
      */
-    public function checkModuleBlocks($module = '') {
+    public function checkModuleBlockInfo($module = '') {
       if (empty($module)) {
         throw new \Exception('Supplied argument for checkModuleBlocks cannot be null');
       }
