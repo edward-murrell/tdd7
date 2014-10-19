@@ -1,11 +1,16 @@
 <?php
 
 namespace oua\lms\testframework\mocks;
-include_once dirname(__FILE__) . "/../../oua_lms_services/HangUpService/ExitCapable.php";
+include_once dirname(dirname(__DIR__)) . "/oua_lms_services/HangUpService/HangUpService.php";
 
 use Exception;
 use oua\lms\services\ExitCapable;
 
+/**
+ * Class ControlledExitCapability
+ *
+ * @package oua\lms\testframework\mocks
+ */
 class ControlledExitCapability extends ExitCapable {
   /**
    * @var bool
@@ -15,6 +20,8 @@ class ControlledExitCapability extends ExitCapable {
    * @var bool
    */
   public $softDropped = NULL;
+
+  public $softMessage = NULL;
 
   public $throwException = FALSE;
 
@@ -31,8 +38,14 @@ class ControlledExitCapability extends ExitCapable {
 
   /**
    * Agree to hang up in the 'soft way'.
+   *
+   * @param string $message_to_print
+   *   A message string to 'print' on exit.
+   *
+   * @throws Exception
    */
-  public function soft() {
+  public function soft($message_to_print) {
+    $this->softMessage = $message_to_print;
     $this->softDropped = TRUE;
     $this->hardDropped = FALSE;
     if ($this->throwException) {
