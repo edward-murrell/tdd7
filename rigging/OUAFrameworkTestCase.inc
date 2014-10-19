@@ -71,6 +71,12 @@ namespace oua\lms\testframework {
       foreach ($info as $delta => $data) {
         $this->assertTrue(is_string($delta));
         $this->assertTrue(is_array($data));
+
+        // Check that data has an info string that is not empty
+        $this->assertArrayHasKey('info', $data);
+        $this->assertTrue(is_string($delta));
+        $this->assertNotEmpty($data['info']);
+
         $this->checkModuleBlockView($module, $delta);
       }
     }
