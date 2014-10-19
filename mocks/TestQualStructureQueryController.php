@@ -4,8 +4,13 @@ namespace oua_lms_testframework\mocks;
 
 use VetWebservices\AbstractQualStructureQueryController;
 
-require_once dirname(__FILE__) . '/../../vet_webservices/classes/QualStructureQueryController.php';
+require_once dirname(dirname(__DIR__)) . '/vet_webservices/classes/QualStructureQueryController.php';
 
+/**
+ * Class TestQualStructureQueryController
+ *
+ * @package oua_lms_testframework\mocks
+ */
 class TestQualStructureQueryController extends AbstractQualStructureQueryController {
 
   public $entityFieldQuery = NULL;
