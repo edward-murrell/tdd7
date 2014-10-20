@@ -137,7 +137,7 @@ class MockSelectQuery implements \SelectQueryInterface {
     if (empty($operator)) {
       $operator = '=';
     }
-    $this->conditions[$field] = array('value' => $value, 'operator' => $operator);
+    $this->conditions[] = array('field' => $field, 'value' => $value, 'operator' => $operator);
     return $this;
   }
 
@@ -255,7 +255,8 @@ class MockSelectQuery implements \SelectQueryInterface {
    * Ugly function decide if fields match conditons or not
    */
   private function confirmMatch($row) {
-    foreach ($this->conditions as $field => $cond) {
+    foreach ($this->conditions as $cond) {
+      $field = $cond['field'];
       switch ($cond['operator']) {
         case null :
         case '='  :
