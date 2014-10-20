@@ -93,6 +93,8 @@ namespace oua\lms\testframework {
       $result = call_user_func($view_callback, $delta);
       $this->assertArrayHasKey('subject', $result);
       $this->assertArrayHasKey('content', $result);
+      // TODO: Checkt ath content is either a valid render array
+      // OR is a valid HTML string
     }
 
     /**
