@@ -2,17 +2,13 @@
 /**
  * @file
  * @author David Walters <david.walters@open.edu.au>
- * Date: 3/06/2014
- * Time: 12:27 PM
+ * @author Edward Murrell <edward@catalyst-au.net>
+ * Date: 20/10/2014
+ * Time: 11:15 AM
  */
 
-namespace templates\test;
+namespace oua\lms\testframework;
 use DOMDocument;
-
-define('DRUPAL_ROOT', __DIR__ . '/../../../../../../');
-require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-drupal_override_server_variables();
-drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 
 abstract class TemplateTestBase extends \PHPUnit_Framework_TestCase {
 
