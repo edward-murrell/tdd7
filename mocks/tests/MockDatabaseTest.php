@@ -220,4 +220,19 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertObjectNotHasAttribute('year', $record);
     $this->assertFalse($res->fetchObject());
   }
+
+  // Test that adding a second condition on the same field doesn't overwrite the
+  // older condition.
+  public function testSelectMultipleConditionsSingleField() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'lastName'))
+      ->condition('email',    '%@example.de.com', 'LIKE')
+      ->condition('email',    'hans%', 'LIKE')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals(31,       $record->id);
+    $this->assertEquals('Dülfer', $record->lastName);
+    $this->assertFalse($res->fetchObject());
+  }
 }
