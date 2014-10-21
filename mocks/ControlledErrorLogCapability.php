@@ -1,7 +1,7 @@
 <?php
 
 namespace oua\lms\testframework\mocks;
-require_once dirname(dirname(__DIR__)) . "/oua_lms_services/ErrorLogService/ErrorLogCapable.php";
+require_once dirname(dirname(__DIR__)) . "/oua_lms_services/ErrorLogService/ErrorLogService.php";
 
 use oua\lms\services\ErrorLogCapable;
 
