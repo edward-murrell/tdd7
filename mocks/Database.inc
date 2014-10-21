@@ -86,6 +86,13 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
       return FALSE;
     }
   }
+
+  /**
+   * Replace all test data.
+   */
+  public function resetTestData() {
+    $this->data = array();
+  }
 }
 
 class MockSelectQuery implements \SelectQueryInterface {
@@ -130,7 +137,7 @@ class MockSelectQuery implements \SelectQueryInterface {
     if (empty($operator)) {
       $operator = '=';
     }
-    $this->conditions[$field] = array('value' => $value, 'operator' => $operator);
+    $this->conditions[] = array('field' => $field, 'value' => $value, 'operator' => $operator);
     return $this;
   }
 
@@ -248,7 +255,8 @@ class MockSelectQuery implements \SelectQueryInterface {
    * Ugly function decide if fields match conditons or not
    */
   private function confirmMatch($row) {
-    foreach ($this->conditions as $field => $cond) {
+    foreach ($this->conditions as $cond) {
+      $field = $cond['field'];
       switch ($cond['operator']) {
         case null :
         case '='  :
@@ -267,6 +275,24 @@ class MockSelectQuery implements \SelectQueryInterface {
       }
     }
     return TRUE;
+  }
+
+  /**
+   * Filters the given row down to only the fields expected. If the fields are
+   * not supplied, they a null value will be created. If an empty array has been
+   * supplied for fields, then all fields will be returned.
+   * @param array $row
+   * @return array The same row, with only the fields expected
+   */
+  private function filterFields($tablename, array $row) {
+    if (empty($this->fields[$tablename])) {
+      return $row;
+    }
+    $new = array();
+    foreach ($this->fields[$tablename] as $field) {
+      $new[$field] = $row[$field];
+    }
+    return $new;
   }
 
   /**
@@ -289,7 +315,7 @@ class MockSelectQuery implements \SelectQueryInterface {
     $results = array();
     foreach ($this->database->getTestData($this->tablename) as $row) {
       if ($this->confirmMatch($row)) {
-        $results[] = $row;
+        $results[] = $this->filterFields($this->tablename, $row);
       }
     }
 
@@ -320,7 +346,7 @@ class MockQueryResult {
 
   /**
    * Returns a stdObject() pointing to the row of the next result
-   * @return stdClass or NULL
+   * @return stdClass or FALSE
    */
   public function fetchObject() {
     if (!empty($this->results)) {

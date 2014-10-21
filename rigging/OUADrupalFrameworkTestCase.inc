@@ -6,7 +6,9 @@
  * and open the template in the editor.
  */
 namespace oua\lms\testframework {
-  abstract class OuaFrameworkTestCase extends \PHPUnit_Framework_TestCase {
+  require_once ('OUAFrameworkTemplateTestCase.inc');
+
+  abstract class OuaDrupalFrameworkTestCase extends TemplateTestBase {
     /**
      * Checks validity of Drupal menu arrays
      *  Asserts the following:
@@ -55,13 +57,59 @@ namespace oua\lms\testframework {
     }
 
     /**
+     * Checks if the block_info and modules for a given module are valid
+     *  according to the specifications at:
+     *  https://api.drupal.org/api/drupal/modules!block!block.api.php/function/hook_block_info/7
+     * @param string $module module name to check.
+     */
+    public function checkModuleBlockInfo($module = '') {
+      if (empty($module)) {
+        throw new \Exception('Supplied argument for checkModuleBlocks cannot be null');
+      }
+      $info_callback = "{$module}_block_info";
+      $this->assertTrue(function_exists($info_callback), "Expected function '{$info_callback}' does not exist");
+      $info = call_user_func($info_callback);
+      $this->assertTrue(is_array($info));
+      foreach ($info as $delta => $data) {
+        $this->assertTrue(is_string($delta));
+        $this->assertTrue(is_array($data));
+
+        // Check that data has an info string that is not empty
+        $this->assertArrayHasKey('info', $data);
+        $this->assertTrue(is_string($delta));
+        $this->assertNotEmpty($data['info']);
+
+        $this->checkModuleBlockView($module, $delta);
+      }
+    }
+
+    /**
+     * Checks the validity of data returned from hook_block_view. This is
+     *  automatically called from checkModuleBlockInfo
+     * @param type $module module name to check
+     * @param type $delta delta string to pass to hook_block_view
+     */
+    public function checkModuleBlockView($module = '', $delta = '') {
+      $view_callback = "{$module}_block_view";
+      $this->assertTrue(function_exists($view_callback), "Expected function '{$view_callback}' does not exist");
+      $result = call_user_func($view_callback, $delta);
+      $this->assertArrayHasKey('subject', $result);
+      $this->assertArrayHasKey('content', $result);
+      if (is_array($result['content'])) {
+        $this->AssertValidHtml(drupal_render($result['content']));
+      } else {
+        $this->AssertValidHtml($result['content']);
+      }
+    }
+
+    /**
      * A test so that child classes of \PHPUnit_Framework_TestCase don't fail
      *  due to a lack of tests. Also should catch changes to the class name.
      *
      * Test that this class is being inheritted properly.
      */
     public function testSelfClassName() {
-      $this->assertEquals('oua\lms\testframework\OuaFrameworkTestCase', __CLASS__);
+      $this->assertEquals('oua\lms\testframework\OuaDrupalFrameworkTestCase', __CLASS__);
     }
   }
 }
