@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * @file Drupal Database layer mock functions and classes
  */
 
@@ -100,10 +100,12 @@ class MockSelectQuery implements \SelectQueryInterface {
   private $tablename;
   private $fields;
   private $conditions;
+  private $countQuery;
 
  function __construct(DatabaseConnection_unittest $db, $tablename) {
     $this->database = $db;
     $this->tablename    = $tablename;
+    $this->countQuery = FALSE;
   }
 
   public function __clone() {
@@ -145,6 +147,8 @@ class MockSelectQuery implements \SelectQueryInterface {
   }
 
   public function countQuery() {
+    $this->countQuery = TRUE;
+    return $this;
   }
 
   public function distinct($distinct = TRUE) {
@@ -319,6 +323,10 @@ class MockSelectQuery implements \SelectQueryInterface {
       }
     }
 
+    if ($this->countQuery) {
+      $results = array(count($results));
+    }
+
     return new MockQueryResult($this->database, $this, $results);
   }
 }
@@ -355,5 +363,19 @@ class MockQueryResult {
     } else {
       return FALSE;
     }
+  }
+
+  /**
+   * Returns the value at $index of result.
+   * @return value or False
+   */
+  public function fetchField($index = 0) {
+    $ret = FALSE;
+
+    if (!empty($this->results) && $index < count($this->results) && $index >= 0) {
+      $ret = $this->results[$index];
+    }
+
+    return $ret;
   }
 }
