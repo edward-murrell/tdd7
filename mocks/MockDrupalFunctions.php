@@ -7,7 +7,7 @@
  */
 
 namespace oua\lms\testframework\mocks {
-  class DrupalFunctions {
+  class MockDrupalFunctions {
     private static $variables = array();
     /**
      * Mock version of variable_set()
