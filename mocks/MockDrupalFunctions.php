@@ -17,6 +17,7 @@ namespace oua\lms\testframework\mocks {
      *  functions take care of serialization as necessary.
      */
     public static function variable_set($name, $value) {
+      self::$variables[$name] = $value;
     }
 
     /**
@@ -27,6 +28,11 @@ namespace oua\lms\testframework\mocks {
      *  been set.
      */
     public static function variable_get($name, $default = NULL) {
+      if (array_key_exists($name, self::$variables)) {
+        return self::$variables[$name];
+      } else {
+        return $default;
+      }
     }
   }
 }
