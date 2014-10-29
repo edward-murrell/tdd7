@@ -51,5 +51,20 @@ namespace oua\lms\testframework\mocks {
         self::$form_errors[$name] = $message;
       }
     }
+
+    /**
+     * Returns all the currently stored errors
+     * @return array Array of all errors so far
+     */
+    public function form_get_errors() {
+      return self::$form_errors;
+    }
+
+    /**
+     * Clears the internal mock form error list.
+     */
+    public function form_clear_error() {
+      self::$form_errors = array();
+    }
   }
 }
