@@ -9,6 +9,7 @@
 namespace oua\lms\testframework\mocks {
   class MockDrupalFunctions {
     private static $variables = array();
+    private static $form_errors = array();
     /**
      * Mock version of variable_set()
      * Original documentation: https://api.drupal.org/api/drupal/includes!bootstrap.inc/function/variable_set/7
@@ -36,6 +37,18 @@ namespace oua\lms\testframework\mocks {
         return self::$variables[$name];
       } else {
         return \variable_get($name, $default);
+      }
+    }
+
+    /**
+     * Mock form_set_error
+     * @param type $name field name of error
+     * @param type $message Error message
+     * @param type $limit_validation_errors
+     */
+    public function form_set_error($name = NULL, $message = '', $limit_validation_errors = NULL) {
+      if ($name != NULL) {
+        $this->$form_errors[$name] = $message;
       }
     }
   }
