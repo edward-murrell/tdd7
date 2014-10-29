@@ -112,7 +112,7 @@ abstract class TemplateTestBase extends \PHPUnit_Framework_TestCase {
     if ($wrap_tags) {
       $contents = "<html>\n" . $contents . "\n</html>";
     }
-    $this->AssertValidHtml($contents);
+    $this->AssertValidHtml5($contents);
   }
 
   /**
