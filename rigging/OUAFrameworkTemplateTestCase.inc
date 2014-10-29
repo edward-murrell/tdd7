@@ -76,6 +76,28 @@ abstract class TemplateTestBase extends \PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Validate an HTML5 string. Searches and replaces <section> & </section>
+   *  tags with <div> tags, as DOMDocument does not support these.
+   * @TODO : Replace this with something better as soon as possible.
+   *
+   * @param string $html_string
+   *   The string to validate.
+   */
+  public function AssertValidHtml5($html_string) {
+    $new_html = str_replace(array(
+        '<section',
+        '</section',
+      ),
+      array(
+        '<div',
+        '</div',
+      ),
+      $html_string
+    );
+    $this->AssertValidHtml($new_html);
+  }
+
+  /**
    * Validate HTML template.
    *
    * @param string $filename
