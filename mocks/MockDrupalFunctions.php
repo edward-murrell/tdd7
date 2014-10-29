@@ -46,7 +46,7 @@ namespace oua\lms\testframework\mocks {
      * @param type $message Error message
      * @param type $limit_validation_errors
      */
-    public function form_set_error($name = NULL, $message = '', $limit_validation_errors = NULL) {
+    public static function form_set_error($name = NULL, $message = '', $limit_validation_errors = NULL) {
       if ($name != NULL) {
         self::$form_errors[$name] = $message;
       }
@@ -56,14 +56,14 @@ namespace oua\lms\testframework\mocks {
      * Returns all the currently stored errors
      * @return array Array of all errors so far
      */
-    public function form_get_errors() {
+    public static function form_get_errors() {
       return self::$form_errors;
     }
 
     /**
      * Clears the internal mock form error list.
      */
-    public function form_clear_error() {
+    public static function form_clear_error() {
       self::$form_errors = array();
     }
   }
