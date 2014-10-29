@@ -48,7 +48,7 @@ namespace oua\lms\testframework\mocks {
      */
     public function form_set_error($name = NULL, $message = '', $limit_validation_errors = NULL) {
       if ($name != NULL) {
-        $this->$form_errors[$name] = $message;
+        self::$form_errors[$name] = $message;
       }
     }
   }
