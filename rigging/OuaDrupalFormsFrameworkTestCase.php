@@ -15,7 +15,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCa
   abstract function GetForm();
   
   /**
-   * @dataProvider GetForm();
+   * @dataProvider GetForm
    */
   public function testForm() {
     // This will pull in a from, and pass it out to the checkElementXYZ functions
