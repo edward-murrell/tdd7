@@ -56,6 +56,8 @@ abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCa
    * @param $field The value for the array where the key is #autocomplete_path
    */
   public function checkElementTextfieldFieldDataAutocomplete_path($field) {
+    $menu = menu_get_item($field);
+    $this->assertNotEmpty($menu);
   }
 
   /**
