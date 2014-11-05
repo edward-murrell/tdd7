@@ -43,6 +43,13 @@ abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCa
   }
 
   /**
+   * Check textfield element field #autocomplete_path is valid
+   * @param $field The value for the array where the key is #autocomplete_path
+   */
+  public function checkElementTextfieldFieldDataAutocomplete_path($field) {
+  }
+
+  /**
    * Check that validity of this submit element
    * @param $key string the key as attached to the element above
    */
