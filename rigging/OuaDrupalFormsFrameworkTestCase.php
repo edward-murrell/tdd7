@@ -41,4 +41,16 @@ abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCa
       $this->assertArrayHasKey($field, $fields);
     }
   }
+
+  /**
+   * Check that validity of this submit element
+   * @param $key string the key as attached to the element above
+   */
+  public function checkElementSubmitFields($key, array $element) {
+    $fields = array('#access' => TRUE, '#after_build' => TRUE, '#ajax' => TRUE, '#attributes' => TRUE, '#button_type' => TRUE, '#disabled' => TRUE, '#element_validate' => TRUE, '#executes_submit_callback' => TRUE, '#limit_validation_errors' => TRUE, '#name' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#submit' => TRUE, '#states' => TRUE, '#suffix' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#validate' => TRUE, '#value' => TRUE, '#weight' => TRUE);
+    foreach($element as $field => $value) {
+      // Assert that this field is in the allowed list for this field.
+      $this->assertArrayHasKey($field, $fields);
+    }
+  }
 }
