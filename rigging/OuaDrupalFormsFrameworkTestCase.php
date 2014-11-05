@@ -35,7 +35,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCa
    * @param $key string the key as attached to the element above
    */
   public function checkElementTextfieldFields($key, array $element) {
-    $fields = array('#access', '#after_build', '#ajax', '#attributes', '#autocomplete_path', '#default_value', '#description', '#disabled', '#element_validate', '#field_prefix', '#field_suffix', '#maxlength', '#parents', '#post_render', '#prefix', '#pre_render', '#process', '#required', '#size', '#states', '#suffix', '#text_format', '#theme', '#theme_wrappers', '#title', '#title_display', '#tree', '#type', '#weight');
+    $fields = array('#access' => TRUE, '#after_build' => TRUE, '#ajax' => TRUE, '#attributes' => TRUE, '#autocomplete_path' => TRUE, '#default_value' => TRUE, '#description' => TRUE, '#disabled' => TRUE, '#element_validate' => TRUE, '#field_prefix' => TRUE, '#field_suffix' => TRUE, '#maxlength' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#required' => TRUE, '#size' => TRUE, '#states' => TRUE, '#suffix' => TRUE, '#text_format' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#title' => TRUE, '#title_display' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#weight' => TRUE);
     foreach($element as $field => $value) {
       // Assert that this field is in the allowed list for this field.
       $this->assertArrayHasKey($field, $fields);
