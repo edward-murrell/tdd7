@@ -27,6 +27,15 @@ abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCa
       if (method_exists($this, $method)) {
         $this->$method($key, $element);
       }
+
+      // Iterate through all the fields in the element
+      foreach ($element as $fieldname => $fieldata) {
+        $field = ltrim($fieldname, '#');
+        $field_method = "checkElement{$element['#type']}FieldData{$field}";
+        if (method_exists($this, $field_method)) {
+          $this->$field_method($fieldata);
+        }
+      }
     }
   }
 
