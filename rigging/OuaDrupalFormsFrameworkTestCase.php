@@ -10,25 +10,20 @@ abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCa
   
   /**
    * Virtual function that must be implemented to enforce a form.
-   * @return array() A unrendered from array
+   * @return array() Array containing an array contain form arrays.
    */
   abstract function GetForms();
   
   /**
-   * @dataProvider GetForms
-   * @param array $forms Array containing an array contain form arrays.
-   */
-  public function testForm(array $forms) {
-    // This will pull in a from, and pass it out to the checkElementXYZ functions
-    // GetForm() is defined by the implementing class.
-  }
-
-  /**
    * Checks that form elements are of acceptable elements, and passes them to
    *  check methods called nameCheckElement{$type}Fields
+   * @dataProvider GetForms
    * @param array $form Drupal form array
    */
-  public function checkForm(array $form) {
+  public function testForm(array $forms) {
+    foreach ($form as $key => $element) {
+      $this->assertArrayHasKey('#type', $element);
+    }
   }
 
   public function checkElementTextfieldFields(array $element) {
