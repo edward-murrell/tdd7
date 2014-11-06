@@ -96,9 +96,9 @@ namespace oua\lms\testframework {
       $this->assertArrayHasKey('subject', $result);
       $this->assertArrayHasKey('content', $result);
       if (is_array($result['content'])) {
-        $this->AssertValidHtml(drupal_render($result['content']));
+        $this->AssertValidHtml5(drupal_render($result['content']));
       } else {
-        $this->AssertValidHtml($result['content']);
+        $this->AssertValidHtml5($result['content']);
       }
     }
 

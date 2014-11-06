@@ -24,6 +24,7 @@ class MockCurlService {
    */
   public function init($url) {
     $this->url = $url;
+    $this->options[CURLOPT_URL] = $url;
   }
 
   public $options = array();

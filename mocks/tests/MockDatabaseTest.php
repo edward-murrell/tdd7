@@ -10,7 +10,7 @@ require_once './includes/bootstrap.inc';
 drupal_override_server_variables();
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 
-module_load_include('inc', 'oua_lms_testframework', 'mocks/Database');
+require_once DRUPAL_ROOT . "/sites/all/modules/custom/oua_lms_testframework/mocks/Database.inc";
 
 define ('TABLE1', 'testMockTable1');
 define ('TABLE2', 'testMockTable2');
