@@ -49,7 +49,7 @@ abstract class TemplateTestBase extends \PHPUnit_Framework_TestCase {
    * @param bool   $prepend_declaration
    *   Prepend the XML fragment with a <?xml?> declaration.
    */
-  public function AssertTemplateValidXml($filename, $vars = NULL, $prepend_declaration = TRUE) {
+  public function AssertTemplateValidXml($filename, $vars = array(), $prepend_declaration = TRUE) {
     $contents = $this->IncludeFile($filename, $vars);
     if ($prepend_declaration) {
       $contents = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" . $contents;
@@ -107,7 +107,7 @@ abstract class TemplateTestBase extends \PHPUnit_Framework_TestCase {
    * @param bool $wrap_tags
    *   Whether or not to wrap the HTML fragment in <html> tags.
    */
-  public function AssertTemplateValidHtml($filename, $vars = NULL, $wrap_tags = TRUE) {
+  public function AssertTemplateValidHtml($filename, $vars = array(), $wrap_tags = TRUE) {
     $contents = $this->IncludeFile($filename, $vars);
     if ($wrap_tags) {
       $contents = "<html>\n" . $contents . "\n</html>";
@@ -178,7 +178,7 @@ abstract class TemplateTestBase extends \PHPUnit_Framework_TestCase {
    * @return string
    *   The processed file.
    */
-  protected function IncludeFile($filename, $vars) {
+  protected function IncludeFile($filename, array $vars = array()) {
     ob_start();
     extract($vars);
     include $filename;
