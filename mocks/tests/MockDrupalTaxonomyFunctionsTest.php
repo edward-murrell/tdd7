@@ -19,6 +19,8 @@ define ('TERM1_TITLE', 'Taxo test term 1');
 define ('TERM2_TITLE', 'Taxo test two');
 define ('TERM3_TITLE', 'Taxo test third');
 
+define ('NODE1_NID', 334345555545555555);
+
 class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
   public function testAddingTestDataToTaxonomyIsReturned() {
     MockDrupalTaxonomyFunctions::ResetMockData();
@@ -38,5 +40,9 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
 
     $emptytree = MockDrupalTaxonomyFunctions::taxonomy_get_tree(8);
     $this->assertEmpty(0, $emptytree);
+  }
+
+  public function testTaxonomy_select_nodesReturnsNodeMapFromMockData() {
+    MockDrupalTaxonomyFunctions::AddMockTermToNode(TERM3_TID,NODE1_NID);
   }
 }
