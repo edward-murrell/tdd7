@@ -12,16 +12,11 @@ namespace oua\lms\testframework\mocks {
      * Mock function for taxonomy_select_nodes.
      */
     public static function taxonomy_select_nodes($tid, $pager = TRUE, $limit = FALSE, $order = array('t.sticky' => 'DESC', 't.created' => 'DESC')) {
-      $nids = array();
-      switch ($tid) {
-        case 123:
-          $nids[] = 999;
-          break;
-
-        default:
-          break;
-      }
-      return $nids;
+      $nid_map = array(
+        123 => array(999),
+        999 => array(123),
+      );
+      return $nid_map[$tid];
     }
   }
 }
