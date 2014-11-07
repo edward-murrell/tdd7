@@ -18,5 +18,8 @@ namespace oua\lms\testframework\mocks {
       );
       return $nid_map[$tid];
     }
+
+    public static function taxonomy_get_tree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE) {}
+    public static function taxonomy_term_load($tid) {}
   }
 }
