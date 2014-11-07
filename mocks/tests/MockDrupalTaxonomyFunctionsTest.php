@@ -35,5 +35,8 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
     MockDrupalTaxonomyFunctions::AddMockTerm(3, TERM3_TID, TERM3_TITLE);
     $tree = MockDrupalTaxonomyFunctions::taxonomy_get_tree(2);
     $this->assertEquals(TERM2_TITLE, $tree[0]->name);
+
+    $emptytree = MockDrupalTaxonomyFunctions::taxonomy_get_tree(8);
+    $this->assertEmpty(0, $emptytree);
   }
 }
