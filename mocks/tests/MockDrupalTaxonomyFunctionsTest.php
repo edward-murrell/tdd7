@@ -30,5 +30,10 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
 
   public function testRetrievingDataByMockTaxonomy_get_treeFunction() {
     MockDrupalTaxonomyFunctions::ResetMockData();
+    MockDrupalTaxonomyFunctions::AddMockTerm(1, TERM1_TID, TERM1_TITLE);
+    MockDrupalTaxonomyFunctions::AddMockTerm(2, TERM2_TID, TERM2_TITLE);
+    MockDrupalTaxonomyFunctions::AddMockTerm(3, TERM3_TID, TERM3_TITLE);
+    $tree = MockDrupalTaxonomyFunctions::taxonomy_get_tree(2);
+    $this->assertEquals(TERM2_TITLE, $tree[0]->name);
   }
 }
