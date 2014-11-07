@@ -21,6 +21,7 @@ define ('TERM3_TITLE', 'Taxo test third');
 
 class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
   public function testAddingTestDataToTaxonomyIsReturned() {
+    MockDrupalTaxonomyFunctions::ResetMockData();
     MockDrupalTaxonomyFunctions::AddMockTerm(0, TERM1_TID, TERM1_TITLE);
     MockDrupalTaxonomyFunctions::AddMockTerm(0, TERM2_TID, TERM2_TITLE);
     $term = MockDrupalTaxonomyFunctions::taxonomy_term_load(TERM2_TID);
