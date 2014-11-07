@@ -43,7 +43,12 @@ namespace oua\lms\testframework\mocks {
      * @param int $tid Taxonomy ID of term to load.
      * @return A taxonomy term object, or FALSE if the term was not found.
      */
-    public static function taxonomy_term_load($tid = null) {}
+    public static function taxonomy_term_load($tid = null) {
+      if ($tid == null || !array_key_exists($tid, self::$terms)) {
+        return FALSE;
+      }
+      return self::$terms[$tid];
+    }
 
     /**
      * Add a mock term item to the set of mock taxonmies.
