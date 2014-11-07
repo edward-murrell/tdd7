@@ -9,6 +9,7 @@
 namespace oua\lms\testframework\mocks {
   class MockDrupalTaxonomyFunctions {
     private static $terms = array();
+    private static $tree  = array();
 
     /**
      * Mock function for taxonomy_select_nodes.
@@ -35,7 +36,12 @@ namespace oua\lms\testframework\mocks {
      *  normal ones. Term objects will be partial or complete depending on the
      *  $load_entities parameter.
      */
-    public static function taxonomy_get_tree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE) {}
+    public static function taxonomy_get_tree($vid, $parent = 0, $max_depth = NULL, $load_entities = FALSE) {
+      if ($vid == null || !array_key_exists($vid, self::$tree)) {
+        return array();
+      }
+      return self::$tree[$vid];
+    }
 
     /**
      * Return the mock term object matching a term ID.
@@ -62,6 +68,7 @@ namespace oua\lms\testframework\mocks {
       $taxonomy->vid = $vid;
       $taxonomy->name = $name;
       self::$terms[$tid] = $taxonomy;
+      self::$tree[$vid][] = $taxonomy;
     }
 
     /**
