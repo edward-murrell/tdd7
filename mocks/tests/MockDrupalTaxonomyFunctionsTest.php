@@ -26,4 +26,8 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
     $term = MockDrupalTaxonomyFunctions::taxonomy_term_load(TERM2_TID);
     $this->assertEquals(TERM2_TITLE, $term->name);
   }
+
+  public function testRetrievingDataByMockTaxonomy_get_treeFunction() {
+    MockDrupalTaxonomyFunctions::ResetMockData();
+  }
 }

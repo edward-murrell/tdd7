@@ -63,5 +63,12 @@ namespace oua\lms\testframework\mocks {
       $taxonomy->name = $name;
       self::$terms[$tid] = $taxonomy;
     }
+
+    /**
+     * Delete all saved mock data.
+     */
+    public static function ResetMockData() {
+      self::$terms = array();
+    }
   }
 }
