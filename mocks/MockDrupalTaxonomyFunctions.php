@@ -8,6 +8,8 @@
 
 namespace oua\lms\testframework\mocks {
   class MockDrupalTaxonomyFunctions {
+    private static $terms = array();
+
     /**
      * Mock function for taxonomy_select_nodes.
      */
@@ -50,7 +52,11 @@ namespace oua\lms\testframework\mocks {
      * @param type $name
      */
     public static function AddMockTerm($vid, $tid, $name) {
-
+      $taxonmy = new \stdClass();
+      $taxonomy->tid = $tid;
+      $taxonomy->vid = $vid;
+      $taxonomy->name = $name;
+      self::$terms[$tid] = $taxonomy;
     }
   }
 }
