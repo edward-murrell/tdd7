@@ -42,5 +42,15 @@ namespace oua\lms\testframework\mocks {
      * @return A taxonomy term object, or FALSE if the term was not found.
      */
     public static function taxonomy_term_load($tid = null) {}
+
+    /**
+     * Add a mock term item to the set of mock taxonmies.
+     * @param type $vid
+     * @param type $tid
+     * @param type $name
+     */
+    public static function AddMockTerm($vid, $tid, $name) {
+
+    }
   }
 }
