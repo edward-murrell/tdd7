@@ -10,6 +10,7 @@ namespace oua\lms\testframework\mocks {
   class MockDrupalFunctions {
     private static $variables = array();
     private static $form_errors = array();
+    private static $last_drupal_goto = null;
     /**
      * Mock version of variable_set()
      * Original documentation: https://api.drupal.org/api/drupal/includes!bootstrap.inc/function/variable_set/7
@@ -65,6 +66,24 @@ namespace oua\lms\testframework\mocks {
      */
     public static function form_clear_error() {
       self::$form_errors = array();
+    }
+
+    /**
+     * Mock drupal_goto function.
+     * Unlike the real drupal_goto, this will return.
+     * @param string $url Relative or absolute URL to pass.
+     */
+    public static function drupal_goto($url = '') {
+      self::$last_drupal_goto = $url;
+    }
+
+    /**
+     * Returns the last URL passed to Mock drupal_goto function. The URL string
+     * is not processed in any way.
+     * @return string|null last url passed to drupal_goto.
+     */
+    public static function GetLastDrupalGoto() {
+      return self::$last_drupal_goto;
     }
   }
 }
