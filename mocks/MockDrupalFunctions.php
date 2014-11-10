@@ -10,6 +10,8 @@ namespace oua\lms\testframework\mocks {
   class MockDrupalFunctions {
     private static $variables = array();
     private static $form_errors = array();
+    private static $last_drupal_goto = null;
+    private static $last_drupal_json_output = null;
     /**
      * Mock version of variable_set()
      * Original documentation: https://api.drupal.org/api/drupal/includes!bootstrap.inc/function/variable_set/7
@@ -65,6 +67,44 @@ namespace oua\lms\testframework\mocks {
      */
     public static function form_clear_error() {
       self::$form_errors = array();
+    }
+
+    /**
+     * Mock drupal_goto function.
+     * Unlike the real drupal_goto, this will return.
+     * @param string $url Relative or absolute URL to pass.
+     */
+    public static function drupal_goto($url = '') {
+      self::$last_drupal_goto = $url;
+    }
+
+    /**
+     * Returns the last URL passed to Mock drupal_goto function. The URL string
+     * is not processed in any way.
+     * @return string|null last url passed to drupal_goto.
+     */
+    public static function GetLastDrupalGoto() {
+      return self::$last_drupal_goto;
+    }
+
+    /**
+     * Converts the input to JSON and saves it.
+     *  Normally, this function would echo the result of the JSON conversion to
+     *  stdout. For testing purposes, this will be saved in a internal variable,
+     *  which can be retrieved with GetLastDrupalJsonOutput
+     * @param type $var
+     * @return type
+     */
+    public static function drupal_json_output($var = null) {
+      self::$last_drupal_json_output = drupal_json_encode($var);
+    }
+
+    /**
+     * Returns the JSON output sent via drupal_json_output()
+     * @return string JSON output.
+     */
+    public static function GetLastDrupalJsonOutput() {
+      return self::$last_drupal_json_output;
     }
   }
 }

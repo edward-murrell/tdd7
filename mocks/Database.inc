@@ -77,13 +77,18 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
     $this->data[$table][] = $data;
   }
 
+  /**
+   * Returns test data for specified table. If no data is available, an empty
+   *  array will be returned.
+   * @param type $table
+   * @return array Data added to test tables so far, may be empty.
+   */
   public function getTestData($table) {
     if (array_key_exists($table, $this->data)) {
       return $this->data[$table];
     }
     else {
-      // Maybe this should be an exception.
-      return FALSE;
+      return array();
     }
   }
 
