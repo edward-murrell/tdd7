@@ -75,15 +75,15 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
   }
 
   public function testAddEmptyData() {
-    // Use local copy for this test becase we are corrupting it with empty data
-    $db = new DatabaseConnection_unittest();
+    // Use local copy for this test becase we are corrupting it with empty data.
+    $db = new DatabaseConnection_unittest('', '', '');
 
-    $this->assertFalse($db->getTestData(TABLE1));
+    $this->assertEmpty($db->getTestData(TABLE1));
     $db->addTestData(TABLE1, array());
     $this->assertCount(1, $db->getTestData(TABLE1));
 
-    // Assert that data is stored in the correct 'table'
-    $this->assertFalse($db->getTestData(TABLE2));
+    // Assert that data only is stored in the correct 'table'.
+    $this->assertEmpty($db->getTestData(TABLE2));
   }
 
   // Test that a simple record request by unique ID works
