@@ -84,7 +84,7 @@ namespace oua\lms\testframework\mocks {
      * @param type $name
      */
     public static function AddMockTerm($vid, $tid, $name) {
-      $taxonmy = new \stdClass();
+      $taxonomy = new \stdClass();
       $taxonomy->tid = $tid;
       $taxonomy->vid = $vid;
       $taxonomy->name = $name;
