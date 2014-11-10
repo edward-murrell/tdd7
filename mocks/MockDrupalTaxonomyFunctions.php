@@ -8,7 +8,19 @@
 
 namespace oua\lms\testframework\mocks {
   class MockDrupalTaxonomyFunctions {
+    /**
+     * Array of taxonomy terms. Each item is populated mock taxonomy object
+     *  with the tid, vid, and name fields, keyed by the tid. This array is
+     *  populated by AddMockTerm()
+     * @var array $terms
+     */
     private static $terms = array();
+    /**
+     * Nested array of taxonomy objects, where key is the vid of a taxonomy term
+     *  and the internal array is an anonymous list of taxonomy objects. This
+     *  array is populated by AddMockTerm()
+     * @var array $tree
+     */
     private static $tree  = array();
 
     /**
