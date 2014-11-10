@@ -107,6 +107,8 @@ namespace oua\lms\testframework\mocks {
      */
     public static function ResetMockData() {
       self::$terms = array();
+      self::$tree = array();
+      self::$nid_map = array();
     }
   }
 }
