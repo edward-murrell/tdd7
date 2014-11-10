@@ -22,6 +22,11 @@ namespace oua\lms\testframework\mocks {
      * @var array $tree
      */
     private static $tree  = array();
+    /**
+     * List of node IDs attached to a given taxonomy node. The array is key by
+     *  tid, and points to an anonymous list of Node IDs.
+     */
+    private static $nid_map = array();
 
     /**
      * Mock function for taxonomy_select_nodes.
