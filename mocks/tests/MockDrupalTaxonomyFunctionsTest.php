@@ -42,6 +42,11 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
     $this->assertEmpty(0, $emptytree);
   }
 
+  public function testTaxonomy_select_nodesReturnsEmptyArrayWithNoMockData() {
+    MockDrupalTaxonomyFunctions::ResetMockData();
+    $this->assertEquals(array(),MockDrupalTaxonomyFunctions::taxonomy_select_nodes(TERM3_TID));
+  }
+
   public function testTaxonomy_select_nodesReturnsNodeMapFromMockData() {
     MockDrupalTaxonomyFunctions::AddMockTermToNode(TERM3_TID,NODE1_NID);
     $expected_result = array(NODE1_NID);
