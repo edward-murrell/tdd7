@@ -20,6 +20,7 @@ define ('TERM2_TITLE', 'Taxo test two');
 define ('TERM3_TITLE', 'Taxo test third');
 
 define ('NODE1_NID', 334345555545555555);
+define ('NODE2_NID', 111348885545555555);
 
 class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
   public function testAddingTestDataToTaxonomyIsReturned() {
@@ -52,5 +53,13 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
     $expected_result = array(NODE1_NID);
     $this->assertEquals($expected_result, MockDrupalTaxonomyFunctions::taxonomy_select_nodes(TERM3_TID));
     $this->assertEquals(array(),MockDrupalTaxonomyFunctions::taxonomy_select_nodes(TERM2_TID));
+  }
+  public function testTaxonomy_select_nodesReturnsSingleInstanceOfNodeWhenMappingMockData() {
+    MockDrupalTaxonomyFunctions::ResetMockData();
+    MockDrupalTaxonomyFunctions::AddMockTermToNode(TERM3_TID,NODE1_NID);
+    MockDrupalTaxonomyFunctions::AddMockTermToNode(TERM3_TID,NODE1_NID);
+    MockDrupalTaxonomyFunctions::AddMockTermToNode(TERM3_TID,NODE2_NID);
+    $expected_result = array(NODE1_NID,NODE2_NID);
+    $this->assertEquals($expected_result, MockDrupalTaxonomyFunctions::taxonomy_select_nodes(TERM3_TID));
   }
 }
