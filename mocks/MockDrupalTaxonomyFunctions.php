@@ -29,14 +29,18 @@ namespace oua\lms\testframework\mocks {
     private static $nid_map = array();
 
     /**
-     * Mock function for taxonomy_select_nodes.
+     * * Mock function for taxonomy_select_nodes.
+     * @param type $tid
+     * @param type $pager NOT IMPEMENTED
+     * @param type $limit NOT IMPEMENTED
+     * @param type $order NOT IMPEMENTED
+     * @return array
      */
     public static function taxonomy_select_nodes($tid, $pager = TRUE, $limit = FALSE, $order = array('t.sticky' => 'DESC', 't.created' => 'DESC')) {
-      $nid_map = array(
-        123 => array(999),
-        999 => array(123),
-      );
-      return $nid_map[$tid];
+      if (array_key_exists($tid, self::$nid_map)) {
+        return self::$nid_map[$tid];
+      }
+      return array();
     }
 
     /**
