@@ -89,6 +89,20 @@ namespace oua\lms\testframework\mocks {
     }
 
     /**
+     * Adds a term ID to the function map
+     * @param type $tid
+     * @param type $nid
+     */
+    public static function AddMockTermToNode($tid, $nid) {
+      if (!array_key_exists($tid, self::$nid_map)) {
+        self::$nid_map[$tid] = array($nid);
+      }
+      else if (!in_array($nid, self::$nid_map[$tid])) {
+        self::$nid_map[$tid][] = $nid;
+      }
+    }
+
+    /**
      * Delete all saved mock data.
      */
     public static function ResetMockData() {
