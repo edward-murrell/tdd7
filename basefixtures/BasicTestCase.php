@@ -7,10 +7,8 @@ use ReflectionClass;
 if (!defined('DRUPAL_ROOT')) {
   define('DRUPAL_ROOT', getcwd());
   require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-
   drupal_override_server_variables();
   drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-
 }
 
 /**
@@ -18,6 +16,22 @@ if (!defined('DRUPAL_ROOT')) {
  * @package oua\lms\testframework
  */
 abstract class BasicTestCase extends \PHPUnit_Framework_TestCase {
+
+  /**
+   * Wrapper to handle the php53 nightmare.
+   *
+   * @param object|array $obj
+   *   The object to jsonify.
+   *
+   * @return string
+   *   The json string result.
+   */
+  protected static function safeJson($obj) {
+    if (defined("JSON_PRETTY_PRINT")) {
+      return json_encode($obj, JSON_PRETTY_PRINT);
+    }
+    return json_encode($obj);
+  }
 
   /**
    * Constructor.
@@ -34,32 +48,12 @@ abstract class BasicTestCase extends \PHPUnit_Framework_TestCase {
     if (!empty($product_line_constrained)) {
       $product_line_tag = array_values($product_line_constrained)[0];
       $product_lines_list = preg_split("/^.*@oua_productline\\s/", $product_line_tag, -1, PREG_SPLIT_NO_EMPTY);
-      $product_lines_filter = $product_lines_list[0];
+      $product_lines_filter = trim($product_lines_list[0]);
       $allowed_product_lines = explode(" ", $product_lines_filter);
       if (!in_array($product_line, $allowed_product_lines)) {
-        //try {
-          self::markTestSkipped();
-        //} catch(\PHPUnit_Framework_SkippedTestError $e) {
-        //  echo "TEST SKIPPED: " . $me->name . " is specific to '$product_lines_filter'\n";
-        //}
+        self::markTestSkipped();
       }
     }
-  }
-
-  /**
-   * Wrapper to handle the php53 nightmare.
-   *
-   * @param object|array $obj
-   *   The object to jsonify.
-   *
-   * @return string
-   *   The json string result.
-   */
-  protected static function safeJson($obj) {
-    if (defined("JSON_PRETTY_PRINT")) {
-      return json_encode($obj, JSON_PRETTY_PRINT);
-    }
-    return json_encode($obj);
   }
 
 }
