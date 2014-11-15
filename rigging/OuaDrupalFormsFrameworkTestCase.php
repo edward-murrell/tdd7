@@ -21,7 +21,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    * @dataProvider GetForms
    * @param array $form Drupal form array
    */
-  public function testForm($forms) {
+  public function testForm(array $forms) {
     foreach ($forms as $key => $element) {
       $this->assertArrayHasKey('#type', $element);
       $method = "checkElement{$element['#type']}Fields";
