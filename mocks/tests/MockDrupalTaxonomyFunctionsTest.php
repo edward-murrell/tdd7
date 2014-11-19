@@ -63,4 +63,13 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
     $expected_result = array(NODE1_NID,NODE2_NID);
     $this->assertEquals($expected_result, MockDrupalTaxonomyFunctions::taxonomy_select_nodes(TERM3_TID));
   }
+
+  /**
+   * Call MockDrupalTaxonomyFunctions with non existing machine name to enforce
+   *  returning FALSE when no such mock data exists.
+   */
+  public function testTaxonomy_vocabulary_machine_name_loadReturnsFalseWhenVocabIsNotFound() {
+    $result = MockDrupalTaxonomyFunctions::taxonomy_vocabulary_machine_name_load('fake_machine_name_that_doesnt_exist');
+    $this->assertFalse($result);
+  }
 }
