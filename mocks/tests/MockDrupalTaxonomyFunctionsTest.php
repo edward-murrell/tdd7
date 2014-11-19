@@ -12,6 +12,13 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 
 require_once DRUPAL_ROOT . '/sites/all/modules/custom/oua_lms_testframework/mocks/MockDrupalTaxonomyFunctions.php';
 
+define ('VOCAB1_VID', 789789789789123123);
+define ('VOCAB2_VID', 489789789789123124);
+define ('VOCAB1_MACHNAME', 'test_vocab_1');
+define ('VOCAB2_MACHNAME', 'test_vocab_2');
+define ('VOCAB1_TITLE', 'Test Taxonomy Vocab One');
+define ('VOCAB2_TITLE', 'Test Taxonomy Vocab Two');
+
 define ('TERM1_TID', 888889999999991111);
 define ('TERM2_TID', 888889999999992222);
 define ('TERM3_TID', 888889999999993333);
@@ -71,5 +78,16 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
   public function testTaxonomy_vocabulary_machine_name_loadReturnsFalseWhenVocabIsNotFound() {
     $result = MockDrupalTaxonomyFunctions::taxonomy_vocabulary_machine_name_load('fake_machine_name_that_doesnt_exist');
     $this->assertFalse($result);
+  }
+
+  /**
+   * Call MockDrupalTaxonomyFunctions with previously added machine name to
+   *  and test that it returns the same element.
+   */
+  public function testTaxonomy_vocabulary_machine_name_loadReturnsSameNameAndVid() {
+    MockDrupalTaxonomyFunctions::AddSimpleVocab(VOCAB1_VID,VOCAB1_MACHNAME, VOCAB1_TITLE);
+    MockDrupalTaxonomyFunctions::AddSimpleVocab(VOCAB2_VID,VOCAB2_MACHNAME, VOCAB2_TITLE);
+    $result = MockDrupalTaxonomyFunctions::taxonomy_vocabulary_machine_name_load(VOCAB1_MACHNAME);
+    $this->assertNotFalse($result);
   }
 }

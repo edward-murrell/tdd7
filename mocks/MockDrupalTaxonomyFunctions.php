@@ -78,6 +78,16 @@ namespace oua\lms\testframework\mocks {
     }
 
     /**
+     * Return a mocked up taxonomy vocabulary.
+     *
+     * @param string
+     *  $name The vocabulary's machine name.
+     */
+    public static function taxonomy_vocabulary_machine_name_load($name) {
+      return false;
+    }
+
+    /**
      * Add a mock term item to the set of mock taxonmies.
      * @param type $vid
      * @param type $tid
