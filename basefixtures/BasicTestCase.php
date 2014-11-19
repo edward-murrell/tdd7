@@ -11,8 +11,11 @@ if (!defined('DRUPAL_ROOT')) {
   drupal_override_server_variables();
   drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 }
-if (!defined('PRODUCTLINE_CONSTRAINED_TESTS')) {
+if (!defined('PRODUCTLINE_CONSTRAINED_TESTS') && !getenv("PRODUCTLINE_CONSTRAINED_TESTS")) {
   define('PRODUCTLINE_CONSTRAINED_TESTS', FALSE);
+}
+else {
+  define('PRODUCTLINE_CONSTRAINED_TESTS', TRUE);
 }
 
 /**
