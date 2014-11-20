@@ -150,6 +150,7 @@ namespace oua\lms\testframework\mocks {
       self::$terms = array();
       self::$tree = array();
       self::$nid_map = array();
+      self::$vocab = array();
     }
   }
 }
