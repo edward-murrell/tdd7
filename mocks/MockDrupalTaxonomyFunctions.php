@@ -89,6 +89,9 @@ namespace oua\lms\testframework\mocks {
      *  $name The vocabulary's machine name.
      */
     public static function taxonomy_vocabulary_machine_name_load($name) {
+      if (array_key_exists($name, self::$vocab)) {
+        return self::$vocab[$name];
+      }
       return false;
     }
 
@@ -134,7 +137,7 @@ namespace oua\lms\testframework\mocks {
       $vocab->name = $name;
       $vocab->title = $title;
 
-      self::$vocab[$vid] = $vocab;
+      self::$vocab[$name] = $vocab;
       if (!array_key_exists($vid, self::$tree)) {
         self::$tree[$vid] = array();
       }
