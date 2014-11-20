@@ -93,4 +93,14 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(VOCAB1_TITLE,    $result->title);
     $this->assertEquals(VOCAB1_MACHNAME, $result->name);
   }
+
+  /**
+   * Test that ResetMockData() removes Mock vocabs data.
+   */
+  public function testResetMockDataCleansMockVocab() {
+    MockDrupalTaxonomyFunctions::AddSimpleVocab(VOCAB1_VID,VOCAB1_MACHNAME, VOCAB1_TITLE);
+    MockDrupalTaxonomyFunctions::ResetMockData();
+    $result = MockDrupalTaxonomyFunctions::taxonomy_vocabulary_machine_name_load(VOCAB1_MACHNAME);
+    $this->assertFalse($result);
+  }
 }
