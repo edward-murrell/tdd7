@@ -88,6 +88,9 @@ class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
     MockDrupalTaxonomyFunctions::AddSimpleVocab(VOCAB1_VID,VOCAB1_MACHNAME, VOCAB1_TITLE);
     MockDrupalTaxonomyFunctions::AddSimpleVocab(VOCAB2_VID,VOCAB2_MACHNAME, VOCAB2_TITLE);
     $result = MockDrupalTaxonomyFunctions::taxonomy_vocabulary_machine_name_load(VOCAB1_MACHNAME);
-    $this->assertNotFalse($result);
+    $this->assertNotEmpty($result);
+    $this->assertEquals(VOCAB1_VID,      $result->vid);
+    $this->assertEquals(VOCAB1_TITLE,    $result->title);
+    $this->assertEquals(VOCAB1_MACHNAME, $result->name);
   }
 }
