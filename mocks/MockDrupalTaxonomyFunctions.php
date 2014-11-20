@@ -29,6 +29,11 @@ namespace oua\lms\testframework\mocks {
     private static $nid_map = array();
 
     /**
+     * List of vocabulary objects. Array keys are VID.
+     */
+    private static $vocab = array();
+
+    /**
      * * Mock function for taxonomy_select_nodes.
      * @param type $tid
      * @param type $pager NOT IMPEMENTED
@@ -113,6 +118,25 @@ namespace oua\lms\testframework\mocks {
       }
       else if (!in_array($nid, self::$nid_map[$tid])) {
         self::$nid_map[$tid][] = $nid;
+      }
+    }
+
+    /**
+     * Adds a simple mock vocabulary to the mock data. If a vocabulary already
+     *  exists with the same $vid, it will be overwritten.
+     * @param int $vid
+     * @param string $name
+     * @param string $title
+     */
+    public static function AddSimpleVocab($vid, $name, $title = '') {
+      $vocab = new \stdClass();
+      $vocab->vid  = $vid;
+      $vocab->name = $name;
+      $vocab->title = $title;
+
+      self::$vocab[$vid] = $vocab;
+      if (!array_key_exists($vid, self::$tree)) {
+        self::$tree[$vid] = array();
       }
     }
 
