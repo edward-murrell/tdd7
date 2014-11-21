@@ -28,8 +28,6 @@ class ControlledXmlRpcCapability extends XmlRpcCapable {
    */
   public function xmlrpc($url, $args, $options = array()) {
 
-    print "YAY FOR XMLRPC";
-
     $this->xmlrpcCalledWith[] = array(
       'url' => $url,
       'args' => $args,
