@@ -26,6 +26,8 @@ else {
  */
 abstract class BasicTestCase extends PHPUnit_Framework_TestCase {
 
+  protected $shouldTearDown = TRUE;
+
   /**
    * Wrapper to handle the php53 nightmare.
    *
@@ -62,6 +64,7 @@ abstract class BasicTestCase extends PHPUnit_Framework_TestCase {
         $product_lines_filter = trim($product_lines_list[0]);
         $allowed_product_lines = explode(" ", $product_lines_filter);
         if (!in_array($product_line, $allowed_product_lines)) {
+          $this->shouldTearDown = FALSE;
           self::markTestSkipped();
         }
       }
