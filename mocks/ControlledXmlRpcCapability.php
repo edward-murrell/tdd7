@@ -46,6 +46,9 @@ class ControlledXmlRpcCapability extends XmlRpcCapable {
    */
   public function ouaWsMoodleUrl() {
     $this->ouaWebservicesMoodleUriCalled++;
-    return 'fake-moodle.local';
+    return
+      moodle_wsurl()
+      . "/webservice/xmlrpc/server.php?XDEBUG_PROFILE=1&wstoken="
+      . variable_get('oua_webservices_moodle_private_token');
   }
 }
