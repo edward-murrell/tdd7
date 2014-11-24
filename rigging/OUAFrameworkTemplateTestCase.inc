@@ -9,13 +9,16 @@
 
 namespace oua\lms\testframework;
 use DOMDocument;
+require_once './sites/all/modules/custom/oua_lms_testframework/basefixtures/BasicTestCase.php';
+use oua\lms\testframework\BasicTestCase;
 
-abstract class TemplateTestBase extends \PHPUnit_Framework_TestCase {
+abstract class TemplateTestBase extends BasicTestCase {
 
   /**
    * Setup the test, clear any libxml errors.
    */
   public function setUp() {
+    parent::setUp();
     libxml_clear_errors();
   }
 

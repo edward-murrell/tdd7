@@ -5,11 +5,12 @@
 
 namespace oua\lms\testframework\mocks;
 
-define('DRUPAL_ROOT', getcwd());
-require_once './includes/bootstrap.inc';
-drupal_override_server_variables();
-drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-
+if (!defined("DRUPAL_ROOT")) {
+  define('DRUPAL_ROOT', getcwd());
+  require_once './includes/bootstrap.inc';
+  drupal_override_server_variables();
+  drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+}
 require_once DRUPAL_ROOT . '/sites/all/modules/custom/oua_lms_testframework/mocks/MockDrupalTaxonomyFunctions.php';
 
 define ('VOCAB1_VID', 789789789789123123);

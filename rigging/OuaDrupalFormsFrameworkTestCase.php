@@ -5,14 +5,15 @@
  */
 
 namespace oua\lms\testframework;
+require_once __DIR__ . '/../basefixtures/BasicTestCase.php';
 
-abstract class OuaDrupalFormsFrameworkTestCase extends \PHPUnit_Framework_TestCase {
+abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
   
   /**
    * Virtual function that must be implemented to enforce a form.
    * @return array() Array containing an array contain form arrays.
    */
-  abstract function GetForms();
+  public abstract function GetForms();
   
   /**
    * Checks that form elements are of acceptable elements, and passes them to
