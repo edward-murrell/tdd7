@@ -92,6 +92,15 @@ namespace oua\lms\testframework {
     public function checkModuleBlockView($module = '', $delta = '') {
       $view_callback = "{$module}_block_view";
       $this->assertTrue(function_exists($view_callback), "Expected function '{$view_callback}' does not exist");
+      $emptyresult = call_user_func($view_callback);
+      if (!empty($emptyresult)) {
+        $this->assertArrayHasKey('subject', $emptyresult, "Function '{$view_callback}' does not contain expected key 'subject'.");
+        $this->assertArrayHasKey('content', $emptyresult, "Function '{$view_callback}' does not contain expected key 'content'.");
+
+        $this->assertEquals('', $emptyresult['subject'], "Function '{$view_callback}' does not return empty string for null delta argument in key 'subject'.");
+        $this->assertEquals('', $emptyresult['content'], "Function '{$view_callback}' does not return empty string for null delta argument in key 'content'.");
+      }
+
       $result = call_user_func($view_callback, $delta);
       $this->assertArrayHasKey('subject', $result);
       $this->assertArrayHasKey('content', $result);
