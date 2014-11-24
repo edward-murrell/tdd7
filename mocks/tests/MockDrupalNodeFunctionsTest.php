@@ -15,7 +15,7 @@ use oua\lms\testframework\BasicTestCase;
 define ('MOCK_NODE_TEST_NID1', 547545754543);
 define ('MOCK_NODE_TEST_NID2', 963732177731);
 define ('MOCK_NODE_TEST_NID_TYPE1', 'test_type_one');
-define ('MOCK_NODE_TEST_NID_TYPE1', 'test_type_two');
+define ('MOCK_NODE_TEST_NID_TYPE2', 'test_type_two');
 define ('MOCK_NODE_TEST_NID_TITLE1', 'Testing Title Uno');
 define ('MOCK_NODE_TEST_NID_TITLE2', 'Testing Title Duo');
 
