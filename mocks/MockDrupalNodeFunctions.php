@@ -54,6 +54,25 @@ namespace oua\lms\testframework\mocks {
     }
 
     /**
+     * Add an attribute value to the node. This can be any of the columns from
+     *  the the node table, except nid or language. The mock node must have
+     *  already been added via AddMockNode().
+     *
+     * @param int $nid
+     *  The nid of an existing mock node.
+     * @param string $attribute
+     *  The attribute to set the value on. This may be one of: type, title, uid,
+     *  status, created, changed, comment, promote, sticky, tnid, translate
+     * @param string|int $value
+     *  The value to set the attribute to. Existing values will be overwritten.
+     */
+    public static function AddNodeAttribute($nid, $attribute, $value) {
+      if (array_key_exists($nid, self::$nodes)) {
+        self::$nodes[$nid]->$attribute = $value;
+      }
+    }
+
+    /**
      * Delete all saved mock data.
      */
     public static function ResetMockData() {
