@@ -128,6 +128,9 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID1, 'field_test', array('value' => 'test value'));
     $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
     $this->assertEquals('test value', $node->field_test[LANGUAGE_NONE][0]['value']);
+
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID1, 'field_test', array('value' => 'test value2'), 5);
+    $this->assertEquals('test value2', $node->field_test[LANGUAGE_NONE][5]['value']);
   }
 
 }
