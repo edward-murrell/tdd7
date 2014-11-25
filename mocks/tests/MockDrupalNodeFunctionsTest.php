@@ -86,6 +86,13 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
    * Given AddNodeAttribute is called.
    * THEN node_load returns a node with that attribute set.
    */
+  public function testAddnodeattributeSetsFieldsOnMockNodeObjects() {
+    MockDrupalNodeFunctions::ResetMockData();
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
+    MockDrupalNodeFunctions::AddNodeAttribute(MOCK_NODE_TEST_NID1, 'uid', -123);
+    $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
+    $this->assertEquals(-123, $node->uid);
+  }
 
   /**
    * Given AddNodeAttribute is called with an invalid attribute
