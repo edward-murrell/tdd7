@@ -58,4 +58,15 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     $this->assertFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1));
     $this->assertFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID2));
   }
+
+  /**
+   * Given AddMockNode() with a language set.
+   * THEN node_load() returns a language set as 'und', known as LANGUAGE_NONE.
+   */
+  public function testAddmocknodeSetsDefaultLanguageToNone() {
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
+    $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
+    $this->assertEquals(LANGUAGE_NONE, $node->language);
+    $this->assertEquals('und',         $node->language);
+  }
 }
