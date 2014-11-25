@@ -158,5 +158,8 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID2, MOCK_NODE_TEST_NID_TYPE2, MOCK_NODE_TEST_NID_TITLE2);
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID3, MOCK_NODE_TEST_NID_TYPE3, MOCK_NODE_TEST_NID_TITLE3);
     $nodes = MockDrupalNodeFunctions::node_load_multiple(array(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID3));
+    $this->assertArrayHasKey(MOCK_NODE_TEST_NID1,$nodes);
+    $this->assertArrayNotHasKey(MOCK_NODE_TEST_NID2,$nodes);
+    $this->assertArrayHasKey(MOCK_NODE_TEST_NID3,$nodes);
   }
 }
