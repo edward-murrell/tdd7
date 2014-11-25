@@ -54,6 +54,7 @@ namespace oua\lms\testframework\mocks {
      * Delete all saved mock data.
      */
     public static function ResetMockData() {
+      self::$nodes = array();
     }
   }
 }
