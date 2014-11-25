@@ -30,7 +30,7 @@ define ('TERM3_TITLE', 'Taxo test third');
 define ('NODE1_NID', 334345555545555555);
 define ('NODE2_NID', 111348885545555555);
 
-class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
+class MockDrupalNodeFunctionsTest extends \PHPUnit_Framework_TestCase {
   public function testAddingTestDataToTaxonomyIsReturned() {
     MockDrupalTaxonomyFunctions::ResetMockData();
     MockDrupalTaxonomyFunctions::AddMockTerm(0, TERM1_TID, TERM1_TITLE);
