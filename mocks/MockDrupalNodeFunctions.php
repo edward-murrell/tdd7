@@ -69,6 +69,8 @@ namespace oua\lms\testframework\mocks {
     public static function AddNodeAttribute($nid, $attribute, $value) {
       if (array_key_exists($nid, self::$nodes)) {
         self::$nodes[$nid]->$attribute = $value;
+      } else {
+        throw new \Exception('Mock node does not exist.');
       }
     }
 
