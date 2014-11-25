@@ -67,11 +67,15 @@ namespace oua\lms\testframework\mocks {
      *  The value to set the attribute to. Existing values will be overwritten.
      */
     public static function AddNodeAttribute($nid, $attribute, $value) {
-      if (array_key_exists($nid, self::$nodes)) {
-        self::$nodes[$nid]->$attribute = $value;
-      } else {
+      $valid_attrs = array ('type', 'title', 'uid', 'status', 'created',
+        'changed', 'comment', 'promote', 'sticky', 'tnid', 'translate');
+      if (!array_key_exists($nid, self::$nodes)) {
         throw new \Exception('Mock node does not exist.');
       }
+      if (!in_array($attribute, $valid_attrs)) {
+        throw new \Exception('Attribute name is invalid.');
+      }
+      self::$nodes[$nid]->$attribute = $value;
     }
 
     /**
