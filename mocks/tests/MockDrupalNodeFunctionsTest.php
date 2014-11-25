@@ -133,4 +133,15 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     $this->assertEquals('test value2', $node->field_test[LANGUAGE_NONE][5]['value']);
   }
 
+  /**
+   * Given AddNodeField is called with an invalid attribute.
+   * THEN AddNodeField generates an exception.
+   * @expectedException Exception
+   * @expectedExceptionMessage Mock node does not exist.
+   */
+  public function testAddnodefieldWithInvalidNid() {
+    MockDrupalNodeFunctions::ResetMockData();
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID2, 'field_test', array('value' => 'test value'));
+  }
 }
