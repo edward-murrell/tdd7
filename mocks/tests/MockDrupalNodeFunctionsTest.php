@@ -95,7 +95,19 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
   }
 
   /**
-   * Given AddNodeAttribute is called with an invalid attribute
+   * Given AddNodeAttribute is called with an invalid nid.
+   * THEN AddNodeAttribute generates an exception.
+   * @expectedException Exception
+   * @expectedExceptionMessage Mock node does not exist.
+   */
+  public function testAddnodeattributeOnInvalidObject() {
+    MockDrupalNodeFunctions::ResetMockData();
+    MockDrupalNodeFunctions::AddNodeAttribute(MOCK_NODE_TEST_NID1, 'uid', -123);
+    $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
+  }
+
+  /**
+   * Given AddNodeAttribute is called with an invalid attribute.
    * THEN AddNodeAttribute generates an exception.
    */
 
