@@ -33,6 +33,22 @@ namespace oua\lms\testframework\mocks {
     }
 
     /**
+     * Loads multiple mock nodes.
+     *
+     * @param type $nids
+     *  An anonymous array of node IDs.
+     * @param type $conditions
+     *  NOT IMPLEMENTED IN MOCK.
+     * @param type $reset
+     *  NOT IMPLEMENTED IN MOCK
+     *
+     * @return An array of node objects indexed by nid.
+     */
+    public static function node_load_multiple($nids = array(), $conditions = array(), $reset = FALSE) {
+      
+    }
+
+    /**
      * Add basic node to fake node list with field as parameters.
      *
      * @param int $nid
