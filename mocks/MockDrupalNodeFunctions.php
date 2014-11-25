@@ -94,15 +94,24 @@ namespace oua\lms\testframework\mocks {
      *  The delta to update. If set to null, the data will be added to the end
      *  of the values array.
      */
-    public static function AddNodeField($nid, $field, array $value, $delta = null) {
+    public static function AddNodeField($nid, $field, array $value, $delta = NULL) {
       if (!array_key_exists($nid, self::$nodes)) {
         throw new \Exception('Mock node does not exist.');
       }
-      $lang = self::$nodes[$nid]->language;
+
+      $node = self::$nodes[$nid];
+      $lang = $node->language;
       if (!property_exists(self::$nodes[$nid], $field)) {
         self::$nodes[$nid]->$field = array($lang => array());
       }
 
+      if ($delta === NULL) {
+        array_push($node->$field[$lang], $value);
+      } else {
+        $node->$field[$lang][$delta] = $value;
+      }
+
+      self::$nodes[$nid] = $node;
     }
 
     /**
