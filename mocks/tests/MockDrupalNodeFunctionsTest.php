@@ -60,10 +60,11 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
   }
 
   /**
-   * Given AddMockNode() with a language set.
+   * Given AddMockNode() with no anguage set.
    * THEN node_load() returns a language set as 'und', known as LANGUAGE_NONE.
    */
   public function testAddmocknodeSetsDefaultLanguageToNone() {
+    MockDrupalNodeFunctions::ResetMockData();
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
     $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
     $this->assertEquals(LANGUAGE_NONE, $node->language);
