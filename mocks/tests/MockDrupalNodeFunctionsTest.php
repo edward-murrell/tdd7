@@ -112,7 +112,7 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
    * @expectedException Exception
    * @expectedExceptionMessage Attribute name is invalid.
    */
-  public function testAddnodeattributeWithInvalid() {
+  public function testAddnodeattributeWithInvalidAttribute() {
     MockDrupalNodeFunctions::ResetMockData();
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
     MockDrupalNodeFunctions::AddNodeAttribute(MOCK_NODE_TEST_NID1, 'field_foo', -123);
