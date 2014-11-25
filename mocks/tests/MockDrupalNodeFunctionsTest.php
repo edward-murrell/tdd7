@@ -161,5 +161,10 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     $this->assertArrayHasKey(MOCK_NODE_TEST_NID1,$nodes);
     $this->assertArrayNotHasKey(MOCK_NODE_TEST_NID2,$nodes);
     $this->assertArrayHasKey(MOCK_NODE_TEST_NID3,$nodes);
+
+    $node1 = $nodes[MOCK_NODE_TEST_NID1];
+    $node3 = $nodes[MOCK_NODE_TEST_NID3];
+    $this->assertEquals(MOCK_NODE_TEST_NID_TITLE1, $node1->title);
+    $this->assertEquals(MOCK_NODE_TEST_NID_TITLE3, $node3->title);
   }
 }
