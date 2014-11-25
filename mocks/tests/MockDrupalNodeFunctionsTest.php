@@ -81,4 +81,19 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
     $this->assertEquals('testlang', $node->language);
   }
+
+  /**
+   * Given AddNodeAttribute is called.
+   * THEN node_load returns a node with that attribute set.
+   */
+
+  /**
+   * Given AddNodeAttribute is called with an invalid attribute
+   * THEN AddNodeAttribute generates an exception.
+   */
+
+  /**
+   * Given AddNodeField is called.
+   * THEN node_load returns a node with that field set.
+   */
 }
