@@ -67,6 +67,7 @@ abstract class TemplateTestBase extends BasicTestCase {
    *   The string to validate.
    */
   public function AssertValidHtml($html_string) {
+    libxml_clear_errors();
     $a = new DOMDocument();
     // Allow us to process errors rather than just sending them to me.
     libxml_use_internal_errors(TRUE);
