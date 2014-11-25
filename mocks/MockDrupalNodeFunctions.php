@@ -41,12 +41,15 @@ namespace oua\lms\testframework\mocks {
      *   Node type of this node. eg; "page".
      * @param string $title
      *   Optional title of node.
+     * @param string $language
+     *   Optional node setting of language, defaults to LANGUAGE_NONE.
      */
-    public static function AddMockNode($nid, $type, $title = '') {
+    public static function AddMockNode($nid, $type, $title = '', $language = LANGUAGE_NONE) {
       $node = new \stdClass;
       $node->nid = $nid;
       $node->type = $type;
       $node->title = $title;
+      $node->language = $language;
       self::$nodes[$nid] = $node;
     }
 
