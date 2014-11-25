@@ -87,14 +87,22 @@ namespace oua\lms\testframework\mocks {
      *  exist.
      * @param string $field
      *  The field name. eg; field_first_name
-     * @param mixed $value
-     *  The value to be set for this field. This can be any data type.
+     * @param array $value
+     *  The value to be set for this field. This is an array, often with a one
+     *   key that points to the target value. ie; array('target_id' => 55);
      * @param int $delta
      *  The delta to update. If set to null, the data will be added to the end
      *  of the values array.
      */
-    public static function AddNodeField($nid, $field, $value, $delta = null) {
-      
+    public static function AddNodeField($nid, $field, array $value, $delta = null) {
+      if (!array_key_exists($nid, self::$nodes)) {
+        throw new \Exception('Mock node does not exist.');
+      }
+      $lang = self::$nodes[$nid]->language;
+      if (!property_exists(self::$nodes[$nid], $field)) {
+        self::$nodes[$nid]->$field = array($lang => array());
+      }
+
     }
 
     /**

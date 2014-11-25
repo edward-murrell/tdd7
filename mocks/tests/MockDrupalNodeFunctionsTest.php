@@ -125,7 +125,7 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
   public function testAddnodeFieldDataSetsFieldsOnMockNodeObjects() {
     MockDrupalNodeFunctions::ResetMockData();
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
-    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID1, 'field_test', 'test value');
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID1, 'field_test', array('value' => 'test value'));
     $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
     $this->assertEquals('test value', $node->field_test[LANGUAGE_NONE][0]['value']);
   }
