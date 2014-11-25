@@ -79,6 +79,25 @@ namespace oua\lms\testframework\mocks {
     }
 
     /**
+     * Add field data to the node. The nodes language will be used in the
+     *  resulting array, and the field will be created if it does not exist.
+     *
+     * @param int $nid
+     *  The nid of the node to add. An exception will be raised if this does not
+     *  exist.
+     * @param string $field
+     *  The field name. eg; field_first_name
+     * @param mixed $value
+     *  The value to be set for this field. This can be any data type.
+     * @param int $delta
+     *  The delta to update. If set to null, the data will be added to the end
+     *  of the values array.
+     */
+    public static function AddNodeField($nid, $field, $value, $delta = null) {
+      
+    }
+
+    /**
      * Delete all saved mock data.
      */
     public static function ResetMockData() {
