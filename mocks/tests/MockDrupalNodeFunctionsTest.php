@@ -14,10 +14,13 @@ use oua\lms\testframework\BasicTestCase;
 
 define ('MOCK_NODE_TEST_NID1', 547545754543);
 define ('MOCK_NODE_TEST_NID2', 963732177731);
+define ('MOCK_NODE_TEST_NID3', 342789342789);
 define ('MOCK_NODE_TEST_NID_TYPE1', 'test_type_one');
 define ('MOCK_NODE_TEST_NID_TYPE2', 'test_type_two');
+define ('MOCK_NODE_TEST_NID_TYPE3', 'test_type_three');
 define ('MOCK_NODE_TEST_NID_TITLE1', 'Testing Title Uno');
 define ('MOCK_NODE_TEST_NID_TITLE2', 'Testing Title Duo');
+define ('MOCK_NODE_TEST_NID_TITLE3', 'Testing Title Trio');
 
 class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCase {
   public function testResetMockDataFunctionExists() {
@@ -143,5 +146,17 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     MockDrupalNodeFunctions::ResetMockData();
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
     MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID2, 'field_test', array('value' => 'test value'));
+  }
+
+  /**
+   * Given mock nodes exist
+   * THEN node_load_multiple will return only those requested.
+   */
+  public function testNodeloadmultipleReturnsRequestedNodes () {
+    MockDrupalNodeFunctions::ResetMockData();
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID2, MOCK_NODE_TEST_NID_TYPE2, MOCK_NODE_TEST_NID_TITLE2);
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID3, MOCK_NODE_TEST_NID_TYPE3, MOCK_NODE_TEST_NID_TITLE3);
+    $nodes = MockDrupalNodeFunctions::node_load_multiple(array(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID3));
   }
 }
