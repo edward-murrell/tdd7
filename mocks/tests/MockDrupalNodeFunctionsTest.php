@@ -43,4 +43,19 @@ class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCa
     $this->assertEquals('test_type_two',     $node2->type);
     $this->assertEquals('Testing Title Duo', $node2->title);
   }
+
+  /**
+   * GIVEN AddMockNode() is called.
+   * AND ResetMockData() is called.
+   * THEN node_load() return FALSE;
+   */
+  public function testResetMockDataEmptiesMockNodeData() {
+    MockDrupalNodeFunctions::ResetMockData();
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
+    $this->assertNotFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1));
+    $this->assertFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID2));
+    MockDrupalNodeFunctions::ResetMockData();
+    $this->assertFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1));
+    $this->assertFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID2));
+  }
 }
