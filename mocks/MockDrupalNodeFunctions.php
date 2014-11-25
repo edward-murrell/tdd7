@@ -102,14 +102,16 @@ namespace oua\lms\testframework\mocks {
       $node = self::$nodes[$nid];
       $lang = $node->language;
       if (!property_exists(self::$nodes[$nid], $field)) {
-        self::$nodes[$nid]->$field = array($lang => array());
+        $node->$field = array($lang => array());
       }
 
+      $fielddata = $node->$field;
       if ($delta === NULL) {
-        array_push($node->$field[$lang], $value);
+        $fielddata[$lang][] = $value;
       } else {
-        $node->$field[$lang][$delta] = $value;
+        $fielddata[$lang][$delta] = $value;
       }
+      $node->$field = $fielddata;
 
       self::$nodes[$nid] = $node;
     }
