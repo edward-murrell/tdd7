@@ -45,7 +45,14 @@ namespace oua\lms\testframework\mocks {
      * @return An array of node objects indexed by nid.
      */
     public static function node_load_multiple($nids = array(), $conditions = array(), $reset = FALSE) {
-      
+      $result = array();
+      foreach ($nids as $nid) {
+        $node = self::node_load($nid);
+        if ($node != false) {
+          $result[$nid] = $node;
+        }
+      }
+      return $result;
     }
 
     /**
