@@ -79,20 +79,22 @@ namespace oua\lms\testframework\mocks {
     }
 
     /**
-     * Add an attribute value to the node. This can be any of the columns from
-     *  the the node table, except nid or language. The mock node must have
-     *  already been added via AddMockNode().
+     * Add an attribute value to the node.
+     *
+     * This can be any of the columns from the the node table, except nid or
+     * language. The mock node must have already been added via AddMockNode().
      *
      * @param int $nid
-     *  The nid of an existing mock node.
+     *   The nid of an existing mock node.
      * @param string $attribute
-     *  The attribute to set the value on. This may be one of: type, title, uid,
-     *  status, created, changed, comment, promote, sticky, tnid, translate
+     *   The attribute to set the value on. This may be one of: type, title,
+     *   uid, status, created, changed, comment, promote, sticky, tnid, or
+     *   translate.
      * @param string|int $value
-     *  The value to set the attribute to. Existing values will be overwritten.
+     *   The value to set the attribute to. Existing values will be overwritten.
      */
     public static function AddNodeAttribute($nid, $attribute, $value) {
-      $valid_attrs = array ('type', 'title', 'uid', 'status', 'created',
+      $valid_attrs = array('type', 'title', 'uid', 'status', 'created',
         'changed', 'comment', 'promote', 'sticky', 'tnid', 'translate');
       if (!array_key_exists($nid, self::$nodes)) {
         throw new \Exception('Mock node does not exist.');
