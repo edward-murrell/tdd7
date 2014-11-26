@@ -50,7 +50,7 @@ namespace oua\lms\testframework\mocks {
       $result = array();
       foreach ($nids as $nid) {
         $node = self::node_load($nid);
-        if ($node != false) {
+        if ($node != FALSE) {
           $result[$nid] = $node;
         }
       }
@@ -70,7 +70,7 @@ namespace oua\lms\testframework\mocks {
      *   Optional node setting of language, defaults to LANGUAGE_NONE.
      */
     public static function AddMockNode($nid, $type, $title = '', $language = LANGUAGE_NONE) {
-      $node = new \stdClass;
+      $node = new \stdClass();
       $node->nid = $nid;
       $node->type = $type;
       $node->title = $title;
@@ -137,7 +137,8 @@ namespace oua\lms\testframework\mocks {
       $fielddata = $node->$field;
       if ($delta === NULL) {
         $fielddata[$lang][] = $value;
-      } else {
+      }
+      else {
         $fielddata[$lang][$delta] = $value;
       }
       $node->$field = $fielddata;
