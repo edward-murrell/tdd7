@@ -36,16 +36,17 @@ namespace oua\lms\testframework\mocks {
     /**
      * Loads multiple mock nodes.
      *
-     * @param type $nids
-     *  An anonymous array of node IDs.
-     * @param type $conditions
-     *  NOT IMPLEMENTED IN MOCK.
-     * @param type $reset
-     *  NOT IMPLEMENTED IN MOCK
+     * @param array $nids
+     *   An anonymous array of node IDs.
+     * @param array $conditions
+     *   NOT IMPLEMENTED IN MOCK.
+     * @param bool $reset
+     *   NOT IMPLEMENTED IN MOCK
      *
-     * @return An array of node objects indexed by nid.
+     * @return array
+     *   An array of node objects indexed by nid.
      */
-    public static function node_load_multiple($nids = array(), $conditions = array(), $reset = FALSE) {
+    public static function node_load_multiple(array $nids = array(), $conditions = array(), $reset = FALSE) {
       $result = array();
       foreach ($nids as $nid) {
         $node = self::node_load($nid);
