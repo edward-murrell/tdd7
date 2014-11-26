@@ -23,10 +23,6 @@ define('MOCK_NODE_TEST_NID_TITLE2', 'Testing Title Duo');
 define('MOCK_NODE_TEST_NID_TITLE3', 'Testing Title Trio');
 
 class MockDrupalNodeFunctionsTest extends \oua\lms\testframework\BasicTestCase {
-  public function testResetMockDataFunctionExists() {
-    MockDrupalNodeFunctions::ResetMockData();
-  }
-
   /**
    * GIVEN AddMockNode() is called.
    * AND NID is provided
