@@ -22,7 +22,7 @@ define ('MOCK_NODE_TEST_NID_TITLE1', 'Testing Title Uno');
 define ('MOCK_NODE_TEST_NID_TITLE2', 'Testing Title Duo');
 define ('MOCK_NODE_TEST_NID_TITLE3', 'Testing Title Trio');
 
-class MockDrupalTaxonomyFunctionsTest extends \oua\lms\testframework\BasicTestCase {
+class MockDrupalNodeFunctionsTest extends \oua\lms\testframework\BasicTestCase {
   public function testResetMockDataFunctionExists() {
     MockDrupalNodeFunctions::ResetMockData();
   }
