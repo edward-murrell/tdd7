@@ -51,7 +51,10 @@ class MockDrupalNodeFunctionsTest extends \oua\lms\testframework\BasicTestCase {
   public function testResetMockDataEmptiesMockNodeData() {
     MockDrupalNodeFunctions::ResetMockData();
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID1, MOCK_NODE_TEST_NID_TYPE1, MOCK_NODE_TEST_NID_TITLE1);
-    $this->assertNotFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1));
+    // Some version of phpunit do have assertNotFalse, so check assert !empty().
+    $loadresults = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1);
+    $isempty = empty($loadresults);
+    $this->assertFalse($isempty);
     $this->assertFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID2));
     MockDrupalNodeFunctions::ResetMockData();
     $this->assertFalse(MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID1));
