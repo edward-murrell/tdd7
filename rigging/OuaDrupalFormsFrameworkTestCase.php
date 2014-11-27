@@ -41,6 +41,18 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
   }
 
   /**
+   * Check that validity of this fieldset element
+   * @param $key string the key as attached to the element above
+   */
+  public function checkElementFieldsetFields($key, array $element) {
+    $fields = array('#access' => TRUE, '#after_build' => TRUE, '#attributes' => TRUE, '#collapsed' => TRUE, '#description' => TRUE, '#element_validate' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#title' => TRUE, '#title_display' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#weight' => TRUE);
+    foreach($element as $field => $value) {
+      // Assert that this field is in the allowed list for this field.
+      $this->assertArrayHasKey($field, $fields);
+    }
+  }
+
+  /**
    * Check that validity of this textfield element
    * @param $key string the key as attached to the element above
    */
