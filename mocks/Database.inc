@@ -363,7 +363,7 @@ class MockQueryResult {
    */
   public function fetchObject() {
     if (!empty($this->results)) {
-      $res = array_pop($this->results);
+      $res = array_shift($this->results);
       return (object) $res;
     } else {
       return FALSE;
