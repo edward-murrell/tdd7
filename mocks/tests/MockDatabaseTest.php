@@ -236,4 +236,15 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('Dülfer', $record->lastName);
     $this->assertFalse($res->fetchObject());
   }
+
+  /**
+   * test fetchField returns a single field from the next record.
+   */
+  public function testFetchFieldReturnsSingleFieldFromNextRecord() {
+    $result = db_select(TABLE1)
+      ->fields(TABLE1, array('id'))
+      ->execute()
+      ->fetchField();
+    $this->assertEquals(31, $result);
+  }
 }
