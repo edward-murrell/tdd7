@@ -15,7 +15,9 @@ if (!defined('PRODUCTLINE_CONSTRAINED_TESTS') && !getenv("PRODUCTLINE_CONSTRAINE
   define('PRODUCTLINE_CONSTRAINED_TESTS', FALSE);
 }
 else {
-  define('PRODUCTLINE_CONSTRAINED_TESTS', TRUE);
+  if (!defined('PRODUCTLINE_CONSTRAINED_TESTS')) {
+    define('PRODUCTLINE_CONSTRAINED_TESTS', TRUE);
+  }
 }
 
 /**
@@ -23,6 +25,8 @@ else {
  * @package oua\lms\testframework
  */
 abstract class BasicTestCase extends PHPUnit_Framework_TestCase {
+
+  protected $shouldTearDown = TRUE;
 
   /**
    * Wrapper to handle the php53 nightmare.
@@ -60,6 +64,7 @@ abstract class BasicTestCase extends PHPUnit_Framework_TestCase {
         $product_lines_filter = trim($product_lines_list[0]);
         $allowed_product_lines = explode(" ", $product_lines_filter);
         if (!in_array($product_line, $allowed_product_lines)) {
+          $this->shouldTearDown = FALSE;
           self::markTestSkipped();
         }
       }
