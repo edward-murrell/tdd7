@@ -23,6 +23,11 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    */
   public function testForm(array $forms) {
     foreach ($forms as $key => $element) {
+      // Skip this, as it is a field on the form.
+      if (substr($key,0,1) == '#') {
+        continue;
+      }
+
       $this->assertArrayHasKey('#type', $element, "Error in '{$key}' - Missing #type data.");
       $method = "checkElement{$element['#type']}Fields";
       if (method_exists($this, $method)) {
