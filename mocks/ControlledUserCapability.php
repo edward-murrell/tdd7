@@ -17,6 +17,9 @@ class ControlledUserCapability extends UserCapable {
   public $getFieldValueCalled = 0;
   public $getFieldValueReturns = NULL;
 
+  public $currentUserCalled = 0;
+  public $currentUserCalledReturns = NULL;
+
   /**
    * Caller can retrieve user object.
    *
@@ -69,5 +72,18 @@ class ControlledUserCapability extends UserCapable {
   protected function get_field_value($user, $field_name) {
     $this->getFieldValueCalled += 1;
     return array_pop($this->getFieldValueReturns);
+  }
+
+  /**
+   * Retreives the current user object.
+   *
+   * Modeled on Drupal 8 implementation.
+   *
+   * @return object
+   *   A user object. May be anonymous user.
+   */
+  public static function currentUser() {
+    $this->currentUserCalled += 1;
+    return $this->currentUserCalledReturns;
   }
 }
