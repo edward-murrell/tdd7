@@ -82,7 +82,7 @@ class ControlledUserCapability extends UserCapable {
    * @return object
    *   A user object. May be anonymous user.
    */
-  public static function currentUser() {
+  public function currentUser() {
     $this->currentUserCalled += 1;
     return $this->currentUserCalledReturns;
   }
