@@ -142,9 +142,9 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       ->execute();
 
     $record = $res->fetchObject();
-    $this->assertEquals(7593,     $record->id);
-    $record = $res->fetchObject();
     $this->assertEquals(7854,     $record->id);
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,     $record->id);
 
     // Check that only one record was returned.
     $this->assertFalse($res->fetchObject());
@@ -178,17 +178,17 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       ->execute();
 
     $record = $res->fetchObject();
-    $this->assertEquals(7981,      $record->id);
-    $this->assertEquals('Woods',   $record->lastName);
-    $record = $res->fetchObject();
-    $this->assertEquals(7593,      $record->id);
-    $this->assertEquals('Puccio',  $record->lastName);
-    $record = $res->fetchObject();
-    $this->assertEquals(48091,     $record->id);
-    $this->assertEquals('Florine', $record->lastName);
-    $record = $res->fetchObject();
     $this->assertEquals(7854,      $record->id);
-    $this->assertEquals('Honnold',  $record->lastName);
+    $this->assertEquals('Honnold',   $record->lastName);
+    $record = $res->fetchObject();
+    $this->assertEquals(48091,      $record->id);
+    $this->assertEquals('Florine',  $record->lastName);
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,     $record->id);
+    $this->assertEquals('Puccio', $record->lastName);
+    $record = $res->fetchObject();
+    $this->assertEquals(7981,      $record->id);
+    $this->assertEquals('Woods',  $record->lastName);
     $this->assertFalse($res->fetchObject());
   }
 
@@ -235,5 +235,16 @@ class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(31,       $record->id);
     $this->assertEquals('Dülfer', $record->lastName);
     $this->assertFalse($res->fetchObject());
+  }
+
+  /**
+   * test fetchField returns a single field from the next record.
+   */
+  public function testFetchFieldReturnsSingleFieldFromNextRecord() {
+    $result = db_select(TABLE1)
+      ->fields(TABLE1, array('id'))
+      ->execute()
+      ->fetchField();
+    $this->assertEquals(31, $result);
   }
 }
