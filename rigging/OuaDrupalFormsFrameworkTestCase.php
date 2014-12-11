@@ -39,6 +39,10 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    *   Is this a root node (ie; form), default to FALSE.
    */
   public function testElement($id, array $data = array(), $root = FALSE) {
+    // Set the type in a form so we can autodetect types elsewhere.
+    if ($root === TRUE) {
+      $data['#type'] = 'form';
+    }
 
     foreach ($data as $key => $element) {
       // This is another element, so recurisively call this function.
@@ -47,10 +51,8 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
         continue;
       }
 
-      $this->assertArrayHasKey('#type', $element, "Error in '{$id}' - Missing #type data.");
-
       // Check that this field is allowed to have it's data fields
-      $this->checkElementFieldsList($element['#type'], $key, $element);
+      $this->checkElementFieldsList($key, $element);
 
       // Iterate through all the fields in the element
       foreach ($element as $fieldname => $fieldata) {
@@ -66,16 +68,13 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
   /**
    * Tests fields have only allowable fields.
    *
-   * @param string $type
-   *   Element to test this field as. If not provided, will try to detect from
-   *   #type key in $element array.
    * @param string $key
    *   The key that identifies this element in parent array.
    * @param array $element
    *   Element being tested.
    */
-  public function checkElementFieldsList($type = null, $key = 'unknown', array $element = array()){
-
+  public function checkElementFieldsList($key = 'unknown', array $element = array()){
+      $this->assertArrayHasKey('#type', $element, "Error in '{$key}' - Missing #type data.");
   }
 
   /**
