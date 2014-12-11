@@ -109,4 +109,16 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
     $this->assertNotEmpty($menu, "Path for '{$field}' not found in menu structure.");
   }
 
+  /**
+   * Check textfield element field #autocomplete_path is valid
+   *
+   * @param string $key
+   *   Name of the containing element.
+   * @param $field
+   *   The value for the array where the key is #autocomplete_path
+   */
+  public function checkElementFieldData_validate($key = '', $field) {
+    $this->assertTrue(is_array($field), "Validate element for {$key} should be a list.");
+  }
+
 }
