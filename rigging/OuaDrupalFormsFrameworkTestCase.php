@@ -105,7 +105,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    */
   public function checkElementFieldData_autocomplete_path($key = '', $field) {
     $menu = menu_get_item($field);
-    $this->assertNotEmpty($menu);
+    $this->assertNotEmpty($menu, "Path for '{$field}' not found in menu structure.");
   }
 
 }
