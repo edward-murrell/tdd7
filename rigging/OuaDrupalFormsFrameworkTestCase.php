@@ -44,6 +44,9 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
       $data['#type'] = 'form';
     }
 
+    // Check that this field is allowed to have it's data fields
+    $this->checkElementFieldsList($id, $data);
+
     foreach ($data as $key => $element) {
       // This is another element, so recurisively call this function.
       if (substr($key,0,1) != '#') {
@@ -51,16 +54,11 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
         continue;
       }
 
-      // Check that this field is allowed to have it's data fields
-      $this->checkElementFieldsList($key, $element);
-
-      // Iterate through all the fields in the element
-      foreach ($element as $fieldname => $fieldata) {
-        $field = ltrim($fieldname, '#');
-        $field_method = "checkElement{$element['#type']}FieldData{$field}";
-        if (method_exists($this, $field_method)) {
-          $this->$field_method($fieldata);
-        }
+      // Check element type
+      $type = ltrim($key, '#');
+      $check_method = "checkElementFieldData{$type}";
+      if (method_exists($this, $check_method)) {
+        $this->$check_method($key, $type, $data);
       }
     }
   }
