@@ -52,6 +52,10 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
   public function checkElementFieldsetFields($key, array $element) {
     $fields = array('#access' => TRUE, '#after_build' => TRUE, '#attributes' => TRUE, '#collapsed' => TRUE, '#description' => TRUE, '#element_validate' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#title' => TRUE, '#title_display' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#weight' => TRUE, '#prefix' => TRUE, '#suffix' => TRUE);
     foreach($element as $field => $value) {
+      // This needs to be moved into a generic function.
+      if (substr($key,0,1) != '#') {
+        continue;
+      }
       // Assert that this field is in the allowed list for this field.
       $this->assertArrayHasKey($field, $fields, "Error in '{$key}' - Fieldset elements are not allowed to have a {$field} setting.");
     }
