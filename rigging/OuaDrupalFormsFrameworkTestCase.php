@@ -69,7 +69,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
       $type = ltrim($key, '#');
       $check_method = "checkElementFieldData_{$type}";
       if (method_exists($this, $check_method)) {
-        $this->$check_method($key, $data);
+        $this->$check_method($id, $element);
       }
     }
   }
