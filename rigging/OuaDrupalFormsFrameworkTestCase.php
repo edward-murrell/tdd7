@@ -22,17 +22,35 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    * @param array $form Drupal form array
    */
   public function testForm(array $forms) {
-    foreach ($forms as $key => $element) {
-      // Skip this, as it is a field on the form.
-      if (substr($key,0,1) == '#') {
+    $this->testElement('form', $forms, TRUE);
+  }
+
+  /**
+   * Test a drupal field element.
+   *
+   * Checks if fields are allowed for the element, test their validity and
+   * recursively calls itself for sub elements.
+   *
+   * @param string $key
+   *   The key that identifies this element in parent array.
+   * @param array $data
+   *   Element data.
+   * @param boolean $root
+   *   Is this a root node (ie; form), default to FALSE.
+   */
+  public function testElement($id, array $data = array(), $root = FALSE) {
+
+    foreach ($data as $key => $element) {
+      // This is another element, so recurisively call this function.
+      if (substr($key,0,1) != '#') {
+        $this->testElement($key, $element);
         continue;
       }
 
-      $this->assertArrayHasKey('#type', $element, "Error in '{$key}' - Missing #type data.");
-      $method = "checkElement{$element['#type']}Fields";
-      if (method_exists($this, $method)) {
-        $this->$method($key, $element);
-      }
+      $this->assertArrayHasKey('#type', $element, "Error in '{$id}' - Missing #type data.");
+
+      // Check that this field is allowed to have it's data fields
+      $this->checkElementFieldsList($element['#type'], $key, $element);
 
       // Iterate through all the fields in the element
       foreach ($element as $fieldname => $fieldata) {
@@ -44,6 +62,8 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
       }
     }
   }
+
+  public function checkElementFieldsList(){}
 
   /**
    * Check that validity of this fieldset element
