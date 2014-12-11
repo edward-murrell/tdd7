@@ -363,7 +363,7 @@ class MockQueryResult {
    */
   public function fetchObject() {
     if (!empty($this->results)) {
-      $res = array_pop($this->results);
+      $res = array_shift($this->results);
       return (object) $res;
     } else {
       return FALSE;
@@ -371,14 +371,23 @@ class MockQueryResult {
   }
 
   /**
-   * Returns the value at $index of result.
-   * @return value or False
+   * Returns a single field from the next record of a result set.
+   *
+   * @param int $index
+   *   Column index of row
+   *
+   * @return mixed (string or numeric number)
+   *   Value of the column
    */
   public function fetchField($index = 0) {
     $ret = FALSE;
-
-    if (!empty($this->results) && $index < count($this->results) && $index >= 0) {
-      $ret = $this->results[$index];
+    if (!empty($this->results)) {
+      $res = array_shift($this->results);
+      if ($index < count($res) && $index >= 0) {
+        // Get all values with numeric index.
+        $res = array_values($res);
+        $ret = $res[$index];
+      }
     }
 
     return $ret;
