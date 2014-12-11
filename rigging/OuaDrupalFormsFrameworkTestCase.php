@@ -97,7 +97,8 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
   }
 
   /**
-   * Check textfield element field #autocomplete_path is valid
+   * Check #autocomplete_path is valid.
+   *
    * @param string $key
    *   Name of the containing element.
    * @param $field
