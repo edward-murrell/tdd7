@@ -119,6 +119,9 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    */
   public function checkElementFieldData_validate($key = '', $field) {
     $this->assertTrue(is_array($field), "Validate element for {$key} should be a list.");
+    foreach ($field as $callback) {
+      $this->assertTrue(function_exists($callback), "Validate callback {$callback} for {$key} does not exist.");
+    }
   }
 
 }
