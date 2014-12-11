@@ -63,7 +63,20 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
     }
   }
 
-  public function checkElementFieldsList(){}
+  /**
+   * Tests fields have only allowable fields.
+   *
+   * @param string $type
+   *   Element to test this field as. If not provided, will try to detect from
+   *   #type key in $element array.
+   * @param string $key
+   *   The key that identifies this element in parent array.
+   * @param array $element
+   *   Element being tested.
+   */
+  public function checkElementFieldsList($type = null, $key = 'unknown', array $element = array()){
+
+  }
 
   /**
    * Check that validity of this fieldset element
