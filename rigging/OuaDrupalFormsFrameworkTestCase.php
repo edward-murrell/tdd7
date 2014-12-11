@@ -25,7 +25,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    * @return array() Array containing an array contain form arrays.
    */
   public abstract function GetForms();
-  
+
   /**
    * Checks that form elements are of acceptable elements, and passes them to
    *  check methods called checkElement{$type}Fields
