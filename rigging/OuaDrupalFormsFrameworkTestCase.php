@@ -67,9 +67,9 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
 
       // Check element type
       $type = ltrim($key, '#');
-      $check_method = "checkElementFieldData{$type}";
+      $check_method = "checkElementFieldData_{$type}";
       if (method_exists($this, $check_method)) {
-        $this->$check_method($key, $type, $data);
+        $this->$check_method($key, $data);
       }
     }
   }
@@ -98,9 +98,12 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
 
   /**
    * Check textfield element field #autocomplete_path is valid
-   * @param $field The value for the array where the key is #autocomplete_path
+   * @param string $key
+   *   Name of the containing element.
+   * @param $field
+   *   The value for the array where the key is #autocomplete_path
    */
-  public function checkElementTextfieldFieldDataAutocomplete_path($field) {
+  public function checkElementFieldData_autocomplete_path($key = '', $field) {
     $menu = menu_get_item($field);
     $this->assertNotEmpty($menu);
   }
