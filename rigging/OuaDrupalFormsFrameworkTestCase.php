@@ -8,6 +8,16 @@ namespace oua\lms\testframework;
 require_once __DIR__ . '/../basefixtures/BasicTestCase.php';
 
 abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
+  private $validfields = array();
+
+  /**
+   * Creates internal array of fields for testing.
+   */
+  public function __construct() {
+    $this->validfields['fieldset']  = array('#access' => TRUE, '#after_build' => TRUE, '#attributes' => TRUE, '#collapsed' => TRUE, '#description' => TRUE, '#element_validate' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#title' => TRUE, '#title_display' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#weight' => TRUE, '#prefix' => TRUE, '#suffix' => TRUE);
+    $this->validfields['textfield'] = array('#access' => TRUE, '#after_build' => TRUE, '#ajax' => TRUE, '#attributes' => TRUE, '#autocomplete_path' => TRUE, '#default_value' => TRUE, '#description' => TRUE, '#disabled' => TRUE, '#element_validate' => TRUE, '#field_prefix' => TRUE, '#field_suffix' => TRUE, '#maxlength' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#required' => TRUE, '#size' => TRUE, '#states' => TRUE, '#suffix' => TRUE, '#text_format' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#title' => TRUE, '#title_display' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#weight' => TRUE);
+    $this->validfields['submit']    = array('#access' => TRUE, '#after_build' => TRUE, '#ajax' => TRUE, '#attributes' => TRUE, '#button_type' => TRUE, '#disabled' => TRUE, '#element_validate' => TRUE, '#executes_submit_callback' => TRUE, '#limit_validation_errors' => TRUE, '#name' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#submit' => TRUE, '#states' => TRUE, '#suffix' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#validate' => TRUE, '#value' => TRUE, '#weight' => TRUE);
+  }
   
   /**
    * Virtual function that must be implemented to enforce a form.
@@ -72,35 +82,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    *   Element being tested.
    */
   public function checkElementFieldsList($key = 'unknown', array $element = array()){
-      $this->assertArrayHasKey('#type', $element, "Error in '{$key}' - Missing #type data.");
-  }
-
-  /**
-   * Check that validity of this fieldset element
-   * @param $key string the key as attached to the element above
-   */
-  public function checkElementFieldsetFields($key, array $element) {
-    $fields = array('#access' => TRUE, '#after_build' => TRUE, '#attributes' => TRUE, '#collapsed' => TRUE, '#description' => TRUE, '#element_validate' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#title' => TRUE, '#title_display' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#weight' => TRUE, '#prefix' => TRUE, '#suffix' => TRUE);
-    foreach($element as $field => $value) {
-      // This needs to be moved into a generic function.
-      if (substr($key,0,1) != '#') {
-        continue;
-      }
-      // Assert that this field is in the allowed list for this field.
-      $this->assertArrayHasKey($field, $fields, "Error in '{$key}' - Fieldset elements are not allowed to have a {$field} setting.");
-    }
-  }
-
-  /**
-   * Check that validity of this textfield element
-   * @param $key string the key as attached to the element above
-   */
-  public function checkElementTextfieldFields($key, array $element) {
-    $fields = array('#access' => TRUE, '#after_build' => TRUE, '#ajax' => TRUE, '#attributes' => TRUE, '#autocomplete_path' => TRUE, '#default_value' => TRUE, '#description' => TRUE, '#disabled' => TRUE, '#element_validate' => TRUE, '#field_prefix' => TRUE, '#field_suffix' => TRUE, '#maxlength' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#required' => TRUE, '#size' => TRUE, '#states' => TRUE, '#suffix' => TRUE, '#text_format' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#title' => TRUE, '#title_display' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#weight' => TRUE);
-    foreach($element as $field => $value) {
-      // Assert that this field is in the allowed list for this field.
-      $this->assertArrayHasKey($field, $fields);
-    }
+    $this->assertArrayHasKey('#type', $element, "Error in '{$key}' - Missing #type data.");
   }
 
   /**
@@ -112,15 +94,4 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
     $this->assertNotEmpty($menu);
   }
 
-  /**
-   * Check that validity of this submit element
-   * @param $key string the key as attached to the element above
-   */
-  public function checkElementSubmitFields($key, array $element) {
-    $fields = array('#access' => TRUE, '#after_build' => TRUE, '#ajax' => TRUE, '#attributes' => TRUE, '#button_type' => TRUE, '#disabled' => TRUE, '#element_validate' => TRUE, '#executes_submit_callback' => TRUE, '#limit_validation_errors' => TRUE, '#name' => TRUE, '#parents' => TRUE, '#post_render' => TRUE, '#prefix' => TRUE, '#pre_render' => TRUE, '#process' => TRUE, '#submit' => TRUE, '#states' => TRUE, '#suffix' => TRUE, '#theme' => TRUE, '#theme_wrappers' => TRUE, '#tree' => TRUE, '#type' => TRUE, '#validate' => TRUE, '#value' => TRUE, '#weight' => TRUE);
-    foreach($element as $field => $value) {
-      // Assert that this field is in the allowed list for this field.
-      $this->assertArrayHasKey($field, $fields);
-    }
-  }
 }
