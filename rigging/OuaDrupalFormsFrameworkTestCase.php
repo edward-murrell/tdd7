@@ -84,6 +84,16 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    */
   public function checkElementFieldsList($key = 'unknown', array $element = array()){
     $this->assertArrayHasKey('#type', $element, "Error in '{$key}' - Missing #type data.");
+    if (!array_key_exists($element['#type'], $this->validfields)) {
+      return;
+    }
+    $type = $element['#type'];
+    $fields = $this->validfields[$type];
+
+    // Iterate through all the fields in the element
+    foreach ($element as $fieldname => $fieldata) {
+      $this->assertArrayHasKey($field, $fields, "Error in '{$key}' - {$type} elements are not allowed to have a {$fieldname} setting.");
+    }
   }
 
   /**
