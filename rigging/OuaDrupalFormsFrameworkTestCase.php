@@ -33,7 +33,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    * @param array $form Drupal form array
    */
   public function testForm(array $forms) {
-    $this->testElement('form', $forms, TRUE);
+    $this->checkElement('form', $forms, TRUE);
   }
 
   /**
@@ -49,7 +49,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
    * @param boolean $root
    *   Is this a root node (ie; form), default to FALSE.
    */
-  public function testElement($id, array $data = array(), $root = FALSE) {
+  public function checkElement($id, array $data = array(), $root = FALSE) {
     // Set the type in a form so we can autodetect types elsewhere.
     if ($root === TRUE) {
       $data['#type'] = 'form';
@@ -61,7 +61,7 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
     foreach ($data as $key => $element) {
       // This is another element, so recurisively call this function.
       if (substr($key,0,1) != '#') {
-        $this->testElement($key, $element);
+        $this->checkElement($key, $element);
         continue;
       }
 
