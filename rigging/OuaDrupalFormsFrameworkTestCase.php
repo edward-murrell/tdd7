@@ -110,12 +110,12 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
   }
 
   /**
-   * Check textfield element field #autocomplete_path is valid
+   * Check the contents of a #validate field
    *
    * @param string $key
    *   Name of the containing element.
    * @param $field
-   *   The value for the array where the key is #autocomplete_path
+   *   The value for the array where the key is #validate
    */
   public function checkElementFieldData_validate($key = '', $field) {
     $this->assertTrue(is_array($field), "Validate element for {$key} should be a list.");
