@@ -137,6 +137,14 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
 
     $this->assertFalse(array_key_exists('callback', $field) && array_key_exists('path', $field),
         "Ajax configuration for {$key} contains muturally exclusive callback and path settings.");
+
+    if (array_key_exists('callback', $field)) {
+      $this->assertTrue(function_exists($field['callback']), "Callback {$field['callback']} for {$key} does not exist.");
+    }
+    if (array_key_exists('path', $field)) {
+      $menu = menu_get_item($field['path']);
+      $this->assertNotEmpty($menu, "Path '{$field['path']}' not found in menu structure.");
+    }
   }
 
 }
