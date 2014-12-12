@@ -124,4 +124,19 @@ abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
     }
   }
 
+  /**
+   * Check textfield element field #ajax is valid
+   *
+   * @param string $key
+   *   Name of the containing element.
+   * @param $field
+   *   The value for the array where the key is #$ajax
+   */
+  public function checkElementFieldData_ajax($key = '', $field) {
+    $this->assertTrue(is_array($field), "Ajax element for {$key} should be an array.");
+
+    $this->assertFalse(array_key_exists('callback', $field) && array_key_exists('path', $field),
+        "Ajax configuration for {$key} contains muturally exclusive callback and path settings.");
+  }
+
 }
