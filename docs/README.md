@@ -27,13 +27,33 @@ core functions, and the apropriate mock data will be returned.
 # Concepts
 
 ## Writing tests first
+Summarise here, writing the top level requirement and working back from there,
+and red / green testing. Refer to other documents here.
+
+## Namespacing
+Using namespaces is an imperative part of using the TDD7 framework. Production
+code should live in it's own namespace, usually divided on a per module basis.
+Functions and classes can have the same name if they reside in different
+namespaces.
+
+TODO: how call outs to global work.
+
+References:
+* http://php.net/manual/en/language.namespaces.php
+
 
 ## Stubs
+Stubs are small pieces of code that call to namespaced production code.
+
+	<?php
+	function mymodule_theme($existing = array(), $type = '', $theme = '', $path = '') {
+	  return \myorg\mymodule\mymodule_theme($existing, $type, $theme, $path);
+	}
+
 
 ## Mocks
 ## Rigging
 ## 'Production code'
-## Namespacing
 
 # Examples
 
