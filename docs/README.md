@@ -1,12 +1,12 @@
-Introduction
-------------
+# Introduction
+
 The TDD7 is a unit testing framework for Drupal 7. It is not used in the
 production code, but instead to make writing unit tests much much easier and
 faster. It's designed to work with PHPUnit, rather than the much slower default
 simpletest framework.
 
-How it works
-------------
+# How it works
+
 All unit tests need a predefined set of data to work with. In simple examples,
 this data is provided as function arguments. In Drupal, this data often comes
 from the database. When using simpletest, a replica of the drupal database
@@ -24,18 +24,18 @@ as the tested function. The test data is loaded into the test framework.
 When the tesed function is run, it will call the stub functions instead of the
 core functions, and the apropriate mock data will be returned.
 
-Concepts
-========
-* Writing tests first
-* Stubs
-* Mocks
-* Rigging
-* 'Production code'
-* Namespacing
+# Concepts
 
-Examples
-========
+## Writing tests first
 
+## Stubs
 
-To Do
-=====
+## Mocks
+## Rigging
+## 'Production code'
+## Namespacing
+
+# Examples
+
+# To Do
+
