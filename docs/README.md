@@ -37,9 +37,9 @@ Functions and classes can have the same name if they reside in different
 namespaces.
 
 If a function is called without a namespace prefix, and that function is not
-found within the current namespace, PHP will look for that function in the default
-namespace. We can use this in unit testing to provide override core functions and
-provide predicatable responses.
+found within the current namespace, PHP will look for that function in the
+default namespace. We can use this in unit testing to provide override core
+functions and provide predictable responses.
 
 References:
 * http://php.net/manual/en/language.namespaces.php
