@@ -3,6 +3,9 @@
  * @file
  * Mocked up Drupal core field functions
  * @author Glen Ji <glen.ji@open.edu.au>
+ *
+ * @todo: Review. This does not implement good patterns. It needs Add/Reset
+ *  methods, and may be completely pointless.
  */
 
 namespace oua\lms\testframework\mocks {
