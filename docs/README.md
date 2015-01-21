@@ -70,7 +70,18 @@ results without making any changes.
 This may sometimes be erroneously be referred to as a function stub.
 
 ## Mocks
+Mocks are classes and functions that look and respond like core PHP and Drupal
+functions, but are preloaded with test data.
+
+## Basefixtures
+Basefixtures contains the boilerplate code required to load and use the TDD7
+module easily. This will include things such as the namespaced *node_load()*
+functions.
+
 ## Rigging
+Rigging builds on base test cases and enables the testing of commonly tested
+drupal functions. This includes common items such as menu hook validity,
+form array validity, callback existence and so on.
 
 # Examples
 
