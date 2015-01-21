@@ -27,10 +27,12 @@ function node_load($nid = NULL, $vid = NULL, $reset = FALSE) {
 class ExampleDrupalNodeMockTest extends \oua\lms\testframework\BasicTestCase {
 
   public function setUp() {
+    // Create a mock node with nid defined in TDD7_EXAMPLE_NID1, type 'page', and a title of 'Expected title'
     MockDrupalNodeFunctions::AddMockNode(TDD7_EXAMPLE_NID1, 'page', 'Expected title');
   }
 
   public function tearDown() {
+    // Delete all mock node data.
     MockDrupalNodeFunctions::ResetMockData();
   }
 
@@ -38,6 +40,8 @@ class ExampleDrupalNodeMockTest extends \oua\lms\testframework\BasicTestCase {
    * Test the get_node_title returns a title for the right node.
    */
   public function testGet_node_titleReturnsExpectedString() {
+    // Retrieve the results of get_node_title that will call the mocked
+    // node_load() function, and assert that this returns the expected result.
     $this->assertEquals('Expected title', get_node_title());
   }
 }
