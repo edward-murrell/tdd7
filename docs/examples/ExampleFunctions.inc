@@ -2,7 +2,7 @@
 
 namespace tdd7\example;
 
-define('TDD7_EXAMPLE_NID1', 45789543789543543);
+define('TDD7_EXAMPLE_NID1', 457543543);
 
 /**
  * Return the title of a specific node.
