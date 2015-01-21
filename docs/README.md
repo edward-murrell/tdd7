@@ -45,14 +45,19 @@ References:
 * http://php.net/manual/en/language.namespaces.php
 
 
-## Stubs
-Stubs are small pieces of code that call to namespaced production code.
+## Wrapping Namespaced Code
+Since drupal relies on hooks in the global namespace, and test driven
+development requires us to put our production in specific name spaces, it is
+necessary to wrap calls to our namespaced production code in the global
+namespace. These should be a single line pass all arguments, and return the
+results without making any changes.
 
 	<?php
 	function mymodule_theme($existing = array(), $type = '', $theme = '', $path = '') {
 	  return \myorg\mymodule\mymodule_theme($existing, $type, $theme, $path);
 	}
 
+This may sometimes be erroneously be referred to as a function stub.
 
 ## Mocks
 ## Rigging
