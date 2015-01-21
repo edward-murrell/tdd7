@@ -2,7 +2,10 @@
 /**
  * @file
  * @author Edward Murrell <edward@catalyst-au.net>
- * Test get_node_title
+ * Simple test case to demo testing get_node_title() function.
+ *
+ * Runs this test by running the following from the command line:
+ *  phpunit sites/all/modules/contrib/tdd7/docs/examples/tests/ExampleFunctionsTest.php
  */
 
 namespace tdd7\example;
