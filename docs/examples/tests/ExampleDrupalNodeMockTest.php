@@ -2,7 +2,7 @@
 /**
  * @file
  * @author Edward Murrell <edward@catalyst-au.net>
- * Simple test case to demo testing get_node_title() function.
+ * Simple test case to demo use of MockDrupalNodeFunctions.
  *
  * Runs this test by running the following from the command line:
  *  phpunit sites/all/modules/contrib/tdd7/docs/examples/tests/ExampleFunctionsTest.php
@@ -24,7 +24,7 @@ function node_load($nid = NULL, $vid = NULL, $reset = FALSE) {
   return MockDrupalNodeFunctions::node_load($nid, $vid, $reset);
 }
 
-class ExampleFunctionsTest extends \oua\lms\testframework\BasicTestCase {
+class ExampleDrupalNodeMockTest extends \oua\lms\testframework\BasicTestCase {
 
   public function setUp() {
     MockDrupalNodeFunctions::AddMockNode(TDD7_EXAMPLE_NID1, 'page', 'Expected title');
