@@ -36,7 +36,10 @@ code should live in it's own namespace, usually divided on a per module basis.
 Functions and classes can have the same name if they reside in different
 namespaces.
 
-TODO: how call outs to global work.
+If a function is called without a namespace prefix, and that function is not
+found within the current namespace, PHP will look for that function in the default
+namespace. We can use this in unit testing to provide override core functions and
+provide predicatable responses.
 
 References:
 * http://php.net/manual/en/language.namespaces.php
