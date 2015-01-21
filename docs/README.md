@@ -26,6 +26,16 @@ core functions, and the apropriate mock data will be returned.
 
 # Concepts
 
+## Production code
+Production code refers to code that is deployed, and used in the end product.
+This differs from mocks, rigging, and various other testing code that should
+never be run on the production system.
+
+## System Under Test
+The 'System Under Test' or 'SUT' is the function, method, class or other code
+that we are testing. This differs from testing code, core Drupal code, or
+other modules that we are not testing.
+
 ## Writing tests first
 Summarise here, writing the top level requirement and working back from there,
 and red / green testing. Refer to other documents here.
@@ -61,7 +71,6 @@ This may sometimes be erroneously be referred to as a function stub.
 
 ## Mocks
 ## Rigging
-## 'Production code'
 
 # Examples
 
