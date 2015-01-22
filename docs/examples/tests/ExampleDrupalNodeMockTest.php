@@ -5,7 +5,7 @@
  * Simple test case to demo use of MockDrupalNodeFunctions.
  *
  * Runs this test by running the following from the command line:
- *  phpunit sites/all/modules/contrib/tdd7/docs/examples/tests/ExampleFunctionsTest.php
+ *  phpunit sites/all/modules/contrib/tdd7/docs/examples/tests/ExampleDrupalNodeMockTest.php
  */
 
 namespace tdd7\example;
