@@ -10,7 +10,7 @@
 
 namespace tdd7\example;
 
-require_once __DIR__ . '/../ExampleFunctions.inc';
+require_once __DIR__ . '/../ExampleDrupalNodeMock.inc';
 require_once __DIR__ . '/../../../basefixtures/BasicTestCase.php';
 require_once __DIR__ . '/../../../mocks/MockDrupalNodeFunctions.php';
 
