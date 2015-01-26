@@ -38,7 +38,7 @@ require_once __DIR__ . '/../../../mocks/Database.inc';
 use oua\lms\testframework\BasicTestCase;
 use oua\lms\testframework\mocks\DatabaseConnection_unittest;
 
-class ExampleDrupalDbMockTest extends \oua\lms\testframework\BasicTestCase {
+class ExampleDrupalDbMockTest extends BasicTestCase {
   private $db;
 
   public function setUp() {

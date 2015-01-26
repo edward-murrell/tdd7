@@ -24,7 +24,7 @@ function node_load($nid = NULL, $vid = NULL, $reset = FALSE) {
   return MockDrupalNodeFunctions::node_load($nid, $vid, $reset);
 }
 
-class ExampleDrupalNodeMockTest extends \oua\lms\testframework\BasicTestCase {
+class ExampleDrupalNodeMockTest extends BasicTestCase {
 
   public function setUp() {
     // Create a mock node with nid defined in TDD7_EXAMPLE_NID1, type 'page', and a title of 'Expected title'
