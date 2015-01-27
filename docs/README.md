@@ -57,9 +57,10 @@ References:
 
 
 ## Wrapping Namespaced Code
-Drupal relies on hooks in the global namespace, and test driven development
-requires us to keep our production out of the global namespace. To get around
-this problem, we call our module code from wrapper functions.
+Drupal hooks are in the global namespace, and test driven development requires
+us to keep our production code out of the global namespace so that we can use
+mock classes and functions.
+To get around this problem, we call our module code from wrapper functions.
 These wrapper functions should be a single line of code that passes all
 arguments, and return the results without making any changes.
 
@@ -75,7 +76,8 @@ This may sometimes be erroneously be referred to as a function stub.
 
 ## Mocks
 Mocks are classes and functions that look and respond like core PHP and Drupal
-functions, but are preloaded with test data.
+functions, but return test data. This test data should be loaded at the start of
+each test.
 
 ## Basefixtures
 Basefixtures contains the boilerplate code required to load and use the TDD7
