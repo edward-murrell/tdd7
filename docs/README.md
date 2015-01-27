@@ -15,15 +15,15 @@ structure is provided with an alternate database prefix. When using TDD7, the
 database and node structure is mocked up in software, which is much faster.
 
 When using TDD7, production code is moved out of the root namespace into
-individual namespaces, using stub functions.
+individual namespaces, using wrapper functions.
 
 *Example here*
 
-When this function is being tested, a set of stub functions such as
+When this function is being tested, a set of wrapper functions such as
 *node_load()* that call the the mock framework is loaded in the same namespace
 as the tested function. The test data is loaded into the test framework.
-When the tested function is run, it will call the stub functions instead of the
-core functions, and the appropriate mock data will be returned.
+When the tested function is run, it will call the wrapper functions instead of
+the core functions, and the appropriate mock data will be returned.
 
 # Concepts
 
