@@ -12,9 +12,16 @@
 namespace tdd7\example;
 
 /**
- * Return the title of a specific node.
+ * Return the title of the node specified in $nid.
+ *
+ * @param int $nid
+ *   The node ID to the title of.
+ *
+ * @return string
+ *   The title of the node specified in $nid. If no such node exists, an empty
+ *   string is returned.
  */
-function get_node_title() {
-  $node = node_load(TDD7_EXAMPLE_NID1);
+function get_node_title($nid) {
+  $node = node_load($nid);
   return $node->title;
 }
