@@ -17,7 +17,14 @@ require_once __DIR__ . '/../../../mocks/MockDrupalNodeFunctions.php';
 use oua\lms\testframework\BasicTestCase;
 use \oua\lms\testframework\mocks\MockDrupalNodeFunctions;
 
+/**
+ * We define constants here to make it easier to recognise node IDs in the rest
+ * of the unit testing code. Large numbers are used so decrease the likelihood
+ * ID collisions and producting false positives and odd interactions with the
+ * rest of the Drupal code.
+ */
 define('TDD7_EXAMPLE_NID1', 457543543);
+define('TDD7_EXAMPLE_NID2', 454328904);
 
 /**
  * Define the mock node_load() function for our namespaced production code,
