@@ -80,7 +80,7 @@ arguments, and return the results without making any changes.
 This may sometimes be erroneously be referred to as a function stub.
 
 ## Basefixtures
-Basefixtures contains the boilerplate code required to load and use the TDD7
+Basefixtures contain the boilerplate code required to load and use the TDD7
 module easily. This will include things such as the namespaced *node_load()*
 functions.
 
