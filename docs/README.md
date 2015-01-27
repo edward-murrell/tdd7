@@ -56,6 +56,11 @@ References:
 * http://php.net/manual/en/language.namespaces.php
 
 
+## Mocks
+Mocks are classes and functions that look and respond like core PHP and Drupal
+functions, but return test data. This test data should be loaded at the start of
+each test.
+
 ## Wrapping Namespaced Code
 Drupal hooks are in the global namespace, and test driven development requires
 us to keep our production code out of the global namespace so that we can use
@@ -73,11 +78,6 @@ arguments, and return the results without making any changes.
 	}
 
 This may sometimes be erroneously be referred to as a function stub.
-
-## Mocks
-Mocks are classes and functions that look and respond like core PHP and Drupal
-functions, but return test data. This test data should be loaded at the start of
-each test.
 
 ## Basefixtures
 Basefixtures contains the boilerplate code required to load and use the TDD7
