@@ -57,13 +57,16 @@ References:
 
 
 ## Wrapping Namespaced Code
-Since drupal relies on hooks in the global namespace, and test driven
-development requires us to put our production in specific name spaces, it is
-necessary to wrap calls to our namespaced production code in the global
-namespace. These should be a single line pass all arguments, and return the
-results without making any changes.
+Drupal relies on hooks in the global namespace, and test driven development
+requires us to keep our production out of the global namespace. To get around
+this problem, we call our module code from wrapper functions.
+These wrapper functions should be a single line of code that passes all
+arguments, and return the results without making any changes.
 
 	<?php
+	/**
+	 * @file mymodule.module
+	 */
 	function mymodule_theme($existing = array(), $type = '', $theme = '', $path = '') {
 	  return \myorg\mymodule\mymodule_theme($existing, $type, $theme, $path);
 	}
