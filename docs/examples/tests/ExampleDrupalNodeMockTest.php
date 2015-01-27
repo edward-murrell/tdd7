@@ -17,6 +17,8 @@ require_once __DIR__ . '/../../../mocks/MockDrupalNodeFunctions.php';
 use oua\lms\testframework\BasicTestCase;
 use \oua\lms\testframework\mocks\MockDrupalNodeFunctions;
 
+define('TDD7_EXAMPLE_NID1', 457543543);
+
 /**
  * Define the mock node_load() function for our namespaced production code,
  * instead of the core drupal node_load().
