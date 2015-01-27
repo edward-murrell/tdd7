@@ -13,7 +13,7 @@ namespace tdd7\example;
  */
 function search_by_last_name($last_name) {
   $res = db_select('students')
-    ->fields('students')
+    ->fields('students', array('id', 'lastName'))
     ->condition('lastName', $last_name)
     ->execute();
 
