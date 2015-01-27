@@ -68,6 +68,8 @@ class ExampleDrupalDbMockTest extends BasicTestCase {
    * Test that search_by_last_name() returns a single result.
    */
   public function testRetrieve() {
-    $this->assertCount(1, search_by_last_name('smith'));
+    $result = search_by_last_name('Smith');
+    $this->assertCount(1, $result);
+    $this->assertObjectHasAttribute('lastName', $result[0]);
   }
 }
