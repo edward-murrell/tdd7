@@ -8,8 +8,18 @@ namespace tdd7\example;
  * @param string $last_name;
  *
  * @return array
- *  An array of matching records with id, first name, last name and student ID.
+ *  An array of matching record objects with id, first name, last name and
+ *  student ID.
  */
 function search_by_last_name($last_name) {
-  return array();
+  $res = db_select('students')
+    ->fields('students')
+    ->condition('lastName', $last_name)
+    ->execute();
+
+  $results = array();
+  while ($record = $res->fetchObject()) {
+    $results[] = $record;
+  }
+  return $results;
 }
