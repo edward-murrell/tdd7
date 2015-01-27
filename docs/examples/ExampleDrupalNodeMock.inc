@@ -23,5 +23,8 @@ namespace tdd7\example;
  */
 function get_node_title($nid) {
   $node = node_load($nid);
+  if ($node === FALSE) {
+    return '';
+  }
   return $node->title;
 }
