@@ -38,6 +38,14 @@ require_once __DIR__ . '/../../../mocks/Database.inc';
 use oua\lms\testframework\BasicTestCase;
 use oua\lms\testframework\mocks\DatabaseConnection_unittest;
 
+/**
+ * Define the mock db_select() function in the same namespace as our production
+ * code which calls the mocked database select() function.
+ */
+function db_select($table, $alias = NULL, array $options = array()) {
+  return \oua\lms\testframework\mocks\DatabaseConnection_unittest::getInstance()->select($table, $alias, $options);
+}
+
 class ExampleDrupalDbMockTest extends BasicTestCase {
   private $db;
 
