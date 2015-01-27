@@ -11,5 +11,5 @@ namespace tdd7\example;
  *  An array of matching records with id, first name, last name and student ID.
  */
 function search_by_last_name($last_name) {
-  return;
+  return array();
 }
