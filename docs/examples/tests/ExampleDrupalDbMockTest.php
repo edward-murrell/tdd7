@@ -56,6 +56,9 @@ class ExampleDrupalDbMockTest extends BasicTestCase {
     $this->db->resetTestData();
   }
 
+  /**
+   * Test that search_by_last_name() returns a single result.
+   */
   public function testRetrieve() {
     $this->assertCount(1, search_by_last_name('smith'));
   }
