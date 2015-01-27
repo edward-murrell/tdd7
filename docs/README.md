@@ -91,11 +91,15 @@ form array validity, callback existence and so on.
 
 # Examples
 
-## Node
-
+## Using the Node mock
 See the following files:
-docs/examples/ExampleDrupalNodeMock.php
-docs/examples/tests/ExampleDrupalNodeMockTest.php
+* docs/examples/ExampleDrupalNodeMock.inc
+* docs/examples/tests/ExampleDrupalNodeMockTest.php
+
+## Using Database mock
+See the following files:
+* docs/examples/ExampleDrupalDbMock.inc
+* docs/examples/tests/ExampleDrupalDbMockTest.php
 
 # To Do
-
+?
