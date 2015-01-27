@@ -63,8 +63,16 @@ class ExampleDrupalNodeMockTest extends BasicTestCase {
   public function testGet_node_titleReturnsExpectedString() {
     /**
      * Retrieve the results of get_node_title that will call the mocked
-     * node_load() function, and assert that this returns the expected result.
+     * node_load() function, and assert that this returns the title of the
+     * mocked node we created in setUp();
      */
-    $this->assertEquals('Expected title', get_node_title());
+    $this->assertEquals('Expected title', get_node_title(TDD7_EXAMPLE_NID1));
+
+    /**
+     * In this function we search for an nid that doesn't exist. According our
+     * function documentation, this function should return an empty string if
+     * the node isn't found, so we test that.
+     */
+    $this->assertEquals('', get_node_title(TDD7_EXAMPLE_NID2));
   }
 }
