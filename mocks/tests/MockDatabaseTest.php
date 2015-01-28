@@ -11,7 +11,7 @@ if (!defined("DRUPAL_ROOT")) {
   drupal_override_server_variables();
   drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 }
-require_once DRUPAL_ROOT . "/sites/all/modules/custom/oua_lms_testframework/mocks/Database.inc";
+require_once dirname(__DIR__) . '/Database.inc';
 
 define ('TABLE1', 'testMockTable1');
 define ('TABLE2', 'testMockTable2');
