@@ -1,9 +1,9 @@
 <?php
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 require_once DRUPAL_ROOT . '/sites/all/modules/custom/oua_lms_services/XmlRpcService/XmlRpcCapable.php';
 
-use oua\lms\services\XmlRpcCapable;
+use tdd7\services\XmlRpcCapable;
 
 class ControlledXmlRpcCapability extends XmlRpcCapable {
 

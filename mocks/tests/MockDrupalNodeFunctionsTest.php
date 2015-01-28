@@ -5,12 +5,12 @@
  * Tests the Mock Drupal Load functions
  */
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 require_once getcwd() . '/sites/all/modules/custom/oua_lms_testframework/basefixtures/BasicTestCase.php';
 require_once DRUPAL_ROOT . '/sites/all/modules/custom/oua_lms_testframework/mocks/MockDrupalNodeFunctions.php';
 
-use oua\lms\testframework\BasicTestCase;
+use tdd7\testframework\BasicTestCase;
 
 define('MOCK_NODE_TEST_NID1', 547545754543);
 define('MOCK_NODE_TEST_NID2', 963732177731);
@@ -22,7 +22,7 @@ define('MOCK_NODE_TEST_NID_TITLE1', 'Testing Title Uno');
 define('MOCK_NODE_TEST_NID_TITLE2', 'Testing Title Duo');
 define('MOCK_NODE_TEST_NID_TITLE3', 'Testing Title Trio');
 
-class MockDrupalNodeFunctionsTest extends \oua\lms\testframework\BasicTestCase {
+class MockDrupalNodeFunctionsTest extends \tdd7\testframework\BasicTestCase {
   /**
    * GIVEN AddMockNode() is called.
    * AND NID is provided

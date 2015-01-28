@@ -14,8 +14,8 @@ require_once __DIR__ . '/../ExampleDrupalNodeMock.inc';
 require_once __DIR__ . '/../../../basefixtures/BasicTestCase.php';
 require_once __DIR__ . '/../../../mocks/MockDrupalNodeFunctions.php';
 
-use oua\lms\testframework\BasicTestCase;
-use \oua\lms\testframework\mocks\MockDrupalNodeFunctions;
+use tdd7\testframework\BasicTestCase;
+use \tdd7\testframework\mocks\MockDrupalNodeFunctions;
 
 /**
  * We define constants here to make it easier to recognise node IDs in the rest

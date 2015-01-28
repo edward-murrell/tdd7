@@ -1,9 +1,9 @@
 <?php
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 
-use oua\lms\services\PhpInputCapable;
+use tdd7\services\PhpInputCapable;
 
 require_once dirname(dirname(__DIR__)) . '/oua_lms_services/PhpInputService/PhpInputService.php';
 
@@ -11,7 +11,7 @@ require_once dirname(dirname(__DIR__)) . '/oua_lms_services/PhpInputService/PhpI
 /**
  * Class ControlledPhpInputService
  *
- * @package oua\lms\testframework\mocks
+ * @package tdd7\testframework\mocks
  */
 class ControlledPhpInputService extends PhpInputCapable {
 

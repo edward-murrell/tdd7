@@ -1,8 +1,8 @@
 <?php
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
-use oua\lms\services\UserCapable;
+use tdd7\services\UserCapable;
 
 require_once drupal_get_path('module', 'oua_lms_services') . '/UserService/UserCapable.php';
 

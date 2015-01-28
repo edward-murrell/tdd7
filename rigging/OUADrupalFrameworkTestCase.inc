@@ -5,7 +5,7 @@
  * @author Edward Murrell <edward@catalyst-au.net>
  */
 
-namespace oua\lms\testframework {
+namespace tdd7\testframework {
   require_once ('OUAFrameworkTemplateTestCase.inc');
 
   abstract class OuaDrupalFrameworkTestCase extends TemplateTestBase {
@@ -118,7 +118,7 @@ namespace oua\lms\testframework {
      * Test that this class is being inheritted properly.
      */
     public function testSelfClassName() {
-      $this->assertEquals('oua\lms\testframework\OuaDrupalFrameworkTestCase', __CLASS__);
+      $this->assertEquals('tdd7\testframework\OuaDrupalFrameworkTestCase', __CLASS__);
     }
   }
 }

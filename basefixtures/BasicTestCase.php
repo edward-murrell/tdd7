@@ -1,6 +1,6 @@
 <?php
 
-namespace oua\lms\testframework;
+namespace tdd7\testframework;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
@@ -22,7 +22,7 @@ else {
 
 /**
  * Class BasicTestCase
- * @package oua\lms\testframework
+ * @package tdd7\testframework
  */
 abstract class BasicTestCase extends PHPUnit_Framework_TestCase {
 

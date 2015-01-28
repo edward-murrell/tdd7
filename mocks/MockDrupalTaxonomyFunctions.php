@@ -6,7 +6,7 @@
  * @todo: Make this part of DrupalApiService
  */
 
-namespace oua\lms\testframework\mocks {
+namespace tdd7\testframework\mocks {
   class MockDrupalTaxonomyFunctions {
     /**
      * Array of taxonomy terms. Each item is populated mock taxonomy object

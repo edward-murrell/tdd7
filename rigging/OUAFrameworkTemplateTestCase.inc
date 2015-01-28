@@ -7,10 +7,10 @@
  * Time: 11:15 AM
  */
 
-namespace oua\lms\testframework;
+namespace tdd7\testframework;
 use DOMDocument;
 require_once './sites/all/modules/custom/oua_lms_testframework/basefixtures/BasicTestCase.php';
-use oua\lms\testframework\BasicTestCase;
+use tdd7\testframework\BasicTestCase;
 
 abstract class TemplateTestBase extends BasicTestCase {
 

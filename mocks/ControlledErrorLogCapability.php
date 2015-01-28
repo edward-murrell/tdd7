@@ -1,14 +1,14 @@
 <?php
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 require_once dirname(dirname(__DIR__)) . "/oua_lms_services/ErrorLogService/ErrorLogService.php";
 
-use oua\lms\services\ErrorLogCapable;
+use tdd7\services\ErrorLogCapable;
 
 /**
  * Class ControlledErrorLogCapability
  *
- * @package oua\lms\testframework\mocks
+ * @package tdd7\testframework\mocks
  */
 class ControlledErrorLogCapability extends ErrorLogCapable {
 

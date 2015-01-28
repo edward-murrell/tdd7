@@ -3,7 +3,7 @@
  * @file Test DrupalTaxonomyMock functions
  */
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 if (!defined("DRUPAL_ROOT")) {
   define('DRUPAL_ROOT', getcwd());

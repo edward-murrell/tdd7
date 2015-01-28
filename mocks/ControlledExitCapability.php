@@ -1,15 +1,15 @@
 <?php
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 include_once dirname(dirname(__DIR__)) . "/oua_lms_services/HangUpService/HangUpService.php";
 
 use Exception;
-use oua\lms\services\ExitCapable;
+use tdd7\services\ExitCapable;
 
 /**
  * Class ControlledExitCapability
  *
- * @package oua\lms\testframework\mocks
+ * @package tdd7\testframework\mocks
  */
 class ControlledExitCapability extends ExitCapable {
   /**

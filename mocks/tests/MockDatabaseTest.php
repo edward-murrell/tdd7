@@ -3,7 +3,7 @@
  * @file Test Drupal Database DatabaseConnection_unittest mock
  */
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 if (!defined("DRUPAL_ROOT")) {
   define('DRUPAL_ROOT', getcwd());

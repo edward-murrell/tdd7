@@ -4,7 +4,7 @@
  * @author Edward Murrell <edward@catalyst-au.net>
  */
 
-namespace oua\lms\testframework;
+namespace tdd7\testframework;
 require_once __DIR__ . '/../basefixtures/BasicTestCase.php';
 
 abstract class OuaDrupalFormsFrameworkTestCase extends BasicTestCase {
