@@ -3,7 +3,7 @@
  * @file Test DrupalTaxonomyMock functions
  */
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 if (!defined("DRUPAL_ROOT")) {
   define('DRUPAL_ROOT', getcwd());
@@ -11,7 +11,9 @@ if (!defined("DRUPAL_ROOT")) {
   drupal_override_server_variables();
   drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 }
-require_once DRUPAL_ROOT . '/sites/all/modules/custom/oua_lms_testframework/mocks/MockDrupalTaxonomyFunctions.php';
+
+require_once dirname(dirname(__DIR__)). '/basefixtures/BasicTestCase.php';
+require_once dirname(__DIR__) . '/MockDrupalTaxonomyFunctions.php';
 
 define ('VOCAB1_VID', 789789789789123123);
 define ('VOCAB2_VID', 489789789789123124);
@@ -30,7 +32,7 @@ define ('TERM3_TITLE', 'Taxo test third');
 define ('NODE1_NID', 334345555545555555);
 define ('NODE2_NID', 111348885545555555);
 
-class MockDrupalTaxonomyFunctionsTest extends \PHPUnit_Framework_TestCase {
+class MockDrupalTaxonomyFunctionsTest extends \tdd7\testframework\BasicTestCase  {
   public function testAddingTestDataToTaxonomyIsReturned() {
     MockDrupalTaxonomyFunctions::ResetMockData();
     MockDrupalTaxonomyFunctions::AddMockTerm(0, TERM1_TID, TERM1_TITLE);

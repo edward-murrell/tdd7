@@ -3,7 +3,7 @@
  * @file Drupal Database layer mock functions and classes
  */
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 /**
  * Returns a new mocked up SelectQuery object for the active database.
@@ -21,7 +21,7 @@ namespace oua\lms\testframework\mocks;
  *   A new SelectQuery object for this connection.
  */
 function db_select($table, $alias = NULL, array $options = array()) {
-  return \oua\lms\testframework\mocks\DatabaseConnection_unittest::getInstance()->select($table, $alias, $options);
+  return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->select($table, $alias, $options);
 }
 
 class DatabaseConnection_unittest extends \DatabaseConnection {
@@ -347,8 +347,8 @@ class MockQueryResult {
 
   /**
    * Create a result set from the a mock database and query
-   * @param \oua\lms\testframework\mocks\DatabaseConnection_unittest $db
-   * @param \oua\lms\testframework\mocks\MockSelectQuery $qy
+   * @param \tdd7\testframework\mocks\DatabaseConnection_unittest $db
+   * @param \tdd7\testframework\mocks\MockSelectQuery $qy
    * @param type $results Array of results MockSelectQuery execute()
    */
   function __construct(DatabaseConnection_unittest $db, MockSelectQuery $qy, $results) {

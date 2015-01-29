@@ -5,7 +5,7 @@
  * Mocked up Drupal node functions.
  */
 
-namespace oua\lms\testframework\mocks {
+namespace tdd7\testframework\mocks {
   class MockDrupalNodeFunctions {
     /**
      * List of nodes, indexed by Node ID.

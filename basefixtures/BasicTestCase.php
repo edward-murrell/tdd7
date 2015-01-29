@@ -1,6 +1,6 @@
 <?php
 
-namespace oua\lms\testframework;
+namespace tdd7\testframework;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
@@ -22,7 +22,7 @@ else {
 
 /**
  * Class BasicTestCase
- * @package oua\lms\testframework
+ * @package tdd7\testframework
  */
 abstract class BasicTestCase extends PHPUnit_Framework_TestCase {
 
@@ -52,15 +52,15 @@ abstract class BasicTestCase extends PHPUnit_Framework_TestCase {
    */
   public function setUp() {
     if (PRODUCTLINE_CONSTRAINED_TESTS) {
-      $product_line = getenv("oua_productline");
+      $product_line = getenv("productline");
       $me = new ReflectionClass($this);
       $comments = explode("\n", $me->getDocComment());
-      $product_line_constrained = preg_grep("/@oua_productline/", $comments);
+      $product_line_constrained = preg_grep("/@productline/", $comments);
 
       if (!empty($product_line_constrained)) {
         $product_line_tags = array_values($product_line_constrained);
         $product_line_tag = $product_line_tags[0];
-        $product_lines_list = preg_split("/^.*@oua_productline\\s/", $product_line_tag, -1, PREG_SPLIT_NO_EMPTY);
+        $product_lines_list = preg_split("/^.*@productline\\s/", $product_line_tag, -1, PREG_SPLIT_NO_EMPTY);
         $product_lines_filter = trim($product_lines_list[0]);
         $allowed_product_lines = explode(" ", $product_lines_filter);
         if (!in_array($product_line, $allowed_product_lines)) {

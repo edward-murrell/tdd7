@@ -5,10 +5,10 @@
  * @author Edward Murrell <edward@catalyst-au.net>
  */
 
-namespace oua\lms\testframework {
-  require_once ('OUAFrameworkTemplateTestCase.inc');
+namespace tdd7\testframework {
+  require_once ('FrameworkTemplateTestCase.inc');
 
-  abstract class OuaDrupalFrameworkTestCase extends TemplateTestBase {
+  abstract class DrupalFrameworkTestCase extends TemplateTestBase {
     /**
      * Checks validity of Drupal menu arrays
      *  Asserts the following:
@@ -118,7 +118,7 @@ namespace oua\lms\testframework {
      * Test that this class is being inheritted properly.
      */
     public function testSelfClassName() {
-      $this->assertEquals('oua\lms\testframework\OuaDrupalFrameworkTestCase', __CLASS__);
+      $this->assertEquals('tdd7\testframework\DrupalFrameworkTestCase', __CLASS__);
     }
   }
 }

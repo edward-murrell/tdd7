@@ -6,12 +6,12 @@
  * Wraps up and mocks out the Curl Service.
  */
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 /**
  * Class MockCurlService
  *
- * @package oua\lms\services
+ * @package tdd7\services
  */
 class MockCurlService {
   public $url = NULL;

@@ -3,7 +3,7 @@
  * @file Test Drupal Database DatabaseConnection_unittest mock
  */
 
-namespace oua\lms\testframework\mocks;
+namespace tdd7\testframework\mocks;
 
 if (!defined("DRUPAL_ROOT")) {
   define('DRUPAL_ROOT', getcwd());
@@ -16,7 +16,7 @@ require_once dirname(__DIR__) . '/Database.inc';
 define ('TABLE1', 'testMockTable1');
 define ('TABLE2', 'testMockTable2');
 
-class OUAMockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
+class MockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
   private $db;
 
   public function setUp() {

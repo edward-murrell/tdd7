@@ -8,7 +8,7 @@
  *  methods, and may be completely pointless.
  */
 
-namespace oua\lms\testframework\mocks {
+namespace tdd7\testframework\mocks {
   class MockDrupalFieldFunctions {
     /**
      * Array of entity types.

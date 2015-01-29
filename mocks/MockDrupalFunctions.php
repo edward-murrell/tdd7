@@ -6,7 +6,7 @@
  * @todo: Make this part of DrupalApiService
  */
 
-namespace oua\lms\testframework\mocks {
+namespace tdd7\testframework\mocks {
   class MockDrupalFunctions {
     private static $variables = array();
     private static $form_errors = array();
