@@ -9,7 +9,7 @@
 
 namespace tdd7\testframework;
 use DOMDocument;
-require_once './sites/all/modules/custom/oua_lms_testframework/basefixtures/BasicTestCase.php';
+require_once dirname(__DIR__). '/basefixtures/BasicTestCase.php';
 use tdd7\testframework\BasicTestCase;
 
 abstract class TemplateTestBase extends BasicTestCase {

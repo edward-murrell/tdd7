@@ -6,7 +6,7 @@
  */
 
 namespace tdd7\testframework {
-  require_once ('OUAFrameworkTemplateTestCase.inc');
+  require_once ('FrameworkTemplateTestCase.inc');
 
   abstract class DrupalFrameworkTestCase extends TemplateTestBase {
     /**
