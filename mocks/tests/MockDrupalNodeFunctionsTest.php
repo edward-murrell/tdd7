@@ -7,8 +7,8 @@
 
 namespace tdd7\testframework\mocks;
 
-require_once getcwd() . '/sites/all/modules/custom/oua_lms_testframework/basefixtures/BasicTestCase.php';
-require_once DRUPAL_ROOT . '/sites/all/modules/custom/oua_lms_testframework/mocks/MockDrupalNodeFunctions.php';
+require_once dirname(dirname(__DIR__)). '/basefixtures/BasicTestCase.php';
+require_once dirname(__DIR__) . '/MockDrupalNodeFunctions.php';
 
 use tdd7\testframework\BasicTestCase;
 

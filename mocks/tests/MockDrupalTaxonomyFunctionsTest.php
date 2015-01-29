@@ -11,7 +11,7 @@ if (!defined("DRUPAL_ROOT")) {
   drupal_override_server_variables();
   drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 }
-require_once DRUPAL_ROOT . '/sites/all/modules/custom/oua_lms_testframework/mocks/MockDrupalTaxonomyFunctions.php';
+require_once dirname(__DIR__) . '/MockDrupalTaxonomyFunctions.php';
 
 define ('VOCAB1_VID', 789789789789123123);
 define ('VOCAB2_VID', 489789789789123124);
