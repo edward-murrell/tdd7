@@ -8,7 +8,7 @@
 namespace tdd7\testframework {
   require_once ('OUAFrameworkTemplateTestCase.inc');
 
-  abstract class OuaDrupalFrameworkTestCase extends TemplateTestBase {
+  abstract class DrupalFrameworkTestCase extends TemplateTestBase {
     /**
      * Checks validity of Drupal menu arrays
      *  Asserts the following:
@@ -118,7 +118,7 @@ namespace tdd7\testframework {
      * Test that this class is being inheritted properly.
      */
     public function testSelfClassName() {
-      $this->assertEquals('tdd7\testframework\OuaDrupalFrameworkTestCase', __CLASS__);
+      $this->assertEquals('tdd7\testframework\DrupalFrameworkTestCase', __CLASS__);
     }
   }
 }
