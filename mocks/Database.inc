@@ -24,6 +24,21 @@ function db_select($table, $alias = NULL, array $options = array()) {
   return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->select($table, $alias, $options);
 }
 
+/**
+ * Returns a new UpdateQuery object for the active database.
+ *
+ * @param $table
+ *   The table to update.
+ * @param $options
+ *   An array of options to control how the query operates.
+ *
+ * @return UpdateQuery
+ *   A new UpdateQuery object for this connection.
+ */
+function db_update($table, array $options = array()) {
+  return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->update($table, $options);
+}
+
 class DatabaseConnection_unittest extends \DatabaseConnection {
   static $instance = null;
 
@@ -54,6 +69,13 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
   public function select($table, $alias = NULL, array $options = array()) {
     return new MockSelectQuery($this, $table);
+  }
+
+  public function update($table, array $options = array()) {
+    return stdClass();
+    //Copied from upstream
+    //$class = $this->getDriverClass('UpdateQuery', array('query.inc'));
+    //return new $class($this, $table, $options);
   }
 
   /**
