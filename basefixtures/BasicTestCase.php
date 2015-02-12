@@ -5,11 +5,14 @@ namespace tdd7\testframework;
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 
+if (!defined('TDD7_ROOT')) {
+  define('TDD7_ROOT', dirname(__DIR__));
+}
 if (!defined('DRUPAL_ROOT')) {
   define('DRUPAL_ROOT', getcwd());
   require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
   drupal_override_server_variables();
-  drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+  drupal_bootstrap(DRUPAL_BOOTSTRAP_VARIABLES);
 }
 if (!defined('PRODUCTLINE_CONSTRAINED_TESTS') && !getenv("PRODUCTLINE_CONSTRAINED_TESTS")) {
   define('PRODUCTLINE_CONSTRAINED_TESTS', FALSE);
