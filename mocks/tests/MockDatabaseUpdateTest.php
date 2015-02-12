@@ -128,19 +128,7 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
   }
 
   public function testDB_updateMultipleRows() {
-    $res = db_select(TABLE1)
-      ->fields(TABLE1, array('firstName', 'year','id'))
-      ->condition('firstName', 'Hans')
-      ->execute();
-    $record = $res->fetchObject();
-    $this->assertEquals('Hans', $record->firstName);
-    $this->assertEquals(31,   $record->id);
-    $this->assertEquals(1892,   $record->year);
-    $record = $res->fetchObject();
-    $this->assertEquals(48091,     $record->id);
-    $this->assertEquals(1964,   $record->year);
-
-
+    // Update the birthdate of all people called Hans to 1970
     $update = db_update(TABLE1)
       ->fields(array('year' => 1970))
       ->condition('firstName','Hans')
@@ -157,9 +145,11 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(31,   $record->id);
     $this->assertEquals(1970,   $record->year);
     $record = $res->fetchObject();
+    $this->assertEquals('Hans', $record->firstName);
     $this->assertEquals(48091,     $record->id);
     $this->assertEquals(1970,   $record->year);
 
+    // Confirm that no other records were edited.
     $res = db_select(TABLE1)
       ->fields(TABLE1, array('firstName', 'year'))
       ->condition('id', 7593)
