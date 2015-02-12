@@ -108,7 +108,7 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(1964,   $record->year);
   }
 
-  public function testDB_updateFieldthatDoesntExsist() {
+  public function testDB_updateFieldthatDoesntExist() {
 
     $update = db_update(TABLE1)
       ->fields(array('year' => 1971,'foo' => 'Bar'))
