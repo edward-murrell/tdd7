@@ -122,11 +122,57 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
   }
 }
 
-class MockSelectQuery implements \SelectQueryInterface {
+class MockQuery {
+  protected $conditions;
+  /**
+   * Tests if $row matches SQL LIKE $key
+   * @param $row Value to test against
+   * @param $key Search string: eg; '%test%';
+   * @return boolean TRUE if $row matches $key
+   */
+  protected function confirmLikeRow($row, $key) {
+    $test_str = str_replace(
+      array('%%', '%', '?'),
+      array('%', '.*', '.'),
+      $key);
+    $test_str = "/^{$test_str}$/";
+    $result = preg_match($test_str, $row);
+    return (bool)$result;
+  }
+
+  /**
+   * Ugly function decide if fields match conditons or not
+   */
+  protected function confirmMatch($row) {
+    foreach ($this->conditions as $cond) {
+      $field = $cond['field'];
+      switch ($cond['operator']) {
+        case null :
+        case '='  :
+        case '==' :
+          if ($row[$field] != $cond['value']) {
+            return FALSE;
+          }
+          break;
+        case 'LIKE':
+          if ($this->confirmLikeRow($row[$field], $cond['value']) == FALSE) {
+            return FALSE;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+    return TRUE;
+  }
+
+}
+
+class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
   private $database;
   private $tablename;
   private $fields;
-  private $conditions;
+
   private $countQuery;
 
  function __construct(DatabaseConnection_unittest $db, $tablename) {
@@ -282,31 +328,6 @@ class MockSelectQuery implements \SelectQueryInterface {
   public function where($snippet, $args = array()) {
   }
 
-  /**
-   * Ugly function decide if fields match conditons or not
-   */
-  private function confirmMatch($row) {
-    foreach ($this->conditions as $cond) {
-      $field = $cond['field'];
-      switch ($cond['operator']) {
-        case null :
-        case '='  :
-        case '==' :
-          if ($row[$field] != $cond['value']) {
-            return FALSE;
-          }
-          break;
-        case 'LIKE':
-          if ($this->confirmLikeRow($row[$field], $cond['value']) == FALSE) {
-            return FALSE;
-          }
-          break;
-        default:
-          break;
-      }
-    }
-    return TRUE;
-  }
 
   /**
    * Filters the given row down to only the fields expected. If the fields are
@@ -326,21 +347,7 @@ class MockSelectQuery implements \SelectQueryInterface {
     return $new;
   }
 
-  /**
-   * Tests if $row matches SQL LIKE $key
-   * @param $row Value to test against
-   * @param $key Search string: eg; '%test%';
-   * @return boolean TRUE if $row matches $key
-   */
-  private function confirmLikeRow($row, $key) {
-    $test_str = str_replace(
-        array('%%', '%', '?'),
-        array('%', '.*', '.'),
-        $key);
-    $test_str = "/^{$test_str}$/";
-    $result = preg_match($test_str, $row);
-    return (bool)$result;
-  }
+
 
   public function execute() {
     $results = array();
