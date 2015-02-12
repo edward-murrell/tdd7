@@ -102,7 +102,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
    * @param type $table
    * @return array Data added to test tables so far, may be empty.
    */
-  public function getTestData($table) {
+  public function &getTestData($table) {
     if (array_key_exists($table, $this->data)) {
       return $this->data[$table];
     }
@@ -614,8 +614,25 @@ class MockUpdateQuery extends MockQuery implements \QueryConditionInterface {
       unset($fields[$field]);
     }
 
+    $results = array();
+    foreach ($this->database->getTestData($this->tablename) as &$row) {
+      if ($this->confirmMatch($row)) {
+
+        foreach($fields as $fieldkey => $updatevalue) {
+          $row[$fieldkey] = $updatevalue;
+        }
+        $results[] = $this->filterFields($this->tablename, $row);
+      }
+    }
+
+    return count($results);
+
+
+
     // Because we filter $fields the same way here and in __toString(), the
     // placeholders will all match up properly.
+
+    /*
     $max_placeholder = 0;
     foreach ($fields as $field => $value) {
       $update_values[':db_update_placeholder_' . ($max_placeholder++)] = $value;
@@ -627,6 +644,7 @@ class MockUpdateQuery extends MockQuery implements \QueryConditionInterface {
     }
 
     return $this->connection->query((string) $this, $update_values, $this->queryOptions);
+    */
   }
 
   /**
