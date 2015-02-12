@@ -125,7 +125,48 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('Yuji', $record->firstName);
     $this->assertEquals(1971,   $record->year);
     $this->assertObjectNotHasAttribute('foo',$record);
+  }
 
+  public function testDB_updateMultipleRows() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year','id'))
+      ->condition('firstName', 'Hans')
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Hans', $record->firstName);
+    $this->assertEquals(31,   $record->id);
+    $this->assertEquals(1892,   $record->year);
+    $record = $res->fetchObject();
+    $this->assertEquals(48091,     $record->id);
+    $this->assertEquals(1964,   $record->year);
+
+
+    $update = db_update(TABLE1)
+      ->fields(array('year' => 1970))
+      ->condition('firstName','Hans')
+      ->execute();
+
+    $this->assertEquals(2,$update);
+
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year','id'))
+      ->condition('firstName', 'Hans')
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Hans', $record->firstName);
+    $this->assertEquals(31,   $record->id);
+    $this->assertEquals(1970,   $record->year);
+    $record = $res->fetchObject();
+    $this->assertEquals(48091,     $record->id);
+    $this->assertEquals(1970,   $record->year);
+
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year'))
+      ->condition('id', 7593)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Alex', $record->firstName);
+    $this->assertEquals(1989,   $record->year);
   }
 
 }
