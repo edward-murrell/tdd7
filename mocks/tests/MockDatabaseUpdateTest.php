@@ -124,7 +124,7 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
     $record = $res->fetchObject();
     $this->assertEquals('Yuji', $record->firstName);
     $this->assertEquals(1971,   $record->year);
-    $this->assertObjectNotHasAttribute('foo',$record);
+    $this->assertObjectHasAttribute('foo',$record);
   }
 
   public function testDB_updateMultipleRows() {

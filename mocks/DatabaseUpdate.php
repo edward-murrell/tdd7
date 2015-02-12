@@ -196,9 +196,10 @@ class MockUpdateQuery extends MockQuery implements \QueryConditionInterface {
     foreach ($this->database->getTestData($this->tablename) as &$row) {
       if ($this->confirmMatch($row)) {
         foreach($fields as $fieldkey => $updatevalue) {
-          if(array_key_exists($fieldkey,$row)) {
+          //Untill we implement scheme checking on inserts, this is not helpful!
+          //if(array_key_exists($fieldkey,$row)) {
             $row[$fieldkey] = $updatevalue;
-          }
+          //}
         }
         $results[] = $this->filterFields($this->tablename, $row);
       }
