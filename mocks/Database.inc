@@ -121,6 +121,18 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
 class MockQuery {
   protected $conditions;
+
+  public function condition($field, $value = NULL, $operator = NULL) {
+    if (empty($operator)) {
+      $operator = '=';
+    }
+    $this->conditions[] = array('field' => $field, 'value' => $value, 'operator' => $operator);
+    return $this;
+  }
+
+  public function &conditions() {
+  }
+
   /**
    * Tests if $row matches SQL LIKE $key
    * @param $row Value to test against
@@ -163,6 +175,25 @@ class MockQuery {
     return TRUE;
   }
 
+  /**
+   * Filters the given row down to only the fields expected. If the fields are
+   * not supplied, they a null value will be created. If an empty array has been
+   * supplied for fields, then all fields will be returned.
+   * @param array $row
+   * @return array The same row, with only the fields expected
+   */
+  protected function filterFields($tablename, array $row) {
+    if (empty($this->fields[$tablename])) {
+      return $row;
+    }
+    $new = array();
+    foreach ($this->fields[$tablename] as $field) {
+      $new[$field] = $row[$field];
+    }
+    return $new;
+  }
+
+
 }
 
 class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
@@ -203,17 +234,6 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
   }
 
   public function compiled() {
-  }
-
-  public function condition($field, $value = NULL, $operator = NULL) {
-    if (empty($operator)) {
-      $operator = '=';
-    }
-    $this->conditions[] = array('field' => $field, 'value' => $value, 'operator' => $operator);
-    return $this;
-  }
-
-  public function &conditions() {
   }
 
   public function countQuery() {
@@ -326,23 +346,6 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
   }
 
 
-  /**
-   * Filters the given row down to only the fields expected. If the fields are
-   * not supplied, they a null value will be created. If an empty array has been
-   * supplied for fields, then all fields will be returned.
-   * @param array $row
-   * @return array The same row, with only the fields expected
-   */
-  private function filterFields($tablename, array $row) {
-    if (empty($this->fields[$tablename])) {
-      return $row;
-    }
-    $new = array();
-    foreach ($this->fields[$tablename] as $field) {
-      $new[$field] = $row[$field];
-    }
-    return $new;
-  }
 
 
 
@@ -486,13 +489,6 @@ class MockUpdateQuery extends MockQuery implements \QueryConditionInterface {
    // $this->condition = new DatabaseCondition('AND');
   }
 
-  /**
-   * Implements QueryConditionInterface::condition().
-   */
-  public function condition($field, $value = NULL, $operator = NULL) {
-    $this->condition->condition($field, $value, $operator);
-    return $this;
-  }
 
   /**
    * Implements QueryConditionInterface::isNull().
@@ -526,12 +522,6 @@ class MockUpdateQuery extends MockQuery implements \QueryConditionInterface {
     return $this;
   }
 
-  /**
-   * Implements QueryConditionInterface::conditions().
-   */
-  public function &conditions() {
-    return $this->condition->conditions();
-  }
 
   /**
    * Implements QueryConditionInterface::arguments().
