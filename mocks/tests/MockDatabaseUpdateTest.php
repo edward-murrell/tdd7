@@ -99,6 +99,33 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('Yuji', $record->firstName);
     $this->assertEquals(1970,   $record->year);
 
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year'))
+      ->condition('id', 48091)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Hans', $record->firstName);
+    $this->assertEquals(1964,   $record->year);
+  }
+
+  public function testDB_updateFieldthatDoesntExsist() {
+
+    $update = db_update(TABLE1)
+      ->fields(array('year' => 1971,'foo' => 'Bar'))
+      ->condition('id',2391)
+      ->execute();
+
+    $this->assertEquals(1,$update);
+
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year','foo'))
+      ->condition('id', 2391)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Yuji', $record->firstName);
+    $this->assertEquals(1971,   $record->year);
+    $this->assertObjectNotHasAttribute('foo',$record);
+
   }
 
 }
