@@ -70,10 +70,35 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
   /**
    * Assert that our db_select returns the object it's supposed t.
    */
-  public function testDb_selectReturnsObject() {
-    $query = db_select();
-    $this->assertInstanceOf('MockSelectQuery', $query);
-    $this->assertInstanceOf('SelectQuery',     $query);
+  public function testDb_updateReturnsObject() {
+    $query = db_update('foo');
+    $this->assertInstanceOf('\tdd7\testframework\mocks\MockUpdateQuery', $query);
+  }
+
+  public function testDB_updateSingleRow() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year'))
+      ->condition('id', 2391)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Yuji', $record->firstName);
+    $this->assertEquals(1969,   $record->year);
+
+    $update = db_update(TABLE1)
+      ->fields(array('year' => 1970))
+      ->condition('id',2391)
+      ->execute();
+
+    $this->assertEquals(1,$update);
+
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year'))
+      ->condition('id', 2391)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Yuji', $record->firstName);
+    $this->assertEquals(1970,   $record->year);
+
   }
 
 }
