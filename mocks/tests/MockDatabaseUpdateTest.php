@@ -124,6 +124,13 @@ class MockDatabaseTestUpdateCase extends \PHPUnit_Framework_TestCase {
     $record = $res->fetchObject();
     $this->assertEquals('Yuji', $record->firstName);
     $this->assertEquals(1971,   $record->year);
+    /**
+     * @TODO: This is wrong. When the following issue is fixed, the function
+     * assertObjectHasAttribute should be changed to assertObjectNotHasAttribute
+     * and an Exception attached to the execute() function run on non-existent
+     * columns.
+     * http://git.syd.catalyst-au.net/edward/tdd7/issues/2
+     */
     $this->assertObjectHasAttribute('foo',$record);
   }
 
