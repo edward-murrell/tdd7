@@ -121,6 +121,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
 class MockQuery {
   protected $conditions;
+  protected $fields;
 
   public function condition($field, $value = NULL, $operator = NULL) {
     if (empty($operator)) {
@@ -199,7 +200,7 @@ class MockQuery {
 class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
   private $database;
   private $tablename;
-  private $fields;
+
 
   private $countQuery;
 
