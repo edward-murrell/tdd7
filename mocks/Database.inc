@@ -245,6 +245,7 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
   }
 
   public function distinct($distinct = TRUE) {
+    return $this;
   }
 
   public function exists(\SelectQueryInterface $select) {
