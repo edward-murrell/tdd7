@@ -5,6 +5,11 @@
 
 namespace tdd7\testframework\mocks;
 
+require_once 'DatabaseSelect.php';
+require_once 'DatabaseInsert.php';
+require_once 'DatabaseUpdate.php';
+require_once 'DatabaseMockQuery.php';
+
 /**
  * Returns a new mocked up SelectQuery object for the active database.
  *
@@ -23,6 +28,38 @@ namespace tdd7\testframework\mocks;
 function db_select($table, $alias = NULL, array $options = array()) {
   return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->select($table, $alias, $options);
 }
+
+/**
+ * Returns a new UpdateQuery object for the active database.
+ *
+ * @param $table
+ *   The table to update.
+ * @param $options
+ *   An array of options to control how the query operates.
+ *
+ * @return UpdateQuery
+ *   A new UpdateQuery object for this connection.
+ */
+function db_update($table, array $options = array()) {
+  return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->update($table, $options);
+}
+
+
+/**
+ * Returns a new InsertQuery object for the active database.
+ *
+ * @param $table
+ *   The table to update.
+ * @param $options
+ *   An array of options to control how the query operates.
+ *
+ * @return UpdateQuery
+ *   A new UpdateQuery object for this connection.
+ */
+function db_insert($table, array $options = array()) {
+  return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->insert($table, $options);
+}
+
 
 class DatabaseConnection_unittest extends \DatabaseConnection {
   static $instance = null;
@@ -56,6 +93,14 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
     return new MockSelectQuery($this, $table);
   }
 
+  public function update($table, array $options = array()) {
+    return new MockUpdateQuery($this, $table,$options);
+  }
+
+  public function insert($table, array $options = array()) {
+    return new MockInsertQuery($this, $table,$options);
+  }
+
   /**
    * Returns a staticly stored instance of this class. Creates a new instance
    *  if required.
@@ -83,7 +128,7 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
    * @param type $table
    * @return array Data added to test tables so far, may be empty.
    */
-  public function getTestData($table) {
+  public function &getTestData($table) {
     if (array_key_exists($table, $this->data)) {
       return $this->data[$table];
     }
@@ -97,242 +142,6 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
    */
   public function resetTestData() {
     $this->data = array();
-  }
-}
-
-class MockSelectQuery implements \SelectQueryInterface {
-  private $database;
-  private $tablename;
-  private $fields;
-  private $conditions;
-  private $countQuery;
-
- function __construct(DatabaseConnection_unittest $db, $tablename) {
-    $this->database = $db;
-    $this->tablename    = $tablename;
-    $this->countQuery = FALSE;
-  }
-
-  public function __clone() {
-  }
-
-  public function addExpression($expression, $alias = NULL, $arguments = array()) {
-  }
-
-  public function addField($table_alias, $field, $alias = NULL) {
-  }
-
-  public function addJoin($type, $table, $alias = NULL, $condition = NULL, $arguments = array()) {
-  }
-
-  public function addMetaData($key, $object) {
-  }
-
-  public function addTag($tag) {
-  }
-
-  public function arguments() {
-  }
-
-  public function compile(\DatabaseConnection $connection, \QueryPlaceholderInterface $queryPlaceholder) {
-  }
-
-  public function compiled() {
-  }
-
-  public function condition($field, $value = NULL, $operator = NULL) {
-    if (empty($operator)) {
-      $operator = '=';
-    }
-    $this->conditions[] = array('field' => $field, 'value' => $value, 'operator' => $operator);
-    return $this;
-  }
-
-  public function &conditions() {
-  }
-
-  public function countQuery() {
-    $this->countQuery = TRUE;
-    return $this;
-  }
-
-  public function distinct($distinct = TRUE) {
-  }
-
-  public function exists(\SelectQueryInterface $select) {
-  }
-
-  public function extend($extender_name) {
-  }
-
-  public function fields($table_alias, array $fields = array()) {
-    $this->fields[$table_alias] = $fields;
-    return $this;
-  }
-
-  public function forUpdate($set = TRUE) {
-  }
-
-  public function getArguments(\QueryPlaceholderInterface $queryPlaceholder = NULL) {
-  }
-
-  public function &getExpressions() {
-  }
-
-  public function &getFields() {
-  }
-
-  public function &getGroupBy() {
-  }
-
-  public function getMetaData($key) {
-  }
-
-  public function &getOrderBy() {
-  }
-
-  public function &getTables() {
-  }
-
-  public function &getUnion() {
-  }
-
-  public function groupBy($field) {
-  }
-
-  public function hasAllTags() {
-  }
-
-  public function hasAnyTag() {
-  }
-
-  public function hasTag($tag) {
-  }
-
-  public function havingCondition($field, $value = NULL, $operator = NULL) {
-  }
-
-  public function innerJoin($table, $alias = NULL, $condition = NULL, $arguments = array()) {
-  }
-
-  public function isNotNull($field) {
-  }
-
-  public function isNull($field) {
-  }
-
-  public function isPrepared() {
-  }
-
-  public function join($table, $alias = NULL, $condition = NULL, $arguments = array()) {
-  }
-
-  public function leftJoin($table, $alias = NULL, $condition = NULL, $arguments = array()) {
-  }
-
-  public function nextPlaceholder() {
-  }
-
-  public function notExists(\SelectQueryInterface $select) {
-  }
-
-  public function orderBy($field, $direction = 'ASC') {
-  }
-
-  public function orderRandom() {
-  }
-
-  public function preExecute(\SelectQueryInterface $query = NULL) {
-  }
-
-  public function range($start = NULL, $length = NULL) {
-  }
-
-  public function rightJoin($table, $alias = NULL, $condition = NULL, $arguments = array()) {
-  }
-
-  public function union(\SelectQueryInterface $query, $type = '') {
-  }
-
-  public function uniqueIdentifier() {
-  }
-
-  public function where($snippet, $args = array()) {
-  }
-
-  /**
-   * Ugly function decide if fields match conditons or not
-   */
-  private function confirmMatch($row) {
-    foreach ($this->conditions as $cond) {
-      $field = $cond['field'];
-      switch ($cond['operator']) {
-        case null :
-        case '='  :
-        case '==' :
-          if ($row[$field] != $cond['value']) {
-            return FALSE;
-          }
-          break;
-        case 'LIKE':
-          if ($this->confirmLikeRow($row[$field], $cond['value']) == FALSE) {
-            return FALSE;
-          }
-          break;
-        default:
-          break;
-      }
-    }
-    return TRUE;
-  }
-
-  /**
-   * Filters the given row down to only the fields expected. If the fields are
-   * not supplied, they a null value will be created. If an empty array has been
-   * supplied for fields, then all fields will be returned.
-   * @param array $row
-   * @return array The same row, with only the fields expected
-   */
-  private function filterFields($tablename, array $row) {
-    if (empty($this->fields[$tablename])) {
-      return $row;
-    }
-    $new = array();
-    foreach ($this->fields[$tablename] as $field) {
-      $new[$field] = $row[$field];
-    }
-    return $new;
-  }
-
-  /**
-   * Tests if $row matches SQL LIKE $key
-   * @param $row Value to test against
-   * @param $key Search string: eg; '%test%';
-   * @return boolean TRUE if $row matches $key
-   */
-  private function confirmLikeRow($row, $key) {
-    $test_str = str_replace(
-        array('%%', '%', '?'),
-        array('%', '.*', '.'),
-        $key);
-    $test_str = "/^{$test_str}$/";
-    $result = preg_match($test_str, $row);
-    return (bool)$result;
-  }
-
-  public function execute() {
-    $results = array();
-    foreach ($this->database->getTestData($this->tablename) as $row) {
-      if ($this->confirmMatch($row)) {
-        $results[] = $this->filterFields($this->tablename, $row);
-      }
-    }
-
-    if ($this->countQuery) {
-      $results = array(count($results));
-    }
-
-    return new MockQueryResult($this->database, $this, $results);
   }
 }
 
@@ -393,3 +202,6 @@ class MockQueryResult {
     return $ret;
   }
 }
+
+
+
