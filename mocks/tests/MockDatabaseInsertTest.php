@@ -43,5 +43,24 @@ class MockDatabaseTestInssertCase extends \PHPUnit_Framework_TestCase {
     $this->assertInstanceOf('\tdd7\testframework\mocks\MockInsertQuery', $query);
   }
 
+  public function testDB_insertSingle() {
+    $fields = array(
+      'id' => '42',
+      'firstName' => 'Jane',
+      'lastName' => 'Hill',
+      'year' => 1956,
+      'email' => 'jane@example.de.com',
+    );
+    $nid = db_insert(TABLE1)
+      ->fields($fields)
+      ->execute();
 
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName', 'year'))
+      ->condition('id', 42)
+      ->execute();
+    $record = $res->fetchObject();
+    $this->assertEquals('Jane', $record->firstName);
+    $this->assertEquals(1956, $record->year);
+  }
 }

@@ -14,7 +14,7 @@ class MockInsertQuery extends MockQuery {
    *
    * @var string
    */
-  protected $table;
+  protected $tablename;
 
   /**
    * An array of fields on which to insert.
@@ -66,7 +66,7 @@ class MockInsertQuery extends MockQuery {
    */
   public function __construct(DatabaseConnection_unittest $db, $tablename, array $options = array()) {
     $this->database = $db;
-    $this->tablename    = $tablename;
+    $this->tablename = $tablename;
     // $this->condition = new DatabaseCondition('AND');
   }
 
@@ -192,36 +192,25 @@ class MockInsertQuery extends MockQuery {
 
     // If we're selecting from a SelectQuery, finish building the query and
     // pass it back, as any remaining options are irrelevant.
+    /*
     if (!empty($this->fromQuery)) {
       $sql = (string) $this;
       // The SelectQuery may contain arguments, load and pass them through.
       return $this->connection->query($sql, $this->fromQuery->getArguments(), $this->queryOptions);
-    }
+    }*/
 
     $last_insert_id = 0;
 
-    // Each insert happens in its own query in the degenerate case. However,
-    // we wrap it in a transaction so that it is atomic where possible. On many
-    // databases, such as SQLite, this is also a notable performance boost.
-    $transaction = $this->connection->startTransaction();
 
-    try {
-      $sql = (string) $this;
-      foreach ($this->insertValues as $insert_values) {
-        $last_insert_id = $this->connection->query($sql, $insert_values, $this->queryOptions);
+    $table = &$this->database->getTestData($this->tablename);
+
+    foreach ($this->insertValues as $insertRowValues ) {
+      $row = array();
+      foreach ($this->insertFields as $index => $colname) {
+        $row[$colname] = $insertRowValues[$index];
       }
+      $table[] = $row;
     }
-    catch (Exception $e) {
-      // One of the INSERTs failed, rollback the whole batch.
-      $transaction->rollback();
-      // Rethrow the exception for the calling code.
-      throw $e;
-    }
-
-    // Re-initialize the values array so that we can re-use this query.
-    $this->insertValues = array();
-
-    // Transaction commits here where $transaction looses scope.
 
     return $last_insert_id;
   }
