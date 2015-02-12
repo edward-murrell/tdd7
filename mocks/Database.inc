@@ -189,7 +189,9 @@ class MockQuery {
     }
     $new = array();
     foreach ($this->fields[$tablename] as $field) {
-      $new[$field] = $row[$field];
+      if (array_key_exists($field, $row)) {
+         $new[$field] = $row[$field];
+      }
     }
     return $new;
   }
@@ -617,9 +619,10 @@ class MockUpdateQuery extends MockQuery implements \QueryConditionInterface {
     $results = array();
     foreach ($this->database->getTestData($this->tablename) as &$row) {
       if ($this->confirmMatch($row)) {
-
         foreach($fields as $fieldkey => $updatevalue) {
-          $row[$fieldkey] = $updatevalue;
+          if(array_key_exists($fieldkey,$row)) {
+            $row[$fieldkey] = $updatevalue;
+          }
         }
         $results[] = $this->filterFields($this->tablename, $row);
       }
