@@ -5,6 +5,7 @@
 
 namespace tdd7\testframework\mocks;
 
+require_once 'DatabaseInsert.php';
 require_once 'DatabaseMockQuery.php';
 
 /**
@@ -41,6 +42,23 @@ function db_update($table, array $options = array()) {
   return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->update($table, $options);
 }
 
+
+/**
+ * Returns a new InsertQuery object for the active database.
+ *
+ * @param $table
+ *   The table to update.
+ * @param $options
+ *   An array of options to control how the query operates.
+ *
+ * @return UpdateQuery
+ *   A new UpdateQuery object for this connection.
+ */
+function db_insert($table, array $options = array()) {
+  return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->insert($table, $options);
+}
+
+
 class DatabaseConnection_unittest extends \DatabaseConnection {
   static $instance = null;
 
@@ -75,6 +93,10 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
   public function update($table, array $options = array()) {
     return new MockUpdateQuery($this, $table,$options);
+  }
+
+  public function insert($table, array $options = array()) {
+    return new MockInsertQuery($this, $table,$options);
   }
 
   /**
