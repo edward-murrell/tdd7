@@ -134,4 +134,25 @@ class MockDatabaseDeleteTestCase extends \PHPUnit_Framework_TestCase {
     // Assert all rows deleted.
     $this->assertEquals($count, $delete);
   }
+
+  /**
+   * Test that deletes using two conditionals on two different columns works
+   *  as a boolean AND.
+   */
+  public function testDeleteUsingConditionalTwice() {
+    $query = db_delete(TABLE1);
+    $query->condition('firstName', 'Alex');
+    $query->condition('year',      1989);
+    $delete = $query->execute();
+
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id'))
+      ->condition('firstName', 'Alex')
+      ->execute();
+
+    // Assert that Alex Honnold (id 7854) is still in the DB
+    $record = $res->fetchObject();
+    $this->assertEquals(7854, $record->id);
+    $this->assertEquals(1, $delete);
+  }
 }

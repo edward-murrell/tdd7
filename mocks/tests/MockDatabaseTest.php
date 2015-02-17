@@ -262,4 +262,14 @@ class MockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
 
     $this->assertEquals(1, $result);
   }
+
+  // Test that multiple conditionals default to using AND.
+  public function testMultiConditionalUsesBooleanAndToMatchRecord() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'firstName', 'lastName'))
+      ->condition('firstName', 'Alex')
+      ->condition('year', 1892)
+      ->execute();
+    $this->assertFalse($res->fetchObject());
+  }
 }
