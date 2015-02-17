@@ -8,6 +8,7 @@ namespace tdd7\testframework\mocks;
 require_once 'DatabaseSelect.php';
 require_once 'DatabaseInsert.php';
 require_once 'DatabaseUpdate.php';
+require_once 'DatabaseDelete.php';
 require_once 'DatabaseMockQuery.php';
 
 /**
@@ -60,6 +61,20 @@ function db_insert($table, array $options = array()) {
   return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->insert($table, $options);
 }
 
+/**
+ * Returns a new MockDeleteQuery object for the active database.
+ *
+ * @param $table
+ *   The table to delete from.
+ * @param $options
+ *   An array of options to control how the query operates.
+ *
+ * @return MockDeleteQuery
+ *   A new MockDeleteQuery object for this connection.
+ */
+function db_delete($table, array $options = array()) {
+  return \tdd7\testframework\mocks\DatabaseConnection_unittest::getInstance()->delete($table, $options);
+}
 
 class DatabaseConnection_unittest extends \DatabaseConnection {
   static $instance = null;
@@ -99,6 +114,10 @@ class DatabaseConnection_unittest extends \DatabaseConnection {
 
   public function insert($table, array $options = array()) {
     return new MockInsertQuery($this, $table,$options);
+  }
+
+  public function delete($table, array $options = array()) {
+    return new MockDeleteQuery($this, $table,$options);
   }
 
   /**
