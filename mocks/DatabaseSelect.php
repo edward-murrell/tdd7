@@ -167,7 +167,7 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
     }
 
     if ($this->countQuery) {
-      $results = array(count($results));
+      $results = array(array('count' => count($results)));
     }
 
     return new MockQueryResult($this->database, $this, $results);
