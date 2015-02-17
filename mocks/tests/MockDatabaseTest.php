@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * @file Test Drupal Database DatabaseConnection_unittest mock
  */
 
@@ -246,5 +246,20 @@ class MockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       ->execute()
       ->fetchField();
     $this->assertEquals(31, $result);
+  }
+
+
+  /**
+   * test countQuery() returns expected output.
+   */
+  public function testCountQuery() {
+    $result = db_select(TABLE1)
+      ->fields(TABLE1, array('id'))
+      ->condition('id', 7593)
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+
+    $this->assertEquals(1, $result);
   }
 }
