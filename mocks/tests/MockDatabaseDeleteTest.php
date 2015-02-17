@@ -116,6 +116,9 @@ class MockDatabaseDeleteTestCase extends \PHPUnit_Framework_TestCase {
   }
 
   public function testDeleteWholeTable() {
+    //  Find out the total number of original records
+    $count = db_select(TABLE1)->countQuery()->execute()->fetchField();
+
     // Delete all from TABLE1
     $query = db_delete(TABLE1);
     $delete = $query->execute();
@@ -128,5 +131,7 @@ class MockDatabaseDeleteTestCase extends \PHPUnit_Framework_TestCase {
     // Assert empty record.
     $record = $res->fetchObject();
     $this->assertEquals('', $record->firstName);
+    // Assert all rows deleted.
+    $this->assertEquals($count, $delete);
   }
 }
