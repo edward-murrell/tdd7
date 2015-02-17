@@ -79,4 +79,54 @@ class MockDatabaseDeleteTestCase extends \PHPUnit_Framework_TestCase {
     $query = db_delete('foo');
     $this->assertInstanceOf('\tdd7\testframework\mocks\MockDeleteQuery', $query);
   }
+
+  public function testDeleteSingleRow() {
+    $query = db_delete(TABLE1);
+    $query->condition('id', 7981);
+    $delete = $query->execute();
+
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName'))
+      ->condition('id', 7981)
+      ->execute();
+
+    // Assert empty record.
+    $record = $res->fetchObject();
+    $this->assertEquals('', $record->firstName);
+    // Assert 1 row deleted.
+    $this->assertEquals(1, $delete);
+  }
+
+  public function testDeleteMultipleRows() {
+    $query = db_delete(TABLE1);
+    $query->condition('firstName', 'Alex');
+    $delete = $query->execute();
+
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName'))
+      ->condition('id', 7593)
+      ->condition('id', 7854)
+      ->execute();
+
+    // Assert empty record.
+    $record = $res->fetchObject();
+    $this->assertEquals('', $record->firstName);
+    // Assert 2 rows deleted.
+    $this->assertEquals(2, $delete);
+  }
+
+  public function testDeleteWholeTable() {
+    // Delete all from TABLE1
+    $query = db_delete(TABLE1);
+    $delete = $query->execute();
+
+    // Select all from TABLE1
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('firstName'))
+      ->execute();
+
+    // Assert empty record.
+    $record = $res->fetchObject();
+    $this->assertEquals('', $record->firstName);
+  }
 }
