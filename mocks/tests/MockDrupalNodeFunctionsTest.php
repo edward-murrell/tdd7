@@ -166,4 +166,17 @@ class MockDrupalNodeFunctionsTest extends \tdd7\testframework\BasicTestCase {
     $this->assertEquals(MOCK_NODE_TEST_NID_TITLE1, $node1->title);
     $this->assertEquals(MOCK_NODE_TEST_NID_TITLE3, $node3->title);
   }
+
+  /**
+   * GIVEN AddNodeField is called on body more than once with a languge set.
+   * THEN node_load returns a node with all the language fields.
+   */
+  public function testAddnodeFieldDataSetsLanguageFieldsOnMockNodeObjects() {
+    MockDrupalNodeFunctions::ResetMockData();
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID2, MOCK_NODE_TEST_NID_TYPE2, MOCK_NODE_TEST_NID_TITLE2, 'lang_default');
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID2, 'field_test', array('value' => 'test value'));
+
+    $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID2);
+    $this->assertEquals('test value', $node->field_test['lang_default'][0]['value']);
+  }
 }
