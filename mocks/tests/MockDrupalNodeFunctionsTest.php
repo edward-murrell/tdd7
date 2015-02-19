@@ -208,4 +208,21 @@ class MockDrupalNodeFunctionsTest extends \tdd7\testframework\BasicTestCase {
     $this->assertEquals('test2-B value', $node->field_test['lang_alt2'][1]['value']);
     $this->assertEquals('test3-B value', $node->field_test['lang_alt3'][1]['value']);
   }
+
+  /**
+   * GIVEN AddNodeField is called w/h deltas on a field with multiple times w/h langauges.
+   * THEN node_load returns a node with all the language fields and all deltas.
+   */
+  public function testAddnodeFieldDataSetsLanguageMultipleDeltaFieldsOnMockNodeObjects() {
+    MockDrupalNodeFunctions::ResetMockData();
+    MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID3, MOCK_NODE_TEST_NID_TYPE3, MOCK_NODE_TEST_NID_TITLE3, 'lang_default');
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID3, 'field_test', array('value' => 'testlang1 delt1 value'), 1, 'lang_alt1');
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID3, 'field_test', array('value' => 'testlang2 delt2 value'), 2, 'lang_alt2');
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID3, 'field_test', array('value' => 'testlang3 delt2 value'), 2, 'lang_alt3');
+
+    $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID3);
+    $this->assertEquals('testlang1 delt1 value', $node->field_test['lang_alt1'][1]['value']);
+    $this->assertEquals('testlang2 delt2 value', $node->field_test['lang_alt2'][2]['value']);
+    $this->assertEquals('testlang3 delt2 value', $node->field_test['lang_alt3'][2]['value']);
+  }
 }
