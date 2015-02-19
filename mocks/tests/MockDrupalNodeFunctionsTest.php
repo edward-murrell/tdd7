@@ -175,7 +175,7 @@ class MockDrupalNodeFunctionsTest extends \tdd7\testframework\BasicTestCase {
     MockDrupalNodeFunctions::ResetMockData();
     MockDrupalNodeFunctions::AddMockNode(MOCK_NODE_TEST_NID2, MOCK_NODE_TEST_NID_TYPE2, MOCK_NODE_TEST_NID_TITLE2, 'lang_default');
     MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID2, 'field_test', array('value' => 'test value'));
-    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID2, 'field_test', array('value' => 'test1 value'), 'lang_altern');
+    MockDrupalNodeFunctions::AddNodeField(MOCK_NODE_TEST_NID2, 'field_test', array('value' => 'test1 value'), NULL, 'lang_altern');
 
     $node = MockDrupalNodeFunctions::node_load(MOCK_NODE_TEST_NID2);
     $this->assertEquals('test value', $node->field_test['lang_default'][0]['value']);
