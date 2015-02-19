@@ -122,14 +122,23 @@ namespace tdd7\testframework\mocks {
      * @param int $delta
      *   The delta to update. If set to null, the data will be added to the end
      *   of the values array.
+     * @param string $language
+     *   The language to set this field to. If set to null, the default language
+     *   for this node will be used.
      */
-    public static function AddNodeField($nid, $field, array $value, $delta = NULL) {
+    public static function AddNodeField($nid, $field, array $value, $delta = NULL, $language = NULL) {
       if (!array_key_exists($nid, self::$nodes)) {
         throw new \Exception('Mock node does not exist.');
       }
-
       $node = self::$nodes[$nid];
-      $lang = $node->language;
+
+      // Use the node language if no language defined in arguements.
+      if ($language === NULL) {
+        $lang = $node->language;
+      } else {
+        $lang = $language;
+      }
+
       if (!property_exists(self::$nodes[$nid], $field)) {
         $node->$field = array($lang => array());
       }
