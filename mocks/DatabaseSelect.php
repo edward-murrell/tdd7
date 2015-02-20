@@ -167,9 +167,15 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface {
     }
     //Unsure what happens if multiple order by fields are defined.
     if (!empty($this->order)) {
-      foreach ($this->order as $field) {
-        usort($results, function ($a,$b) use ($field) {
-          return strcmp($a[$field], $b[$field]);
+      foreach ($this->order as $field => $direction) {
+        usort($results, function ($a,$b) use ($field,$direction) {
+          if($direction == 'ASC') {
+            return strcmp($a[$field], $b[$field]);
+          }
+          else
+          {
+            return strcmp($b[$field], $a[$field]);
+          }
         });
       }
     }
