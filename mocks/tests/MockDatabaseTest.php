@@ -247,4 +247,23 @@ class MockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       ->fetchField();
     $this->assertEquals(31, $result);
   }
+  
+  /**
+  * Test the orde of the results comes back as requested.
+  */
+  public function testOrderSelect() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'firstName', 'lastName'))
+      ->condition('firstName', 'Alex')
+      ->orderBy('id','ASC')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,     $record->id);
+    $record = $res->fetchObject();
+    $this->assertEquals(7854,     $record->id);
+
+    // Check that only one record was returned.
+    $this->assertFalse($res->fetchObject());
+  }
 }
