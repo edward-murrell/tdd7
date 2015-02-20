@@ -4,16 +4,16 @@ namespace tdd7\testframework\mocks;
 
 require_once 'DatabaseMockQuery.php';
 
-class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
+class MockSelectQuery extends MockQuery implements \SelectQueryInterface {
   private $database;
   private $tablename;
-
+  private $order = array();
 
   private $countQuery;
 
   function __construct(DatabaseConnection_unittest $db, $tablename) {
     $this->database = $db;
-    $this->tablename    = $tablename;
+    $this->tablename = $tablename;
     $this->countQuery = FALSE;
   }
 
@@ -131,6 +131,10 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
   }
 
   public function orderBy($field, $direction = 'ASC') {
+    // Only allow ASC and DESC, default to ASC.
+    $direction = strtoupper($direction) == 'DESC' ? 'DESC' : 'ASC';
+    $this->order[$field] = $direction;
+    return $this;
   }
 
   public function orderRandom() {
@@ -154,10 +158,6 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
   public function where($snippet, $args = array()) {
   }
 
-
-
-
-
   public function execute() {
     $results = array();
     foreach ($this->database->getTestData($this->tablename) as $row) {
@@ -165,11 +165,19 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface  {
         $results[] = $this->filterFields($this->tablename, $row);
       }
     }
-
+    //Unsure what happens if multiple order by fields are defined.
+    if (!empty($this->order)) {
+      foreach ($this->order as $field) {
+        usort($results, function ($a,$b) use ($field) {
+          return strcmp($a[$field], $b[$field]);
+        });
+      }
+    }
     if ($this->countQuery) {
       $results = array(count($results));
     }
 
     return new MockQueryResult($this->database, $this, $results);
   }
+
 }
