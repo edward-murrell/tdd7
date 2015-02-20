@@ -248,7 +248,6 @@ class MockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(31, $result);
   }
 
-
   /**
    * test countQuery() returns expected output.
    */
@@ -272,4 +271,41 @@ class MockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
       ->execute();
     $this->assertFalse($res->fetchObject());
   }
+
+  /**
+  * Test the orde of the results comes back as requested.
+  */
+  public function testOrderSelect() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'firstName', 'lastName'))
+      ->condition('firstName', 'Alex')
+      ->orderBy('id','ASC')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,     $record->id);
+    $record = $res->fetchObject();
+    $this->assertEquals(7854,     $record->id);
+
+    // Check that only one record was returned.
+    $this->assertFalse($res->fetchObject());
+  }
+
+  // Test that we get all instances of records that match
+  public function testOrderSelectDESC() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'firstName', 'lastName'))
+      ->condition('firstName', 'Alex')
+      ->orderBy('id','DESC')
+      ->execute();
+
+    $record = $res->fetchObject();
+    $this->assertEquals(7854,     $record->id);
+    $record = $res->fetchObject();
+    $this->assertEquals(7593,     $record->id);
+
+    // Check that only one record was returned.
+    $this->assertFalse($res->fetchObject());
+  }
+
 }
