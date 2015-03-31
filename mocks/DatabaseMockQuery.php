@@ -37,6 +37,9 @@ class MockQuery {
    * Ugly function decide if fields match conditons or not
    */
   protected function confirmMatch($row) {
+  if(!isset($this->conditions)) {
+    return TRUE;
+  }
     foreach ($this->conditions as $cond) {
       $field = $cond['field'];
       switch ($cond['operator']) {
@@ -52,6 +55,11 @@ class MockQuery {
             return FALSE;
           }
           break;
+        case 'IN':
+          if(!in_array($row[$field],$cond['value'])) {
+            return FALSE;
+          }
+
         default:
           break;
       }
