@@ -308,4 +308,26 @@ class MockDatabaseTestCase extends \PHPUnit_Framework_TestCase {
     $this->assertFalse($res->fetchObject());
   }
 
+  /**
+   * Test range() limits the number of results returned.
+   *
+   * GIVEN a select query with a range
+   * WHEN I execute the query
+   * THEN I should be returned a list of results limited by that range.
+   *
+   * @test
+   */
+  public function rangeLimitsResultSetReturned() {
+    $res = db_select(TABLE1)
+      ->fields(TABLE1, array('id', 'firstName', 'lastName'))
+      ->orderBy('firstName','DESC')
+      ->range(0, 2)
+      ->execute();
+
+    $records = $res->fetchAll();
+    $this->assertCount(2, $records);
+    $this->assertEquals(2391, $records[0]->id);
+    $this->assertEquals(31, $records[1]->id);
+  }
+
 }

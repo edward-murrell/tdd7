@@ -8,6 +8,7 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface {
   private $database;
   private $tablename;
   private $order = array();
+  private $range = array();
 
   private $countQuery;
 
@@ -144,6 +145,9 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface {
   }
 
   public function range($start = NULL, $length = NULL) {
+    $this->range = array('start' => $start, 'length' => $length);
+
+    return $this;
   }
 
   public function rightJoin($table, $alias = NULL, $condition = NULL, $arguments = array()) {
@@ -178,6 +182,9 @@ class MockSelectQuery extends MockQuery implements \SelectQueryInterface {
           }
         });
       }
+    }
+    if (!empty($this->range)) {
+      $results = array_slice($results, $this->range['start'], $this->range['length']);
     }
     if ($this->countQuery) {
       $results = array(array('count' => count($results)));
